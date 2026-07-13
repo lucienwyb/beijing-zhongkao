@@ -20,6 +20,16 @@
 | [常见考题与真题分析](physics/past-questions.md) | 2022–2025 典型真题分类解析 |
 | [必背公式速查](physics/formula-sheet.md) | 中考常用公式汇总 |
 
+## 📄 真题合集
+
+| 年份 | 数学 | 物理 |
+|------|------|------|
+| 2024 | [2024 数学真题](papers/math/2024-math.md) | [2024 物理真题](papers/physics/2024-physics.md) |
+| 2023 | [2023 数学真题](papers/math/2023-math.md) | [2023 物理真题](papers/physics/2023-physics.md) |
+| 2022 | [2022 数学真题](papers/math/2022-math.md) | [2022 物理真题](papers/physics/2022-physics.md) |
+
+📎 [官方 PDF 及资源链接汇总](papers/sources/README.md) — 北京教育考试院、学科网、菁优网等官方/主流资源入口
+
 ---
 
 ## 📊 北京中考概况
