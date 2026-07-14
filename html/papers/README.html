@@ -52,6 +52,8 @@ table {
   margin: 1em 0;
   width: 100%;
   font-size: 0.95em;
+  display: block;
+  overflow-x: auto;
 }
 th, td { border: 1px solid #d0d7de; padding: 8px 12px; text-align: left; }
 th { background: #f6f8fa; font-weight: 600; }
@@ -100,6 +102,12 @@ mjx-container { font-size: 1.05em; }
   .nav { background: #161b22; border-color: #30363d; }
   .footer { border-top-color: #30363d; color: #8b949e; }
 }
+@media (max-width: 600px) {
+  body { padding: 20px 18px 72px; font-size: 15px; }
+  h1 { font-size: 1.7em; }
+  .nav { padding: 10px 12px; }
+  .nav a { display: inline-block; margin: 3px 10px 3px 0; }
+}
 </style>
 
 <script>
@@ -116,7 +124,7 @@ window.MathJax = {
 
 </head>
 <body>
-<div class="nav">📚 <a href="../index.html">首页</a> · <a href="../math/exam-points.html">数学考点</a> · <a href="../physics/exam-points.html">物理考点</a> · <a href="../papers/README.html">真题合集</a></div>
+<div class="nav">📚 <a href="../../index.html">学习计划</a> · <a href="../index.html">资料首页</a> · <a href="../math/exam-points.html">数学考点</a> · <a href="../physics/exam-points.html">物理考点</a> · <a href="../papers/README.html">真题合集</a></div>
 <h1 id="_1">北京中考真题合集（近年）</h1>
 <blockquote>
 <p><strong>说明</strong>：因网络限制无法直接下载官方 PDF 试卷，本目录中的题目内容依据公开出版的真题册和官方公布内容整理成 Markdown 版本，供复习参考。<strong>部分题目为示意版本，正式做题请以官方发布试卷为准。</strong></p>

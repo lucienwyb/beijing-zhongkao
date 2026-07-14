@@ -52,6 +52,8 @@ table {
   margin: 1em 0;
   width: 100%;
   font-size: 0.95em;
+  display: block;
+  overflow-x: auto;
 }
 th, td { border: 1px solid #d0d7de; padding: 8px 12px; text-align: left; }
 th { background: #f6f8fa; font-weight: 600; }
@@ -100,6 +102,12 @@ mjx-container { font-size: 1.05em; }
   .nav { background: #161b22; border-color: #30363d; }
   .footer { border-top-color: #30363d; color: #8b949e; }
 }
+@media (max-width: 600px) {
+  body { padding: 20px 18px 72px; font-size: 15px; }
+  h1 { font-size: 1.7em; }
+  .nav { padding: 10px 12px; }
+  .nav a { display: inline-block; margin: 3px 10px 3px 0; }
+}
 </style>
 
 <script>
@@ -116,7 +124,7 @@ window.MathJax = {
 
 </head>
 <body>
-<div class="nav">📚 <a href="../index.html">首页</a> · <a href="../math/exam-points.html">数学考点</a> · <a href="../physics/exam-points.html">物理考点</a> · <a href="../papers/README.html">真题合集</a></div>
+<div class="nav">📚 <a href="../../index.html">学习计划</a> · <a href="../index.html">资料首页</a> · <a href="../math/exam-points.html">数学考点</a> · <a href="../physics/exam-points.html">物理考点</a> · <a href="../papers/README.html">真题合集</a></div>
 <h1 id="_1">北京中考数学 · 常见考题与真题分析</h1>
 <blockquote>
 <p>基于 2022–2025 年北京中考数学真题整理，按题型分类。</p>
@@ -125,14 +133,18 @@ window.MathJax = {
 <h2 id="18-2">一、选择题（1–8 题，每题 2 分）</h2>
 <h3 id="1">第 1 题：实数与数轴</h3>
 <p><strong>考点</strong>：绝对值、相反数、数轴上的点表示数</p>
-<p><strong>典型题（2024·北京）</strong>：在数轴上，点 $A$ 表示的数是 $-\sqrt{5}$，则 $A$ 到原点的距离是？
-- A. $\sqrt{5}$   B. $-\sqrt{5}$   C. $\frac{\sqrt{5}}{5}$   D. $5$</p>
+<p><strong>典型题（2024·北京）</strong>：在数轴上，点 $A$ 表示的数是 $-\sqrt{5}$，则 $A$ 到原点的距离是？</p>
+<ul>
+<li>A. $\sqrt{5}$   B. $-\sqrt{5}$   C. $\frac{\sqrt{5}}{5}$   D. $5$</li>
+</ul>
 <blockquote>
 <p>答案：A。绝对值的意义：数轴上的点到原点的距离即为该数的绝对值。</p>
 </blockquote>
 <h3 id="2">第 2 题：科学记数法</h3>
-<p><strong>典型题（2023·北京）</strong>：2022 年北京市 GDP 约为 4.16 万亿元，将 4.16 万亿用科学记数法表示？
-- A. $4.16×10^{12}$   B. $4.16×10^{13}$   C. $4.16×10^{11}$   D. $4.16×10^{10}$</p>
+<p><strong>典型题（2023·北京）</strong>：2022 年北京市 GDP 约为 4.16 万亿元，将 4.16 万亿用科学记数法表示？</p>
+<ul>
+<li>A. $4.16×10^{12}$   B. $4.16×10^{13}$   C. $4.16×10^{11}$   D. $4.16×10^{10}$</li>
+</ul>
 <blockquote>
 <p>答案：A。1 万亿 = $10^{12}$。</p>
 </blockquote>
@@ -145,8 +157,10 @@ window.MathJax = {
 <p><strong>典型题（2023·北京）</strong>：一次函数 $y=kx+b$ 的图像经过点 $(1,3)$ 和 $(−1, −1)$，则 $k=$ <strong><em>_，$b=$ </em></strong>_。</p>
 <h3 id="6">第 6 题：圆的基本性质</h3>
 <p><strong>考点</strong>：圆周角定理、圆心角定理</p>
-<p><strong>典型题（2024·北京）</strong>：如图，点 $A$、$B$、$C$ 在 $\bigodot O$ 上，$\angle AOB=100°$，则 $\angle ACB=$ ____。
-- A. $100°$   B. $50°$   C. $40°$   D. $80°$</p>
+<p><strong>典型题（2024·北京）</strong>：如图，点 $A$、$B$、$C$ 在 $\bigodot O$ 上，$\angle AOB=100°$，则 $\angle ACB=$ ____。</p>
+<ul>
+<li>A. $100°$   B. $50°$   C. $40°$   D. $80°$</li>
+</ul>
 <blockquote>
 <p>答案：B。同弧所对圆周角是圆心角的一半：$100°÷2=50°$。</p>
 </blockquote>
@@ -156,8 +170,10 @@ window.MathJax = {
 <p>提示：连接 $BD$ 得等边三角形 $ABD$，$BD=AB=2$。</p>
 </blockquote>
 <h3 id="8">第 8 题（压轴选择题）：函数图像分析</h3>
-<p><strong>典型题（2024·北京）</strong>：已知二次函数 $y=ax^2+bx+c$（$a&gt;0$）的图像经过点 $(−2, y_1)$、$(1, y_2)$、$(3, y_3)$ 且 $y_1&lt;y_2&lt;y_3$，则下列 $\frac{b}{a}$ 的取值范围正确的是？
-- A. $-1&lt;\frac{b}{a}&lt;0$   B. $-2&lt;\frac{b}{a}&lt;-1$   C. $0&lt;\frac{b}{a}&lt;1$   D. $\frac{b}{a}&gt;1$</p>
+<p><strong>典型题（2024·北京）</strong>：已知二次函数 $y=ax^2+bx+c$（$a&gt;0$）的图像经过点 $(−2, y_1)$、$(1, y_2)$、$(3, y_3)$ 且 $y_1&lt;y_2&lt;y_3$，则下列 $\frac{b}{a}$ 的取值范围正确的是？</p>
+<ul>
+<li>A. $-1&lt;\frac{b}{a}&lt;0$   B. $-2&lt;\frac{b}{a}&lt;-1$   C. $0&lt;\frac{b}{a}&lt;1$   D. $\frac{b}{a}&gt;1$</li>
+</ul>
 <blockquote>
 <p>分析：对称轴 $x=-\frac{b}{2a}$，由 $y_1&lt;y_2&lt;y_3$ 及开口向上，可知点越远离对称轴函数值越大，由此推断对称轴位置。</p>
 </blockquote>
@@ -238,11 +254,13 @@ window.MathJax = {
 <hr />
 <h2 id="2326-6">四、中档解答题（23–26 题，每题 6 分）</h2>
 <h3 id="23">第 23 题：统计与概率综合</h3>
-<p><strong>典型题（2024·北京）</strong>：某校调查八年级学生每周课外阅读时间（单位：h），数据如下：
-- 0~2h：8 人，2~4h：12 人，4~6h：18 人，6~8h：7 人，8h 以上：5 人
+<p><strong>典型题（2024·北京）</strong>：某校调查八年级学生每周课外阅读时间（单位：h），数据如下：</p>
+<ul>
+<li>0~2h：8 人，2~4h：12 人，4~6h：18 人，6~8h：7 人，8h 以上：5 人
 （1）补全频数分布直方图
 （2）求这组数据的中位数所在时间段
-（3）随机抽取一名学生，阅读时间在 4h 以上的概率是多少？</p>
+（3）随机抽取一名学生，阅读时间在 4h 以上的概率是多少？</li>
+</ul>
 <h3 id="24">第 24 题：一次函数与反比例函数综合</h3>
 <p><strong>典型题（2024·北京）</strong>：直线 $y=kx+b$ 与双曲线 $y=\frac{m}{x}$ 交于 $A(1, 4)$、$B(−2, n)$ 两点。
 （1）求 $m$、$n$ 的值
@@ -267,35 +285,45 @@ window.MathJax = {
 <h2 id="2728-7">五、压轴题（27–28 题，每题 7 分）</h2>
 <h3 id="27">第 27 题：二次函数综合题</h3>
 <p><strong>典型题型</strong>：给定二次函数 $y=ax^2+bx+c$（含参数），结合图像变换、面积最值、存在性问题。</p>
-<p><strong>真题思路（2024·北京）</strong>：
-- 第（1）问：求解析式（待定系数法）
-- 第（2）问：二次函数图像平移后的顶点、与 $x$ 轴交点
-- 第（3）问：给定范围上函数值的取值范围（分类讨论对称轴与区间的关系）</p>
+<p><strong>真题思路（2024·北京）</strong>：</p>
+<ul>
+<li>第（1）问：求解析式（待定系数法）</li>
+<li>第（2）问：二次函数图像平移后的顶点、与 $x$ 轴交点</li>
+<li>第（3）问：给定范围上函数值的取值范围（分类讨论对称轴与区间的关系）</li>
+</ul>
 <blockquote>
 <p>三个注意：① 对称轴 $x=-\frac{b}{2a}$；② 开口方向（$a$ 的符号）；③ 端点函数值与顶点函数值比较。</p>
 </blockquote>
-<p><strong>常见题型</strong>：
-- 二次函数与线段/三角形面积最值
-- 二次函数与等腰三角形/直角三角形存在性
-- 二次函数图像平移、对称、旋转</p>
+<p><strong>常见题型</strong>：</p>
+<ul>
+<li>二次函数与线段/三角形面积最值</li>
+<li>二次函数与等腰三角形/直角三角形存在性</li>
+<li>二次函数图像平移、对称、旋转</li>
+</ul>
 <h3 id="28">第 28 题：几何综合压轴题</h3>
 <p><strong>典型题型</strong>：以三角形、四边形为背景，综合全等、相似、旋转对称等变换。</p>
-<p><strong>真题思路（2024·北京）</strong>：
-- 第（1）问：简单证明（如全等、角相等）
-- 第（2）问：线段关系（倍长中线法、截长补短法）
-- 第（3）问：动态几何中的最值或存在性问题</p>
-<p><strong>常见模型</strong>：
-- 手拉手模型（旋转全等）
-- 半角模型（角含半角）
-- 对角互补模型
-- 一线三等角模型
-- 中点的辅助线作法（倍长中线、中位线）
-- 翻折（轴对称）的性质</p>
-<p><strong>解题口诀</strong>：
-- 遇中点，倍长中线或作中位线
-- 遇角分线，作双垂或截长补短
-- 遇旋转，找旋转中心和对应点
-- 遇最值，转化为两点间线段最短/垂线段最短</p>
+<p><strong>真题思路（2024·北京）</strong>：</p>
+<ul>
+<li>第（1）问：简单证明（如全等、角相等）</li>
+<li>第（2）问：线段关系（倍长中线法、截长补短法）</li>
+<li>第（3）问：动态几何中的最值或存在性问题</li>
+</ul>
+<p><strong>常见模型</strong>：</p>
+<ul>
+<li>手拉手模型（旋转全等）</li>
+<li>半角模型（角含半角）</li>
+<li>对角互补模型</li>
+<li>一线三等角模型</li>
+<li>中点的辅助线作法（倍长中线、中位线）</li>
+<li>翻折（轴对称）的性质</li>
+</ul>
+<p><strong>解题口诀</strong>：</p>
+<ul>
+<li>遇中点，倍长中线或作中位线</li>
+<li>遇角分线，作双垂或截长补短</li>
+<li>遇旋转，找旋转中心和对应点</li>
+<li>遇最值，转化为两点间线段最短/垂线段最短</li>
+</ul>
 <hr />
 <h2 id="_2">📌 备考建议</h2>
 <ol>

@@ -52,6 +52,8 @@ table {
   margin: 1em 0;
   width: 100%;
   font-size: 0.95em;
+  display: block;
+  overflow-x: auto;
 }
 th, td { border: 1px solid #d0d7de; padding: 8px 12px; text-align: left; }
 th { background: #f6f8fa; font-weight: 600; }
@@ -100,6 +102,12 @@ mjx-container { font-size: 1.05em; }
   .nav { background: #161b22; border-color: #30363d; }
   .footer { border-top-color: #30363d; color: #8b949e; }
 }
+@media (max-width: 600px) {
+  body { padding: 20px 18px 72px; font-size: 15px; }
+  h1 { font-size: 1.7em; }
+  .nav { padding: 10px 12px; }
+  .nav a { display: inline-block; margin: 3px 10px 3px 0; }
+}
 </style>
 
 <script>
@@ -116,11 +124,17 @@ window.MathJax = {
 
 </head>
 <body>
-<div class="nav">📚 <a href="index.html">首页</a> · <a href="math/exam-points.html">数学考点</a> · <a href="physics/exam-points.html">物理考点</a> · <a href="papers/README.html">真题合集</a></div>
+<div class="nav">📚 <a href="../index.html">学习计划</a> · <a href="index.html">资料首页</a> · <a href="math/exam-points.html">数学考点</a> · <a href="physics/exam-points.html">物理考点</a> · <a href="papers/README.html">真题合集</a></div>
 <h1 id="_1">北京中考考点精析 —— 数学 &amp; 物理</h1>
 <blockquote>
 <p>专注北京中考数学、物理核心考点，梳理近年真题规律，助你高效备考。</p>
 </blockquote>
+<h2 id="21">🗓️ 21 天学习计划网页</h2>
+<p>仓库首页提供可交互的三周提升计划，支持每日任务、完成进度和错题记录，数据保存在浏览器本地。</p>
+<p>直接打开 <code>index.html</code> 即可使用，也可以在仓库目录启动静态服务：</p>
+<pre><code class="language-bash">python3 -m http.server 8000
+</code></pre>
+<p>然后访问 <code>http://localhost:8000</code>。</p>
 <hr />
 <h2 id="_2">📐 数学</h2>
 <table>
@@ -200,14 +214,18 @@ window.MathJax = {
 <h2 id="_5">📊 北京中考概况</h2>
 <p>北京中考数学满分 100 分，考试时间 120 分钟；物理满分 80 分（2025 年起新方案），考试时间 70 分钟。</p>
 <h3 id="_6">试卷结构概览</h3>
-<p><strong>数学（100分，120分钟）</strong>
-- 选择题：8 题 × 2 分 = 16 分
-- 填空题：8 题 × 2 分 = 16 分
-- 解答题：12 题，共 68 分（含 1 道压轴题 7 分）</p>
-<p><strong>物理（80分，70分钟）</strong>
-- 选择题：约 20 题，共 30 分
-- 填空题/实验题：约 10 题，共 30 分
-- 综合应用题：约 3–4 题，共 20 分</p>
+<p><strong>数学（100分，120分钟）</strong></p>
+<ul>
+<li>选择题：8 题 × 2 分 = 16 分</li>
+<li>填空题：8 题 × 2 分 = 16 分</li>
+<li>解答题：12 题，共 68 分（含 1 道压轴题 7 分）</li>
+</ul>
+<p><strong>物理（80分，70分钟）</strong></p>
+<ul>
+<li>选择题：约 20 题，共 30 分</li>
+<li>填空题/实验题：约 10 题，共 30 分</li>
+<li>综合应用题：约 3–4 题，共 20 分</li>
+</ul>
 <hr />
 <p><em>注：本仓库内容基于 2022–2025 年北京中考真题及考纲整理，仅供参考。</em></p>
 <div class="footer">北京中考数学 & 物理 · 核心考点与真题精析 ·

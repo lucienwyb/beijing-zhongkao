@@ -5,7 +5,7 @@ import re
 from pathlib import Path
 import markdown
 
-REPO_ROOT = Path("/pulp/beijing-zhongkao")
+REPO_ROOT = Path(__file__).resolve().parent
 OUT_ROOT = REPO_ROOT / "html"
 
 CSS = """
@@ -56,6 +56,8 @@ table {
   margin: 1em 0;
   width: 100%;
   font-size: 0.95em;
+  display: block;
+  overflow-x: auto;
 }
 th, td { border: 1px solid #d0d7de; padding: 8px 12px; text-align: left; }
 th { background: #f6f8fa; font-weight: 600; }
@@ -104,6 +106,12 @@ mjx-container { font-size: 1.05em; }
   .nav { background: #161b22; border-color: #30363d; }
   .footer { border-top-color: #30363d; color: #8b949e; }
 }
+@media (max-width: 600px) {
+  body { padding: 20px 18px 72px; font-size: 15px; }
+  h1 { font-size: 1.7em; }
+  .nav { padding: 10px 12px; }
+  .nav a { display: inline-block; margin: 3px 10px 3px 0; }
+}
 """
 
 MATHJAX = """
@@ -133,6 +141,17 @@ def rewrite_md_links(html: str, rel_depth: int) -> str:
 
 def convert_file(md_path: Path, out_path: Path):
     text = md_path.read_text(encoding='utf-8')
+    # Python-Markdown requires a blank line before a list. Several papers put
+    # answer options immediately after the question, so normalize that format.
+    lines = text.splitlines()
+    normalized = []
+    for line in lines:
+        is_list_item = re.match(r'^\s*[-+*]\s+', line) is not None
+        previous_is_list_item = bool(normalized and re.match(r'^\s*[-+*]\s+', normalized[-1]))
+        if is_list_item and normalized and normalized[-1].strip() and not previous_is_list_item:
+            normalized.append('')
+        normalized.append(line)
+    text = '\n'.join(normalized)
     # Extract first h1 as title, fallback to filename
     title_m = re.search(r'^#\s+(.+)$', text, re.MULTILINE)
     title = title_m.group(1).strip() if title_m else md_path.stem
@@ -147,7 +166,8 @@ def convert_file(md_path: Path, out_path: Path):
     depth = len(md_path.relative_to(REPO_ROOT).parts) - 1
     root = '../' * depth if depth else ''
 
-    nav = f'<div class="nav">📚 <a href="{root}index.html">首页</a> · <a href="{root}math/exam-points.html">数学考点</a> · <a href="{root}physics/exam-points.html">物理考点</a> · <a href="{root}papers/README.html">真题合集</a></div>'
+    plan_root = '../' * (depth + 1)
+    nav = f'<div class="nav">📚 <a href="{plan_root}index.html">学习计划</a> · <a href="{root}index.html">资料首页</a> · <a href="{root}math/exam-points.html">数学考点</a> · <a href="{root}physics/exam-points.html">物理考点</a> · <a href="{root}papers/README.html">真题合集</a></div>'
 
     html = f"""<!DOCTYPE html>
 <html lang="zh-CN">
