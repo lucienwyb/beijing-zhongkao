@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>北京中考数学 · 常见考题与真题分析</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB",
+               "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 1.75;
+  color: #24292f;
+  background: #ffffff;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px 40px 96px;
+  font-size: 16px;
+}
+h1, h2, h3, h4 { border-bottom: none; margin-top: 1.5em; margin-bottom: 0.6em; font-weight: 600; color: #1f2328; }
+h1 { font-size: 2em; border-bottom: 2px solid #d0d7de; padding-bottom: 8px; }
+h2 { font-size: 1.5em; border-bottom: 1px solid #d0d7de; padding-bottom: 6px; }
+h3 { font-size: 1.25em; }
+h4 { font-size: 1.1em; color: #57606a; }
+p, li { line-height: 1.85; }
+strong { color: #0969da; }
+blockquote {
+  border-left: 4px solid #d0d7de;
+  color: #57606a;
+  margin: 1em 0;
+  padding: 6px 16px;
+  background: #f6f8fa;
+  border-radius: 4px;
+}
+code {
+  background: #f6f8fa;
+  color: #d73a49;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: "SF Mono", Menlo, Monaco, Consolas, monospace;
+  font-size: 0.92em;
+}
+pre {
+  background: #f6f8fa;
+  padding: 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+pre code { background: none; padding: 0; color: #24292f; }
+table {
+  border-collapse: collapse;
+  margin: 1em 0;
+  width: 100%;
+  font-size: 0.95em;
+}
+th, td { border: 1px solid #d0d7de; padding: 8px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #fafbfc; }
+a { color: #0969da; text-decoration: none; }
+a:hover { text-decoration: underline; }
+hr { border: none; border-top: 1px solid #d0d7de; margin: 2em 0; }
+.emoji { font-size: 1.2em; }
+.nav {
+  background: #f6f8fa;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  padding: 12px 20px;
+  margin-bottom: 24px;
+  font-size: 0.95em;
+}
+.nav a { margin-right: 16px; }
+.footer {
+  margin-top: 60px;
+  padding-top: 20px;
+  border-top: 1px solid #d0d7de;
+  color: #57606a;
+  font-size: 0.9em;
+  text-align: center;
+}
+
+/* MathJax display styling */
+mjx-container { font-size: 1.05em; }
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  body { background: #0d1117; color: #c9d1d9; }
+  h1, h2, h3, h4 { color: #f0f6fc; }
+  h1, h2 { border-bottom-color: #30363d; }
+  h4 { color: #8b949e; }
+  strong { color: #58a6ff; }
+  blockquote { background: #161b22; color: #8b949e; border-left-color: #30363d; }
+  code { background: #161b22; color: #ff7b72; }
+  pre { background: #161b22; }
+  pre code { color: #c9d1d9; }
+  th, td { border-color: #30363d; }
+  th { background: #161b22; }
+  tr:nth-child(even) td { background: #0d1117; }
+  a { color: #58a6ff; }
+  hr { border-top-color: #30363d; }
+  .nav { background: #161b22; border-color: #30363d; }
+  .footer { border-top-color: #30363d; color: #8b949e; }
+}
+</style>
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+<body>
+<div class="nav">📚 <a href="../index.html">首页</a> · <a href="../math/exam-points.html">数学考点</a> · <a href="../physics/exam-points.html">物理考点</a> · <a href="../papers/README.html">真题合集</a></div>
+<h1 id="_1">北京中考数学 · 常见考题与真题分析</h1>
+<blockquote>
+<p>基于 2022–2025 年北京中考数学真题整理，按题型分类。</p>
+</blockquote>
+<hr />
+<h2 id="18-2">一、选择题（1–8 题，每题 2 分）</h2>
+<h3 id="1">第 1 题：实数与数轴</h3>
+<p><strong>考点</strong>：绝对值、相反数、数轴上的点表示数</p>
+<p><strong>典型题（2024·北京）</strong>：在数轴上，点 $A$ 表示的数是 $-\sqrt{5}$，则 $A$ 到原点的距离是？
+- A. $\sqrt{5}$   B. $-\sqrt{5}$   C. $\frac{\sqrt{5}}{5}$   D. $5$</p>
+<blockquote>
+<p>答案：A。绝对值的意义：数轴上的点到原点的距离即为该数的绝对值。</p>
+</blockquote>
+<h3 id="2">第 2 题：科学记数法</h3>
+<p><strong>典型题（2023·北京）</strong>：2022 年北京市 GDP 约为 4.16 万亿元，将 4.16 万亿用科学记数法表示？
+- A. $4.16×10^{12}$   B. $4.16×10^{13}$   C. $4.16×10^{11}$   D. $4.16×10^{10}$</p>
+<blockquote>
+<p>答案：A。1 万亿 = $10^{12}$。</p>
+</blockquote>
+<h3 id="3">第 3 题：平行线性质求角度</h3>
+<p><strong>典型题（2024·北京）</strong>：如图，$l_1 \parallel l_2$，直线 $l$ 与 $l_1$、$l_2$ 分别交于 $A$、$B$，$\angle 1=65°$，则 $\angle 2$ = ____。</p>
+<blockquote>
+<p>答案：115°（同位角/同旁内角计算）。</p>
+</blockquote>
+<h3 id="45">第 4–5 题：一次函数/反比例函数性质</h3>
+<p><strong>典型题（2023·北京）</strong>：一次函数 $y=kx+b$ 的图像经过点 $(1,3)$ 和 $(−1, −1)$，则 $k=$ <strong><em>_，$b=$ </em></strong>_。</p>
+<h3 id="6">第 6 题：圆的基本性质</h3>
+<p><strong>考点</strong>：圆周角定理、圆心角定理</p>
+<p><strong>典型题（2024·北京）</strong>：如图，点 $A$、$B$、$C$ 在 $\bigodot O$ 上，$\angle AOB=100°$，则 $\angle ACB=$ ____。
+- A. $100°$   B. $50°$   C. $40°$   D. $80°$</p>
+<blockquote>
+<p>答案：B。同弧所对圆周角是圆心角的一半：$100°÷2=50°$。</p>
+</blockquote>
+<h3 id="7">第 7 题：四边形性质</h3>
+<p><strong>典型题（2023·北京）</strong>：菱形 $ABCD$ 中，$\angle A=60°$，$AB=2$，则对角线 $BD$ 的长为 ____。</p>
+<blockquote>
+<p>提示：连接 $BD$ 得等边三角形 $ABD$，$BD=AB=2$。</p>
+</blockquote>
+<h3 id="8">第 8 题（压轴选择题）：函数图像分析</h3>
+<p><strong>典型题（2024·北京）</strong>：已知二次函数 $y=ax^2+bx+c$（$a&gt;0$）的图像经过点 $(−2, y_1)$、$(1, y_2)$、$(3, y_3)$ 且 $y_1&lt;y_2&lt;y_3$，则下列 $\frac{b}{a}$ 的取值范围正确的是？
+- A. $-1&lt;\frac{b}{a}&lt;0$   B. $-2&lt;\frac{b}{a}&lt;-1$   C. $0&lt;\frac{b}{a}&lt;1$   D. $\frac{b}{a}&gt;1$</p>
+<blockquote>
+<p>分析：对称轴 $x=-\frac{b}{2a}$，由 $y_1&lt;y_2&lt;y_3$ 及开口向上，可知点越远离对称轴函数值越大，由此推断对称轴位置。</p>
+</blockquote>
+<hr />
+<h2 id="916-2">二、填空题（9–16 题，每题 2 分）</h2>
+<h3 id="9">第 9 题：因式分解</h3>
+<p><strong>典型题（2024·北京）</strong>：分解因式：$a^3-4a=$ ____。</p>
+<blockquote>
+<p>答案：$a(a+2)(a-2)$。先提取公因式，再用平方差公式。</p>
+</blockquote>
+<h3 id="10">第 10 题：二次根式有意义条件</h3>
+<p><strong>典型题（2023·北京）</strong>：若 $\sqrt{x-3}$ 有意义，则 $x$ 的取值范围是 ____。</p>
+<blockquote>
+<p>答案：$x≥3$（被开方数非负）。</p>
+</blockquote>
+<h3 id="11">第 11 题：分式值为零</h3>
+<p><strong>典型题（2024·北京）</strong>：若分式 $\frac{x-2}{x+3}$ 的值为 0，则 $x=$ ____。</p>
+<blockquote>
+<p>答案：$x=2$（分子为 0，分母不为 0）。</p>
+</blockquote>
+<h3 id="12-k">第 12 题：反比例函数 $k$ 的几何意义</h3>
+<p><strong>典型题（2023·北京）</strong>：反比例函数 $y=\frac{k}{x}$（$k≠0$）图像上一点 $P$，作 $PA⊥x$ 轴于 $A$，$PB⊥y$ 轴于 $B$，四边形 $OAPB$ 面积为 6，则 $k=$ ____。</p>
+<blockquote>
+<p>答案：$k=6$ 或 $k=-6$。$|k|$ 即为矩形面积。</p>
+</blockquote>
+<h3 id="13">第 13 题：一元二次方程判别式</h3>
+<p><strong>典型题（2024·北京）</strong>：若关于 $x$ 的一元二次方程 $x^2−4x+m=0$ 有两个不相等的实数根，则 $m$ 的取值范围是 ____。</p>
+<blockquote>
+<p>答案：$m&lt;4$。$\Delta = 16-4m&gt;0$。</p>
+</blockquote>
+<h3 id="14">第 14 题：正多边形的内角/外角</h3>
+<p><strong>典型题（2023·北京）</strong>：正十边形的每个外角等于 ____ 度。</p>
+<blockquote>
+<p>答案：36°。$360°÷10=36°$。</p>
+</blockquote>
+<h3 id="15">第 15 题：统计量</h3>
+<p><strong>典型题（2024·北京）</strong>：一组数据 3、5、5、6、8 的中位数是 <strong><em>_，众数是 </em></strong>_。</p>
+<blockquote>
+<p>答案：中位数 5，众数 5。</p>
+</blockquote>
+<h3 id="16">第 16 题（压轴填空）：逻辑推理/找规律</h3>
+<p><strong>考点</strong>：图形规律、数字规律、方案设计</p>
+<p><strong>典型题（2024·北京）</strong>：用长度为 $l$ 的绳子围成一个矩形，用长度为 $k$ 的绳子围成一个圆。若矩形面积大于圆面积，写出一个满足条件的 $l$ 与 $k$ 的关系：____。</p>
+<hr />
+<h2 id="1722-5">三、基础解答题（17–22 题，每题 5 分）</h2>
+<h3 id="17">第 17 题：分式化简求值</h3>
+<p><strong>典型题（2024·北京）</strong>：先化简，再求值：$\frac{x-3}{x+2} ÷ \frac{x^2-9}{x^2-4}$，其中 $x=1$。</p>
+<p><strong>解法</strong>：
+1. 除法变乘法：$\frac{x-3}{x+2} × \frac{x^2-4}{x^2-9}$
+2. 因式分解：$\frac{x-3}{x+2} × \frac{(x+2)(x-2)}{(x+3)(x-3)}$
+3. 约分：$\frac{x-2}{x+3}$
+4. 代入 $x=1$：$\frac{1-2}{1+3}=-\frac{1}{4}$</p>
+<h3 id="18">第 18 题：解不等式（组）</h3>
+<p><strong>典型题（2024·北京）</strong>：解不等式组 $\begin{cases} 3x-1≥5 \ 2x+1&lt;9 \end{cases}$，并把解集在数轴上表示。</p>
+<blockquote>
+<p>答案：$2≤x&lt;4$。注意端点处的实心/空心点表示。</p>
+</blockquote>
+<h3 id="19">第 19 题：一元二次方程/分式方程</h3>
+<p><strong>典型题（2023·北京）</strong>：解方程：$\frac{2}{x-1}=\frac{3}{x+2}$。</p>
+<blockquote>
+<p>答案：去分母得 $2(x+2)=3(x-1)$，$x=7$，检验：$x=7$ 时分母不为 0，所以 $x=7$ 是原方程的解。</p>
+</blockquote>
+<h3 id="20">第 20 题：一元二次方程的应用</h3>
+<p><strong>典型题（2024·北京）</strong>：某商品原价 50 元，经过两次降价后为 40.5 元，若每次降价的百分率相同，求降价的百分率。</p>
+<blockquote>
+<p>设降价百分率为 $x$，$50(1-x)^2=40.5$，解得 $x=0.1=10\%$。</p>
+</blockquote>
+<h3 id="21">第 21 题：全等三角形的证明与计算</h3>
+<p><strong>典型题（2024·北京）</strong>：在 $\triangle ABC$ 中，$D$ 是 $BC$ 边上一点，$E$ 是 $AD$ 中点，$BE$ 延长线交 $AC$ 于 $F$。已知 $∠BED=∠C=90°$，$BE=ED$。
+（1）求证：$\triangle BDE ≅ \triangle CDF$
+（2）若 $AB=5$，$BC=6$，求 $AF$ 的长度。</p>
+<blockquote>
+<p><strong>证法</strong>：利用 AAS 或 ASA 判定全等。</p>
+</blockquote>
+<h3 id="22">第 22 题：四边形判定与性质</h3>
+<p><strong>典型题（2023·北京）</strong>：在平行四边形 $ABCD$ 中，$E$、$F$ 分别为 $AB$、$CD$ 中点，连接 $DE$、$BF$。
+求证：四边形 $BFDE$ 是平行四边形。</p>
+<hr />
+<h2 id="2326-6">四、中档解答题（23–26 题，每题 6 分）</h2>
+<h3 id="23">第 23 题：统计与概率综合</h3>
+<p><strong>典型题（2024·北京）</strong>：某校调查八年级学生每周课外阅读时间（单位：h），数据如下：
+- 0~2h：8 人，2~4h：12 人，4~6h：18 人，6~8h：7 人，8h 以上：5 人
+（1）补全频数分布直方图
+（2）求这组数据的中位数所在时间段
+（3）随机抽取一名学生，阅读时间在 4h 以上的概率是多少？</p>
+<h3 id="24">第 24 题：一次函数与反比例函数综合</h3>
+<p><strong>典型题（2024·北京）</strong>：直线 $y=kx+b$ 与双曲线 $y=\frac{m}{x}$ 交于 $A(1, 4)$、$B(−2, n)$ 两点。
+（1）求 $m$、$n$ 的值
+（2）求直线解析式
+（3）当 $kx+b &gt; \frac{m}{x}$ 时，求 $x$ 的取值范围</p>
+<blockquote>
+<p><strong>思路</strong>：代入 $A(1,4)$ 求 $m=4$；代入 $B(−2,n)$ → $n=-2$；两点求直线；不等式在数轴上结合图像解。</p>
+</blockquote>
+<h3 id="25">第 25 题：解直角三角形应用</h3>
+<p><strong>典型题（2024·北京）</strong>：如图，小明在楼顶 $D$ 处测得地面 $C$ 处俯角 $30°$，$BC=30$ 米，楼高 $AD=60$ 米，求 $C$ 到楼底 $A$ 的距离。（结果保留根号）</p>
+<blockquote>
+<p>提示：作 $DE⊥BC$ 于 $E$，在 $Rt\triangle DEC$ 中解三角形。</p>
+</blockquote>
+<h3 id="26">第 26 题：圆的综合</h3>
+<p><strong>典型题（2024·北京）</strong>：在 $\triangle ABC$ 中，$AB=AC$，以 $AB$ 为直径作 $\bigodot O$ 交 $BC$ 于 $D$，过 $D$ 作 $DE⊥AC$ 于 $E$。
+（1）求证：$DE$ 是 $\bigodot O$ 的切线
+（2）若 $BC=6$，$DE=2$，求 $AB$ 的长</p>
+<blockquote>
+<p><strong>关键</strong>：连接 $OD$，证明 $OD \parallel AC$ → $OD⊥DE$ → 切线；利用等腰三角形和勾股定理求 $AB$。</p>
+</blockquote>
+<hr />
+<h2 id="2728-7">五、压轴题（27–28 题，每题 7 分）</h2>
+<h3 id="27">第 27 题：二次函数综合题</h3>
+<p><strong>典型题型</strong>：给定二次函数 $y=ax^2+bx+c$（含参数），结合图像变换、面积最值、存在性问题。</p>
+<p><strong>真题思路（2024·北京）</strong>：
+- 第（1）问：求解析式（待定系数法）
+- 第（2）问：二次函数图像平移后的顶点、与 $x$ 轴交点
+- 第（3）问：给定范围上函数值的取值范围（分类讨论对称轴与区间的关系）</p>
+<blockquote>
+<p>三个注意：① 对称轴 $x=-\frac{b}{2a}$；② 开口方向（$a$ 的符号）；③ 端点函数值与顶点函数值比较。</p>
+</blockquote>
+<p><strong>常见题型</strong>：
+- 二次函数与线段/三角形面积最值
+- 二次函数与等腰三角形/直角三角形存在性
+- 二次函数图像平移、对称、旋转</p>
+<h3 id="28">第 28 题：几何综合压轴题</h3>
+<p><strong>典型题型</strong>：以三角形、四边形为背景，综合全等、相似、旋转对称等变换。</p>
+<p><strong>真题思路（2024·北京）</strong>：
+- 第（1）问：简单证明（如全等、角相等）
+- 第（2）问：线段关系（倍长中线法、截长补短法）
+- 第（3）问：动态几何中的最值或存在性问题</p>
+<p><strong>常见模型</strong>：
+- 手拉手模型（旋转全等）
+- 半角模型（角含半角）
+- 对角互补模型
+- 一线三等角模型
+- 中点的辅助线作法（倍长中线、中位线）
+- 翻折（轴对称）的性质</p>
+<p><strong>解题口诀</strong>：
+- 遇中点，倍长中线或作中位线
+- 遇角分线，作双垂或截长补短
+- 遇旋转，找旋转中心和对应点
+- 遇最值，转化为两点间线段最短/垂线段最短</p>
+<hr />
+<h2 id="_2">📌 备考建议</h2>
+<ol>
+<li><strong>基础题（1–22 题，共 62 分）</strong>：保证全对，强化计算准确率和速度</li>
+<li><strong>中档题（23–26 题，共 24 分）</strong>：专题突破，掌握每一种题型的标准解法</li>
+<li><strong>压轴题（27–28 题，共 14 分）</strong>：争取第（1）问满分，第（2）问多拿分，第（3）问有思路</li>
+<li><strong>刷题策略</strong>：优先真题（近 5 年北京中考），其次各区一模二模题</li>
+<li><strong>错题本</strong>：分类记录错因（计算错误/思路错误/知识点盲区）</li>
+</ol>
+<div class="footer">北京中考数学 & 物理 · 核心考点与真题精析 ·
+<a href="https://github.com/lucienwyb/beijing-zhongkao">GitHub</a> ·
+<a href="https://gitee.com/lucienwyb/beijing-zhongkao">Gitee</a></div>
+</body>
+</html>

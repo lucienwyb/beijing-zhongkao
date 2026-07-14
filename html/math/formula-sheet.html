@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>北京中考数学 · 必背公式速查</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB",
+               "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 1.75;
+  color: #24292f;
+  background: #ffffff;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px 40px 96px;
+  font-size: 16px;
+}
+h1, h2, h3, h4 { border-bottom: none; margin-top: 1.5em; margin-bottom: 0.6em; font-weight: 600; color: #1f2328; }
+h1 { font-size: 2em; border-bottom: 2px solid #d0d7de; padding-bottom: 8px; }
+h2 { font-size: 1.5em; border-bottom: 1px solid #d0d7de; padding-bottom: 6px; }
+h3 { font-size: 1.25em; }
+h4 { font-size: 1.1em; color: #57606a; }
+p, li { line-height: 1.85; }
+strong { color: #0969da; }
+blockquote {
+  border-left: 4px solid #d0d7de;
+  color: #57606a;
+  margin: 1em 0;
+  padding: 6px 16px;
+  background: #f6f8fa;
+  border-radius: 4px;
+}
+code {
+  background: #f6f8fa;
+  color: #d73a49;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: "SF Mono", Menlo, Monaco, Consolas, monospace;
+  font-size: 0.92em;
+}
+pre {
+  background: #f6f8fa;
+  padding: 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+pre code { background: none; padding: 0; color: #24292f; }
+table {
+  border-collapse: collapse;
+  margin: 1em 0;
+  width: 100%;
+  font-size: 0.95em;
+}
+th, td { border: 1px solid #d0d7de; padding: 8px 12px; text-align: left; }
+th { background: #f6f8fa; font-weight: 600; }
+tr:nth-child(even) td { background: #fafbfc; }
+a { color: #0969da; text-decoration: none; }
+a:hover { text-decoration: underline; }
+hr { border: none; border-top: 1px solid #d0d7de; margin: 2em 0; }
+.emoji { font-size: 1.2em; }
+.nav {
+  background: #f6f8fa;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  padding: 12px 20px;
+  margin-bottom: 24px;
+  font-size: 0.95em;
+}
+.nav a { margin-right: 16px; }
+.footer {
+  margin-top: 60px;
+  padding-top: 20px;
+  border-top: 1px solid #d0d7de;
+  color: #57606a;
+  font-size: 0.9em;
+  text-align: center;
+}
+
+/* MathJax display styling */
+mjx-container { font-size: 1.05em; }
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  body { background: #0d1117; color: #c9d1d9; }
+  h1, h2, h3, h4 { color: #f0f6fc; }
+  h1, h2 { border-bottom-color: #30363d; }
+  h4 { color: #8b949e; }
+  strong { color: #58a6ff; }
+  blockquote { background: #161b22; color: #8b949e; border-left-color: #30363d; }
+  code { background: #161b22; color: #ff7b72; }
+  pre { background: #161b22; }
+  pre code { color: #c9d1d9; }
+  th, td { border-color: #30363d; }
+  th { background: #161b22; }
+  tr:nth-child(even) td { background: #0d1117; }
+  a { color: #58a6ff; }
+  hr { border-top-color: #30363d; }
+  .nav { background: #161b22; border-color: #30363d; }
+  .footer { border-top-color: #30363d; color: #8b949e; }
+}
+</style>
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+<body>
+<div class="nav">📚 <a href="../index.html">首页</a> · <a href="../math/exam-points.html">数学考点</a> · <a href="../physics/exam-points.html">物理考点</a> · <a href="../papers/README.html">真题合集</a></div>
+<h1 id="_1">北京中考数学 · 必背公式速查</h1>
+<hr />
+<h2 id="_2">一、代数公式</h2>
+<h3 id="_3">乘法公式</h3>
+<table>
+<thead>
+<tr>
+<th>公式</th>
+<th>表达式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>平方差</td>
+<td>$(a+b)(a-b)=a^2-b^2$</td>
+</tr>
+<tr>
+<td>完全平方（和）</td>
+<td>$(a+b)^2=a^2+2ab+b^2$</td>
+</tr>
+<tr>
+<td>完全平方（差）</td>
+<td>$(a-b)^2=a^2-2ab+b^2$</td>
+</tr>
+</tbody>
+</table>
+<h3 id="a0-mn">幂的运算（$a≠0, m,n$ 为整数）</h3>
+<table>
+<thead>
+<tr>
+<th>运算</th>
+<th>公式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>同底数幂乘</td>
+<td>$a^m·a^n=a^{m+n}$</td>
+</tr>
+<tr>
+<td>同底数幂除</td>
+<td>$a^m÷a^n=a^{m-n}$</td>
+</tr>
+<tr>
+<td>幂的乘方</td>
+<td>$(a^m)^n=a^{mn}$</td>
+</tr>
+<tr>
+<td>积的乘方</td>
+<td>$(ab)^n=a^nb^n$</td>
+</tr>
+<tr>
+<td>零指数</td>
+<td>$a^0=1$</td>
+</tr>
+<tr>
+<td>负指数</td>
+<td>$a^{-n}=\frac{1}{a^n}$</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_4">因式分解</h3>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>公式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>提公因式</td>
+<td>$ma+mb+mc=m(a+b+c)$</td>
+</tr>
+<tr>
+<td>平方差</td>
+<td>$a^2-b^2=(a+b)(a-b)$</td>
+</tr>
+<tr>
+<td>完全平方</td>
+<td>$a^2±2ab+b^2=(a±b)^2$</td>
+</tr>
+<tr>
+<td>十字相乘</td>
+<td>$x^2+(p+q)x+pq=(x+p)(x+q)$</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_5">一元二次方程</h3>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>公式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>求根公式</td>
+<td>$x=\frac{-b±\sqrt{b^2-4ac}}{2a}$，$ax^2+bx+c=0(a≠0)$</td>
+</tr>
+<tr>
+<td>判别式</td>
+<td>$\Delta = b^2-4ac$</td>
+</tr>
+<tr>
+<td>韦达定理</td>
+<td>$x_1+x_2=-\frac{b}{a}$，$x_1·x_2=\frac{c}{a}$</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_6">不等式性质</h3>
+<ul>
+<li>加减同一数，不等号方向不变</li>
+<li>乘除正数，不等号方向不变</li>
+<li>乘除负数，不等号方向改变</li>
+</ul>
+<hr />
+<h2 id="_7">二、函数公式</h2>
+<h3 id="_8">一次函数</h3>
+<p>$y=kx+b(k≠0)$</p>
+<ul>
+<li>$k&gt;0$ → 增函数（过一三象限）</li>
+<li>$k&lt;0$ → 减函数（过二四象限）</li>
+<li>$b$：纵截距</li>
+</ul>
+<h3 id="_9">反比例函数</h3>
+<p>$y=\frac{k}{x}(k≠0)$</p>
+<ul>
+<li>$k&gt;0$ → 双曲线在一三象限</li>
+<li>$k&lt;0$ → 双曲线在二四象限</li>
+<li>$|k|$ = 双曲线上任意一点向两坐标轴作垂线所得矩形面积</li>
+</ul>
+<h3 id="_10">二次函数</h3>
+<p>$y=ax^2+bx+c(a≠0)$</p>
+<ul>
+<li>顶点坐标：$(-\frac{b}{2a}, \frac{4ac-b^2}{4a})$</li>
+<li>对称轴：$x=-\frac{b}{2a}$</li>
+<li>开口：$a&gt;0$ 向上，$a&lt;0$ 向下</li>
+<li>顶点式：$y=a(x-h)^2+k$，顶点 $(h,k)$</li>
+<li>交点式：$y=a(x-x_1)(x-x_2)$，与 $x$ 轴交于 $(x_1,0)$、$(x_2,0)$</li>
+</ul>
+<hr />
+<h2 id="_11">三、几何公式</h2>
+<h3 id="_12">三角形面积</h3>
+<ul>
+<li>$S=\frac{1}{2}×底×高$</li>
+<li>$S=\frac{1}{2}ab\sin C$</li>
+</ul>
+<h3 id="_13">勾股定理</h3>
+<p>直角三角形：$a^2+b^2=c^2$（$c$ 为斜边）</p>
+<h3 id="_14">特殊三角形性质</h3>
+<table>
+<thead>
+<tr>
+<th>三角形</th>
+<th>性质</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>30°-60°-90°</td>
+<td>30°对边=斜边一半；三边比 $1:\sqrt{3}:2$</td>
+</tr>
+<tr>
+<td>45°-45°-90°</td>
+<td>腰相等；三边比 $1:1:\sqrt{2}$</td>
+</tr>
+<tr>
+<td>等边</td>
+<td>三个角 60°；面积 $S=\frac{\sqrt{3}}{4}a^2$</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_15">多边形内角和</h3>
+<p>$(n-2)×180°$</p>
+<h3 id="_16">平行四边形</h3>
+<ul>
+<li>面积 $S=底×高$</li>
+<li>对角线互相平分</li>
+<li>性质判定对照（平行四边→矩/菱/正方形）</li>
+</ul>
+<h3 id="_17">圆</h3>
+<table>
+<thead>
+<tr>
+<th>内容</th>
+<th>公式/定理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>周长</td>
+<td>$C=2πr=πd$</td>
+</tr>
+<tr>
+<td>面积</td>
+<td>$S=πr^2$</td>
+</tr>
+<tr>
+<td>弧长</td>
+<td>$l=\frac{nπr}{180}$</td>
+</tr>
+<tr>
+<td>扇形面积</td>
+<td>$S=\frac{nπr^2}{360}=\frac{1}{2}lr$</td>
+</tr>
+<tr>
+<td>圆周角</td>
+<td>同弧对圆周角 = 圆心角的一半</td>
+</tr>
+<tr>
+<td>直径对圆周角</td>
+<td>直径所对圆周角 = 90°</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_18">相似三角形</h3>
+<ul>
+<li>周长比 = 相似比</li>
+<li>面积比 = 相似比²</li>
+<li>对应高、中线、角平分线比 = 相似比</li>
+</ul>
+<hr />
+<h2 id="_19">四、锐角三角函数</h2>
+<table>
+<thead>
+<tr>
+<th>角度</th>
+<th>$\sin$</th>
+<th>$\cos$</th>
+<th>$\tan$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$30°$</td>
+<td>$\frac{1}{2}$</td>
+<td>$\frac{\sqrt{3}}{2}$</td>
+<td>$\frac{\sqrt{3}}{3}$</td>
+</tr>
+<tr>
+<td>$45°$</td>
+<td>$\frac{\sqrt{2}}{2}$</td>
+<td>$\frac{\sqrt{2}}{2}$</td>
+<td>$1$</td>
+</tr>
+<tr>
+<td>$60°$</td>
+<td>$\frac{\sqrt{3}}{2}$</td>
+<td>$\frac{1}{2}$</td>
+<td>$\sqrt{3}$</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_20">解直角三角形关系</h3>
+<ul>
+<li>$\sin^2A+\cos^2A=1$</li>
+<li>$\tan A=\frac{\sin A}{\cos A}$</li>
+<li>$A+B=90°$ → $\sin A=\cos B$</li>
+</ul>
+<hr />
+<h2 id="_21">五、统计公式</h2>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>公式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>平均数</td>
+<td>$\bar{x}=\frac{x_1+x_2+...+x_n}{n}$</td>
+</tr>
+<tr>
+<td>方差</td>
+<td>$S^2=\frac{(x_1-\bar{x})^2+...+(x_n-\bar{x})^2}{n}$</td>
+</tr>
+<tr>
+<td>概率</td>
+<td>$P(A)=\frac{\text{事件 A 的结果数}}{\text{总等可能结果数}}$</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_22">六、常用常数</h2>
+<ul>
+<li>$\sqrt{2}≈1.414$，$\sqrt{3}≈1.732$，$\sqrt{5}≈2.236$</li>
+<li>$π≈3.1416$</li>
+<li>$1$ 亿 = $10^8$，$1$ 万亿 = $10^{12}$</li>
+</ul>
+<div class="footer">北京中考数学 & 物理 · 核心考点与真题精析 ·
+<a href="https://github.com/lucienwyb/beijing-zhongkao">GitHub</a> ·
+<a href="https://gitee.com/lucienwyb/beijing-zhongkao">Gitee</a></div>
+</body>
+</html>
