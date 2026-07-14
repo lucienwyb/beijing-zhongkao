@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="北京中考数学与物理三周提升计划">
+  <title>京考进阶 · 21 天学习计划</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#today" aria-label="返回今日任务">
+      <span class="brand-mark">京</span>
+      <span>京考进阶</span>
+    </a>
+    <nav aria-label="主导航">
+      <a href="#today">今日</a>
+      <a href="#plan">计划</a>
+      <a href="#mistakes">错题</a>
+    </nav>
+    <button class="icon-button" id="resetButton" type="button" title="重置全部进度" aria-label="重置全部进度">↻</button>
+  </header>
+
+  <main>
+    <section class="hero" id="today">
+      <div class="hero-copy">
+        <p class="eyebrow">北京中考 · 数学 + 物理</p>
+        <h1>21 天，把会做的分数稳稳拿下</h1>
+        <p class="hero-intro">从基础诊断到整卷模拟，每天完成一小步。目标不是死磕最后一问，而是先把基础题正确率提升到 90%。</p>
+        <div class="hero-actions">
+          <button class="primary-button" id="startButton" type="button">开始今日任务 <span>→</span></button>
+          <a class="text-link" href="#plan">查看完整计划</a>
+        </div>
+      </div>
+      <div class="score-visual" aria-label="目标成绩：数学80到88分，物理64到72分">
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="subject-node math-node"><b>数学</b><span>80–88</span></div>
+        <div class="subject-node physics-node"><b>物理</b><span>64–72</span></div>
+        <div class="center-node"><span>目标</span><b>中高等</b></div>
+      </div>
+    </section>
+
+    <section class="dashboard" aria-label="学习概览">
+      <div class="progress-block">
+        <div class="progress-ring" id="progressRing"><strong id="progressPercent">0%</strong><span>总进度</span></div>
+        <div>
+          <p class="label">当前进展</p>
+          <h2><span id="completedDays">0</span> / 21 天已完成</h2>
+          <p id="progressMessage">先完成诊断，找到最值得补的分数。</p>
+        </div>
+      </div>
+      <div class="metric"><span>数学目标</span><strong>80–88</strong><small>/ 100</small></div>
+      <div class="metric"><span>物理目标</span><strong>64–72</strong><small>/ 80</small></div>
+      <div class="metric"><span>基础正确率</span><strong>90%</strong><small>第三周</small></div>
+    </section>
+
+    <section class="today-panel" aria-labelledby="todayTitle">
+      <div class="section-heading">
+        <div><p class="eyebrow">TODAY'S FOCUS</p><h2 id="todayTitle">今日任务</h2></div>
+        <div class="day-switcher">
+          <button class="icon-button" id="prevDay" type="button" aria-label="前一天">←</button>
+          <span id="dayLabel">第 1 天</span>
+          <button class="icon-button" id="nextDay" type="button" aria-label="后一天">→</button>
+        </div>
+      </div>
+      <div class="today-grid">
+        <article class="task-card math-card">
+          <div class="task-top"><span class="subject-tag">数学</span><span id="mathTime">120 分钟</span></div>
+          <h3 id="mathTitle"></h3><p id="mathDetail"></p>
+          <a id="mathResource" class="resource-link" href="math/exam-points.md">打开复习资料 <span>↗</span></a>
+        </article>
+        <article class="task-card physics-card">
+          <div class="task-top"><span class="subject-tag">物理</span><span id="physicsTime">70 分钟</span></div>
+          <h3 id="physicsTitle"></h3><p id="physicsDetail"></p>
+          <a id="physicsResource" class="resource-link" href="physics/exam-points.md">打开复习资料 <span>↗</span></a>
+        </article>
+        <aside class="check-card">
+          <p class="label">完成标准</p>
+          <h3 id="checkTitle"></h3><p id="checkDetail"></p>
+          <label class="complete-control"><input id="completeToday" type="checkbox"><span></span>标记当天完成</label>
+        </aside>
+      </div>
+    </section>
+
+    <section class="plan-section" id="plan" aria-labelledby="planTitle">
+      <div class="section-heading">
+        <div><p class="eyebrow">THREE-WEEK PLAN</p><h2 id="planTitle">三周进阶路线</h2></div>
+        <div class="week-tabs" role="tablist" aria-label="选择周次">
+          <button class="active" data-week="0" type="button">第 1 周</button>
+          <button data-week="1" type="button">第 2 周</button>
+          <button data-week="2" type="button">第 3 周</button>
+        </div>
+      </div>
+      <div class="week-summary"><span id="weekNumber">01</span><div><h3 id="weekTitle">补基础，建立稳定得分区</h3><p id="weekDescription"></p></div></div>
+      <div class="days-grid" id="daysGrid"></div>
+    </section>
+
+    <section class="method-section">
+      <div><p class="eyebrow">DAILY RHYTHM</p><h2>每天保持同一个节奏</h2><p>不追求题量堆积。当天做错的题，必须在第二天脱离答案重做。</p></div>
+      <ol class="rhythm-list">
+        <li><span>01</span><div><b>知识唤醒</b><small>15 分钟 · 公式与适用条件</small></div></li>
+        <li><span>02</span><div><b>限时训练</b><small>80 分钟 · 按专题完成</small></div></li>
+        <li><span>03</span><div><b>订正归因</b><small>30 分钟 · 只记主要错因</small></div></li>
+        <li><span>04</span><div><b>隔日重做</b><small>20 分钟 · 不看原答案</small></div></li>
+      </ol>
+    </section>
+
+    <section class="mistakes-section" id="mistakes" aria-labelledby="mistakesTitle">
+      <div class="section-heading"><div><p class="eyebrow">MISTAKE LOG</p><h2 id="mistakesTitle">错题记录</h2></div><span class="record-count" id="recordCount">0 条记录</span></div>
+      <form id="mistakeForm" class="mistake-form">
+        <label>学科<select id="mistakeSubject"><option>数学</option><option>物理</option></select></label>
+        <label>错因<select id="mistakeReason"><option>知识不会</option><option>模型没认出</option><option>计算错误</option><option>审题错误</option><option>书写丢分</option></select></label>
+        <label class="question-input">题目或知识点<input id="mistakeText" required maxlength="80" placeholder="例如：反比例函数面积模型"></label>
+        <button class="primary-button" type="submit">添加记录</button>
+      </form>
+      <div id="mistakeList" class="mistake-list"><p class="empty-state">还没有错题记录。做完今日训练后，把最值得重做的题留在这里。</p></div>
+    </section>
+  </main>
+
+  <footer><span>京考进阶 · 数据仅保存在当前浏览器</span><a href="README.md">仓库说明 ↗</a></footer>
+  <dialog id="resetDialog"><h2>重置学习进度？</h2><p>21 天完成状态和错题记录都会被清空，此操作无法撤销。</p><div><button id="cancelReset" type="button">取消</button><button class="danger-button" id="confirmReset" type="button">确认重置</button></div></dialog>
+  <script src="app.js"></script>
+</body>
+</html>
