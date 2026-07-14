@@ -55,6 +55,12 @@
       <div class="metric"><span>基础正确率</span><strong>90%</strong><small>第三周</small></div>
     </section>
 
+    <aside class="source-note" aria-label="资料使用说明">
+      <strong>资料说明</strong>
+      <span>仓库试卷是整理版，部分“如图”题未收录图片。专题学习可使用本站资料；整卷诊断与模考请使用带图、答案完整的官方 PDF。</span>
+      <a href="html/papers/sources/README.html">查看官方资源入口 →</a>
+    </aside>
+
     <section class="today-panel" aria-labelledby="todayTitle">
       <div class="section-heading">
         <div><p class="eyebrow">TODAY'S FOCUS</p><h2 id="todayTitle">今日任务</h2></div>
@@ -67,17 +73,30 @@
       <div class="today-grid">
         <article class="task-card math-card">
           <div class="task-top"><span class="subject-tag">数学</span><span id="mathTime">120 分钟</span></div>
-          <h3 id="mathTitle"></h3><p id="mathDetail"></p>
+          <h3 id="mathTitle"></h3>
+          <dl class="lesson-flow">
+            <div><dt>概念原理</dt><dd id="mathConcept"></dd></div>
+            <div><dt>核心考点</dt><dd id="mathPoints"></dd></div>
+            <div><dt>经典题型</dt><dd id="mathModel"></dd></div>
+            <div class="practice-step"><dt>今日练习</dt><dd id="mathPractice"></dd></div>
+            <div><dt>验收标准</dt><dd id="mathCheck"></dd></div>
+          </dl>
           <a id="mathResource" class="resource-link" href="html/math/exam-points.html">打开复习资料 <span>↗</span></a>
         </article>
         <article class="task-card physics-card">
           <div class="task-top"><span class="subject-tag">物理</span><span id="physicsTime">70 分钟</span></div>
-          <h3 id="physicsTitle"></h3><p id="physicsDetail"></p>
+          <h3 id="physicsTitle"></h3>
+          <dl class="lesson-flow">
+            <div><dt>概念原理</dt><dd id="physicsConcept"></dd></div>
+            <div><dt>核心考点</dt><dd id="physicsPoints"></dd></div>
+            <div><dt>经典题型</dt><dd id="physicsModel"></dd></div>
+            <div class="practice-step"><dt>今日练习</dt><dd id="physicsPractice"></dd></div>
+            <div><dt>验收标准</dt><dd id="physicsCheck"></dd></div>
+          </dl>
           <a id="physicsResource" class="resource-link" href="html/physics/exam-points.html">打开复习资料 <span>↗</span></a>
         </article>
-        <aside class="check-card">
-          <p class="label">完成标准</p>
-          <h3 id="checkTitle"></h3><p id="checkDetail"></p>
+        <aside class="completion-bar">
+          <div><p class="label">当日完成条件</p><h3>两科均完成练习、订正与验收，再打卡</h3></div>
           <label class="complete-control"><input id="completeToday" type="checkbox"><span></span>标记当天完成</label>
         </aside>
       </div>
@@ -120,6 +139,7 @@
 
   <footer><span>京考进阶 · 数据仅保存在当前浏览器</span><a href="html/index.html">仓库说明 ↗</a></footer>
   <dialog id="resetDialog"><h2>重置学习进度？</h2><p>21 天完成状态和错题记录都会被清空，此操作无法撤销。</p><div><button id="cancelReset" type="button">取消</button><button class="danger-button" id="confirmReset" type="button">确认重置</button></div></dialog>
+  <script src="curriculum.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

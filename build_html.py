@@ -83,6 +83,16 @@ hr { border: none; border-top: 1px solid #d0d7de; margin: 2em 0; }
   font-size: 0.9em;
   text-align: center;
 }
+.missing-figure {
+  margin: -0.35em 0 1.2em;
+  padding: 10px 12px;
+  border-left: 4px solid #bf8700;
+  background: #fff8c5;
+  color: #633c01;
+  font-size: 0.9em;
+  border-radius: 4px;
+}
+.missing-figure a { font-weight: 600; }
 
 /* MathJax display styling */
 mjx-container { font-size: 1.05em; }
@@ -105,6 +115,7 @@ mjx-container { font-size: 1.05em; }
   hr { border-top-color: #30363d; }
   .nav { background: #161b22; border-color: #30363d; }
   .footer { border-top-color: #30363d; color: #8b949e; }
+  .missing-figure { background: #2d2515; color: #eac54f; border-left-color: #d29922; }
 }
 @media (max-width: 600px) {
   body { padding: 20px 18px 72px; font-size: 15px; }
@@ -139,6 +150,15 @@ def rewrite_md_links(html: str, rel_depth: int) -> str:
         return f'href="{href}"'
     return re.sub(r'href="([^"]+)"', repl, html)
 
+def mark_missing_figures(html: str, resources_href: str) -> str:
+    """Explain figure omissions that are present in the source material."""
+    notice = (
+        '<div class="missing-figure">本题依赖配图，但仓库整理稿未收录图像。'
+        f'请使用带图官方试卷完成本题。<a href="{resources_href}">查看试卷资源</a></div>'
+    )
+    pattern = re.compile(r'(<p>(?:(?!</p>).)*如图(?:(?!</p>).)*</p>)', re.DOTALL)
+    return pattern.sub(lambda match: match.group(1) + notice, html)
+
 def convert_file(md_path: Path, out_path: Path):
     text = md_path.read_text(encoding='utf-8')
     # Python-Markdown requires a blank line before a list. Several papers put
@@ -165,6 +185,7 @@ def convert_file(md_path: Path, out_path: Path):
     # Relative path back to root for nav
     depth = len(md_path.relative_to(REPO_ROOT).parts) - 1
     root = '../' * depth if depth else ''
+    body = mark_missing_figures(body, f'{root}papers/sources/README.html')
 
     plan_root = '../' * (depth + 1)
     nav = f'<div class="nav">📚 <a href="{plan_root}index.html">学习计划</a> · <a href="{root}index.html">资料首页</a> · <a href="{root}math/exam-points.html">数学考点</a> · <a href="{root}physics/exam-points.html">物理考点</a> · <a href="{root}papers/README.html">真题合集</a></div>'
