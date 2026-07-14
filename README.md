@@ -34,11 +34,23 @@ python3 -m http.server 8000
 
 ## 📄 真题合集
 
+### Markdown 整理版（题面 + 讲解）
+
 | 年份 | 数学 | 物理 |
 |------|------|------|
 | 2024 | [2024 数学真题](papers/math/2024-math.md) | [2024 物理真题](papers/physics/2024-physics.md) |
 | 2023 | [2023 数学真题](papers/math/2023-math.md) | [2023 物理真题](papers/physics/2023-physics.md) |
 | 2022 | [2022 数学真题](papers/math/2022-math.md) | [2022 物理真题](papers/physics/2022-physics.md) |
+
+### 原版 PDF 下载合集（2015-2025）
+
+见 [`papers/downloaded/README.md`](papers/downloaded/README.md) —— 汇总从多来源抓取的 70 份 PDF、24 份 HTML 快照、图片切片和 Markdown 题面：
+
+- **2019-2024**：9 科目基本齐全（原版 PDF）
+- **2016**：数学/物理/化学/语文/英语 新浪版 HTML+图
+- **2015**：仅数学有 HTML 版
+- **2025**：8 科 HTML 快照（zizzs.com / gaokzx.com）
+- **明显缺口**：2015-2018 老年份非数学科目、2020 政治、2024 生物/历史/地理、2025 政治
 
 📎 [官方 PDF 及资源链接汇总](papers/sources/README.md) — 北京教育考试院、学科网、菁优网等官方/主流资源入口
 
