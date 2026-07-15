@@ -11,3 +11,30 @@
 @media(max-width:760px){.today-grid{grid-template-columns:1fr}.task-card{min-height:auto}.completion-bar{grid-column:auto;align-items:flex-start;flex-direction:column}.lesson-flow>div{grid-template-columns:74px 1fr}}
 .source-note{margin:18px clamp(24px,5vw,72px) 0;padding:14px 18px;border:1px solid #dfc16d;border-left:4px solid var(--yellow);background:#fff9e8;border-radius:4px;display:flex;align-items:center;gap:14px;font-size:12px;line-height:1.6}.source-note strong{white-space:nowrap}.source-note span{color:var(--muted)}.source-note a{margin-left:auto;white-space:nowrap;font-weight:700;color:var(--green)}
 @media(max-width:760px){.source-note{margin:16px;align-items:flex-start;flex-direction:column;gap:6px}.source-note a{margin-left:0}}
+
+/* Resources section (added by frontend integration) */
+.resources-section{padding:90px clamp(24px,8vw,120px);background:var(--paper)}
+.resources-section .section-heading{margin-bottom:35px}
+.resource-grid{display:grid;grid-template-columns:1fr 1fr 1.15fr;gap:18px}
+.res-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px 26px 22px;display:flex;flex-direction:column;min-height:420px}
+.res-card{border-top:5px solid var(--line)}
+.res-math{border-top-color:var(--yellow)}
+.res-physics{border-top-color:var(--blue)}
+.res-download{border-top-color:var(--green);background:linear-gradient(180deg,#fff 0,#f6faf7 100%)}
+.res-card .eyebrow{margin:0 0 6px;color:var(--muted)}
+.res-math .eyebrow{color:#b17b0b}
+.res-physics .eyebrow{color:var(--blue)}
+.res-download .eyebrow{color:var(--green)}
+.res-card h3{margin:0 0 18px;font-size:19px}
+.res-card ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:1px}
+.res-card ul li{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line);font-size:13.5px}
+.res-card ul li:first-child{border-top:0}
+.res-card ul li a{font-weight:700;color:var(--ink);border-bottom:1px solid transparent}
+.res-card ul li a:hover{border-bottom-color:var(--green);color:var(--green)}
+.res-card ul li span{color:var(--muted);font-size:11.5px;white-space:nowrap}
+.download-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:18px;padding:14px;background:#fff;border:1px solid var(--line);border-radius:4px}
+.download-stats>div{text-align:center}
+.download-stats b{font-family:Georgia,serif;font-size:26px;color:var(--green);display:block;line-height:1}
+.download-stats span{font-size:10.5px;color:var(--muted);display:block;margin-top:4px;font-weight:700}
+@media(max-width:1000px){.resource-grid{grid-template-columns:1fr}.res-card{min-height:auto}}
+@media(max-width:700px){.resources-section{padding:60px 20px}.download-stats{grid-template-columns:1fr 1fr}}
