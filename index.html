@@ -16,105 +16,47 @@
     <nav aria-label="主导航">
       <a href="#today">今日</a>
       <a href="#plan">计划</a>
-      <a href="#resources">资料</a>
-      <a href="downloads.html">下载</a>
+      <a href="#materials">资料</a>
       <a href="#mistakes">错题</a>
+      <a href="downloads.html">真题下载</a>
     </nav>
     <button class="icon-button" id="resetButton" type="button" title="重置全部进度" aria-label="重置全部进度">↻</button>
   </header>
 
   <main>
-    <section class="hero" id="today">
-      <div class="hero-copy">
+    <!-- ① 首屏简报：目标 + 进度 + 主动作，只出现一次 -->
+    <section class="briefing" id="today" aria-label="学习简报">
+      <div class="briefing-head">
         <p class="eyebrow">2026 北京中考 · 数学 + 物理</p>
-        <h1>21 天，把会做的分数稳稳拿下</h1>
-        <p class="hero-intro">从基础诊断到整卷模拟，每天完成一小步。目标不是死磕最后一问，而是先把基础题正确率提升到 90%。</p>
-        <div class="hero-actions">
-          <button class="primary-button" id="startButton" type="button">开始今日任务 <span>→</span></button>
-          <a class="text-link" href="#plan">查看完整计划</a>
+        <h1>21 天节奏 · 稳拿基础分</h1>
+        <p class="lead">从诊断到整卷模拟，目标是把基础题正确率提到 90%，不追压轴。</p>
+      </div>
+      <div class="briefing-stats" role="group" aria-label="学习目标与进度">
+        <div class="stat stat-math"><span>数学目标</span><strong>80–88</strong><small>/ 100</small></div>
+        <div class="stat stat-physics"><span>物理笔试</span><strong>56–63</strong><small>/ 70 · 实验 +10</small></div>
+        <div class="stat stat-progress">
+          <span>当前进度</span>
+          <strong><span id="progressPercent">0%</span></strong>
+          <small><span id="completedDays">0</span> / 21 天完成</small>
+        </div>
+        <div class="stat stat-note">
+          <span>基础正确率</span>
+          <strong>≥ 90%</strong>
+          <small>三周达成</small>
         </div>
       </div>
-      <div class="score-visual" aria-label="目标成绩：数学80到88分，物理笔试56到63分">
-        <div class="orbit orbit-one"></div>
-        <div class="orbit orbit-two"></div>
-        <div class="subject-node math-node"><b>数学</b><span>80–88</span></div>
-        <div class="subject-node physics-node"><b>物理笔试</b><span>56–63</span></div>
-        <div class="center-node"><span>目标</span><b>中高等</b></div>
+      <div class="briefing-actions">
+        <button class="primary-button" id="startButton" type="button">开始今日任务 <span>→</span></button>
+        <a class="text-link" href="#plan">查看三周计划</a>
+        <span class="briefing-note" id="progressMessage">先完成诊断，找到最值得补的分数。</span>
       </div>
+      <p class="briefing-source">
+        <strong>资料说明：</strong>本站整理版试卷部分"如图"题未收录图片，
+        专题学习可用；<a href="downloads.html">整卷诊断与模考请用带图的官方 PDF</a>。
+      </p>
     </section>
 
-    <section class="dashboard" aria-label="学习概览">
-      <div class="progress-block">
-        <div class="progress-ring" id="progressRing"><strong id="progressPercent">0%</strong><span>总进度</span></div>
-        <div>
-          <p class="label">当前进展</p>
-          <h2><span id="completedDays">0</span> / 21 天已完成</h2>
-          <p id="progressMessage">先完成诊断，找到最值得补的分数。</p>
-        </div>
-      </div>
-      <div class="metric"><span>数学目标</span><strong>80–88</strong><small>/ 100</small></div>
-      <div class="metric"><span>物理笔试目标</span><strong>56–63</strong><small>/ 70，实验另计 10</small></div>
-      <div class="metric"><span>基础正确率</span><strong>90%</strong><small>第三周</small></div>
-    </section>
-
-    <aside class="source-note" aria-label="资料使用说明">
-      <strong>资料说明</strong>
-      <span>仓库试卷是整理版，部分“如图”题未收录图片。专题学习可使用本站资料；整卷诊断与模考请使用带图、答案完整的官方 PDF。</span>
-      <a href="html/papers/sources/README.html">查看官方资源入口 →</a>
-    </aside>
-
-    <section class="resources-section" id="resources" aria-labelledby="resourcesTitle">
-      <div class="section-heading">
-        <div><p class="eyebrow">STUDY MATERIALS</p><h2 id="resourcesTitle">复习资料速查</h2></div>
-        <a class="text-link" href="downloads.html">70+ 真题下载合集 →</a>
-      </div>
-      <div class="resource-grid">
-        <article class="res-card res-math">
-          <p class="eyebrow">数学</p>
-          <h3>核心考点 · 公式 · 真题</h3>
-          <ul>
-            <li><a href="html/math/exam-points.html">数学核心考点</a><span>代数 / 几何 / 统概</span></li>
-            <li><a href="html/math/formula-sheet.html">必背公式速查</a><span>18 大类，考前口述</span></li>
-            <li><a href="html/math/past-questions.html">典型真题分析</a><span>2022–2025 分类</span></li>
-            <li><a href="html/papers/math/2024-math.html">2024 数学整理卷</a><span>题面 + 讲解</span></li>
-            <li><a href="html/papers/math/2023-math.html">2023 数学整理卷</a><span>题面 + 讲解</span></li>
-            <li><a href="html/papers/math/2022-math.html">2022 数学整理卷</a><span>题面 + 讲解</span></li>
-            <li><a href="html/papers/downloaded/2018/math/2018-math_github_asahiluna.html">2018 数学（MD 全题）</a><span>GitHub 完整题面</span></li>
-          </ul>
-        </article>
-        <article class="res-card res-physics">
-          <p class="eyebrow">物理</p>
-          <h3>核心考点 · 公式 · 真题</h3>
-          <ul>
-            <li><a href="html/physics/exam-points.html">物理核心考点</a><span>力/电/热/光/声</span></li>
-            <li><a href="html/physics/formula-sheet.html">必背公式速查</a><span>17 大类，含单位</span></li>
-            <li><a href="html/physics/past-questions.html">典型真题分析</a><span>2022–2025 分类</span></li>
-            <li><a href="html/papers/physics/2024-physics.html">2024 物理整理卷</a><span>题面 + 讲解</span></li>
-            <li><a href="html/papers/physics/2023-physics.html">2023 物理整理卷</a><span>题面 + 讲解</span></li>
-            <li><a href="html/papers/physics/2022-physics.html">2022 物理整理卷</a><span>题面 + 讲解</span></li>
-          </ul>
-        </article>
-        <article class="res-card res-download">
-          <p class="eyebrow">真题合集</p>
-          <h3>95 份原版 PDF / 网页快照 + 图片版真题</h3>
-          <div class="download-stats">
-            <div><b>52</b><span>PDF 原版</span></div>
-            <div><b>35</b><span>HTML 快照</span></div>
-            <div><b>2</b><span>MD 全题</span></div>
-            <div><b>6</b><span>TXT 评析</span></div>
-          </div>
-          <ul>
-            <li><a href="downloads.html">全部年份 · 全部学科</a><span>2015 → 2026</span></li>
-            <li><a href="downloads.html#y2026">2026 · 微信图片版真题</a><span>数学最完整</span></li>
-            <li><a href="downloads.html#y2025">2025 · 8 学科 HTML</a><span>部分含摘要</span></li>
-            <li><a href="downloads.html#y2024">2024 · 6 学科 PDF</a><span>缺生物/历史/地理</span></li>
-            <li><a href="downloads.html#y2019">2019–2023 · 9 学科齐全</a><span>PDF 全套</span></li>
-            <li><a href="html/papers/downloaded/README.html">下载 README（真伪判定）</a><span>来源与缺口分析</span></li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
+    <!-- ② 今日任务 -->
     <section class="today-panel" aria-labelledby="todayTitle">
       <div class="section-heading">
         <div><p class="eyebrow">TODAY'S FOCUS</p><h2 id="todayTitle">今日任务</h2></div>
@@ -150,12 +92,13 @@
           <a id="physicsResource" class="resource-link" href="html/physics/exam-points.html">打开复习资料 <span>↗</span></a>
         </article>
         <aside class="completion-bar">
-          <div><p class="label">当日完成条件</p><h3>两科均完成练习、订正与验收，再打卡</h3></div>
+          <div><p class="label">当日完成条件</p><h3>两科完成练习、订正与验收，再打卡</h3></div>
           <label class="complete-control"><input id="completeToday" type="checkbox"><span></span>标记当天完成</label>
         </aside>
       </div>
     </section>
 
+    <!-- ③ 三周计划（把「每日节奏」内联到头部作为方法说明） -->
     <section class="plan-section" id="plan" aria-labelledby="planTitle">
       <div class="section-heading">
         <div><p class="eyebrow">THREE-WEEK PLAN</p><h2 id="planTitle">三周进阶路线</h2></div>
@@ -165,20 +108,63 @@
           <button data-week="2" type="button">第 3 周</button>
         </div>
       </div>
-      <div class="week-summary"><span id="weekNumber">01</span><div><h3 id="weekTitle">补基础，建立稳定得分区</h3><p id="weekDescription"></p></div></div>
-      <div class="days-grid" id="daysGrid"></div>
-    </section>
 
-    <section class="method-section">
-      <div><p class="eyebrow">DAILY RHYTHM</p><h2>每天保持同一个节奏</h2><p>不追求题量堆积。当天做错的题，必须在第二天脱离答案重做。</p></div>
-      <ol class="rhythm-list">
+      <ol class="rhythm-list" aria-label="每日节奏">
         <li><span>01</span><div><b>知识唤醒</b><small>15 分钟 · 公式与适用条件</small></div></li>
         <li><span>02</span><div><b>限时训练</b><small>80 分钟 · 按专题完成</small></div></li>
         <li><span>03</span><div><b>订正归因</b><small>30 分钟 · 只记主要错因</small></div></li>
         <li><span>04</span><div><b>隔日重做</b><small>20 分钟 · 不看原答案</small></div></li>
       </ol>
+
+      <div class="week-summary"><span id="weekNumber">01</span><div><h3 id="weekTitle">补基础，建立稳定得分区</h3><p id="weekDescription"></p></div></div>
+      <div class="days-grid" id="daysGrid"></div>
     </section>
 
+    <!-- ④ 复习资料（去掉冗余的 stat count，链接为主） -->
+    <section class="resources-section" id="materials" aria-labelledby="resourcesTitle">
+      <div class="section-heading">
+        <div><p class="eyebrow">STUDY MATERIALS</p><h2 id="resourcesTitle">复习资料 · 按需查阅</h2></div>
+        <a class="text-link" href="downloads.html">95 份真题下载合集 →</a>
+      </div>
+      <div class="resource-grid">
+        <article class="res-card res-math">
+          <p class="eyebrow">数学</p>
+          <h3>核心考点 · 公式 · 真题</h3>
+          <ul>
+            <li><a href="html/math/exam-points.html">核心考点</a><span>代数 / 几何 / 统概</span></li>
+            <li><a href="html/math/formula-sheet.html">必背公式速查</a><span>18 大类 · 考前口述</span></li>
+            <li><a href="html/math/past-questions.html">典型真题分析</a><span>2022–2025 分类</span></li>
+            <li><a href="html/papers/math/2024-math.html">2024 整理卷</a><span>题面 + 讲解</span></li>
+            <li><a href="html/papers/math/2023-math.html">2023 整理卷</a><span>题面 + 讲解</span></li>
+            <li><a href="html/papers/math/2022-math.html">2022 整理卷</a><span>题面 + 讲解</span></li>
+          </ul>
+        </article>
+        <article class="res-card res-physics">
+          <p class="eyebrow">物理</p>
+          <h3>核心考点 · 公式 · 真题</h3>
+          <ul>
+            <li><a href="html/physics/exam-points.html">核心考点</a><span>力 / 电 / 热 / 光 / 声</span></li>
+            <li><a href="html/physics/formula-sheet.html">必背公式速查</a><span>17 大类 · 含单位</span></li>
+            <li><a href="html/physics/past-questions.html">典型真题分析</a><span>2022–2025 分类</span></li>
+            <li><a href="html/papers/physics/2024-physics.html">2024 整理卷</a><span>题面 + 讲解</span></li>
+            <li><a href="html/papers/physics/2023-physics.html">2023 整理卷</a><span>题面 + 讲解</span></li>
+            <li><a href="html/papers/physics/2022-physics.html">2022 整理卷</a><span>题面 + 讲解</span></li>
+          </ul>
+        </article>
+        <article class="res-card res-download">
+          <p class="eyebrow">真题下载</p>
+          <h3>原版 PDF · 图片版真题</h3>
+          <ul>
+            <li><a href="downloads.html">全部年份 · 全部学科</a><span>2015 → 2026</span></li>
+            <li><a href="downloads.html#y2026">2026 · 微信图片版</a><span>数学最完整</span></li>
+            <li><a href="downloads.html#y2024">2019–2024 · 原版 PDF</a><span>9 科目基本齐全</span></li>
+            <li><a href="html/papers/downloaded/README.html">下载合集说明</a><span>来源与缺口分析</span></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ⑤ 错题 -->
     <section class="mistakes-section" id="mistakes" aria-labelledby="mistakesTitle">
       <div class="section-heading"><div><p class="eyebrow">MISTAKE LOG</p><h2 id="mistakesTitle">错题记录</h2></div><span class="record-count" id="recordCount">0 条记录</span></div>
       <form id="mistakeForm" class="mistake-form">

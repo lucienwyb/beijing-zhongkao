@@ -225,8 +225,9 @@ def main():
   <nav aria-label="主导航">
     <a href="index.html#today">今日</a>
     <a href="index.html#plan">计划</a>
-    <a href="downloads.html" aria-current="page">下载</a>
-    <a href="html/index.html">资料</a>
+    <a href="index.html#materials">资料</a>
+    <a href="index.html#mistakes">错题</a>
+    <a href="downloads.html" aria-current="page">真题下载</a>
   </nav>
   <a class="icon-button" href="index.html" title="返回">←</a>
 </header>
