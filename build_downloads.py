@@ -23,10 +23,18 @@ EXT_META = {
 
 
 def scan():
+    """Walk papers/downloaded/, but skip image assets inside *_imgs/ dirs and non-document files."""
+    ALLOWED_EXT = {'pdf', 'html', 'md', 'txt'}
     data = {}
     for dp, _, fn in os.walk(DL):
+        # skip _imgs subdirectories (article images, not deliverables)
+        if '_imgs' in Path(dp).parts[-1] or '_imgs/' in dp or dp.endswith('_imgs'):
+            continue
         for f in fn:
             if f == 'README.md':
+                continue
+            ext = f.rsplit('.', 1)[-1].lower()
+            if ext not in ALLOWED_EXT:
                 continue
             full = Path(dp) / f
             rel = full.relative_to(REPO)
@@ -36,9 +44,18 @@ def scan():
             year = parts[2]
             subject = parts[3] if len(parts) == 5 else 'overview'
             size = full.stat().st_size
-            ext = f.rsplit('.', 1)[-1].lower()
+            # count sibling *_imgs image dir to display image bundle size
+            imgs_dir = full.parent / (full.stem + '_imgs')
+            img_count = 0
+            img_bytes = 0
+            if imgs_dir.is_dir():
+                for ip in imgs_dir.iterdir():
+                    if ip.is_file() and ip.suffix.lower() in ('.jpg', '.jpeg', '.png', '.gif', '.webp'):
+                        img_count += 1
+                        img_bytes += ip.stat().st_size
             data.setdefault(year, {}).setdefault(subject, []).append({
                 'name': f, 'href': str(rel), 'size': size, 'ext': ext,
+                'imgs': img_count, 'imgs_bytes': img_bytes,
             })
     for y in data:
         for s in data[y]:
@@ -57,11 +74,15 @@ def fmt_size(n):
 def render_card(f):
     ext = f['ext']
     label, color, kind = EXT_META.get(ext, ('文件', '#61706b', ''))
+    # if HTML article ships with an image bundle, show it as an extra badge
+    extra = ''
+    if f.get('imgs'):
+        extra = f' · 附 {f["imgs"]} 图 · {fmt_size(f["imgs_bytes"])}'
     return f'''
       <a class="dl-file" href="{html.escape(f['href'])}" target="_blank" rel="noopener">
         <span class="dl-badge" style="background:{color}">{label}</span>
         <span class="dl-name">{html.escape(f['name'])}</span>
-        <span class="dl-meta">{kind} · {fmt_size(f['size'])}</span>
+        <span class="dl-meta">{kind} · {fmt_size(f['size'])}{extra}</span>
       </a>'''
 
 
