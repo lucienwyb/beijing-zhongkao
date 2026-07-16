@@ -204,7 +204,9 @@ python3 build_2026_math_viewer.py    # 2026 数学图片版 → html/papers/2026
 <p>三者共享 <code>build_common.py</code>（favicon 链、OG meta 标签、图片大小阈值常量）。修改公共模板时改一处即可。</p>
 <h3 id="_5">文件结构</h3>
 <pre><code>├── index.html              # 首页（21 天计划入口，手写，非脚本生成）
+├── downloads.html          # 真题下载页（由 build_downloads.py 生成，已纳入版本控制）
 ├── styles.css              # 全站样式（首页 + 下载页 + viewer 共用）
+├── favicon.ico/.png/.svg   # 站点图标（build_common.favicon_links 的三档回退链）
 ├── curriculum.js           # 21 天计划数据（mathPlans[] + physicsPlans[]）
 ├── app.js                  # 首页交互（进度、错题、日历渲染）
 ├── build_common.py        # 三脚本共享的 favicon/OG/常量
@@ -218,7 +220,7 @@ python3 build_2026_math_viewer.py    # 2026 数学图片版 → html/papers/2026
 │   ├── physics/           #   物理整理卷（2022-2024，.md）
 │   ├── downloaded/        #   下载的原版文件（PDF/HTML/MD/TXT，按年份/学科分目录）
 │   └── sources/           #   资源链接汇总
-└── html/                   # 构建产物（gitignore，由 build_html.py 生成）
+└── html/                   # 构建产物（由三个脚本生成，已纳入版本控制以便 GitHub Pages 直接服务）
 </code></pre>
 <h3 id="_6">如何扩展</h3>
 <p><strong>新增一份真题整理卷</strong>（.md 题面 + 讲解）：把 <code>.md</code> 放到 <code>papers/math/</code> 或 <code>papers/physics/</code> 下，运行 <code>build_html.py</code>，自动生成对应 HTML。</p>
@@ -233,6 +235,7 @@ python3 build_2026_math_viewer.py    # 2026 数学图片版 → html/papers/2026
 <li><strong>2026 非数学科目</strong>：仅有数学整卷图片版，其余科目官方 PDF 未发布。<code>build_downloads.py</code> 的 force-include 列表含 <code>2026</code>。</li>
 <li><strong><code>build_downloads.py</code> force-include 年份</strong>：<code>('2026', '2025')</code> 硬编码，若未来有新年份无文件需手动加入。</li>
 <li><strong><code>build_2026_math_viewer.py</code> 年份特定</strong>：整个脚本为 2026 数学专用，若 2027 需要图片版查看器需复制改造。</li>
+<li><strong>周次导航固定 3 周</strong>：<code>index.html</code> 的周次按钮、<code>app.js</code> 的 <code>weeks[]</code> 数组与 <code>selectedWeek&lt;3</code> 钳制三处硬编码为 3。总天数虽由 <code>mathPlans.length</code> 自动推导，但超出 21 天（进入第 4 周）后新增天无法通过周次导航到达，需同步改这三处。</li>
 </ul>
 <hr />
 <h2 id="_8">📐 数学</h2>
@@ -339,7 +342,7 @@ python3 build_2026_math_viewer.py    # 2026 数学图片版 → html/papers/2026
 <li>科普阅读题（每年 4 分）和多选部分计分制是北京卷的特色（多选计分制非题型，而是计分规则）</li>
 </ul>
 <hr />
-<p><em>注：2022–2023 数学、2022–2024 物理已据官方 PDF 校对，题面忠实原卷；2024 数学官方 PDF 为扫描件、文字难以提取，暂未校对，做题请到<a href="downloads.html#y2024">真题下载页</a>下载官方 PDF。2026 诊断使用数学图片版整卷（官方 PDF 未发布）。</em></p>
+<p><em>注：2022–2023 数学、2022–2024 物理已据官方 PDF 校对，题面忠实原卷；2024 数学官方 PDF 为扫描件、文字难以提取，暂未校对，做题请到<a href="../downloads.html#y2024">真题下载页</a>下载官方 PDF。2026 诊断使用数学图片版整卷（官方 PDF 未发布）。</em></p>
 <div class="footer">北京中考数学 & 物理 · 核心考点与真题精析 ·
 <a href="https://github.com/lucienwyb/beijing-zhongkao">GitHub</a> ·
 <a href="https://gitee.com/lucienwyb/beijing-zhongkao">Gitee</a></div>

@@ -46,7 +46,9 @@ python3 build_2026_math_viewer.py    # 2026 数学图片版 → html/papers/2026
 
 ```
 ├── index.html              # 首页（21 天计划入口，手写，非脚本生成）
+├── downloads.html          # 真题下载页（由 build_downloads.py 生成，已纳入版本控制）
 ├── styles.css              # 全站样式（首页 + 下载页 + viewer 共用）
+├── favicon.ico/.png/.svg   # 站点图标（build_common.favicon_links 的三档回退链）
 ├── curriculum.js           # 21 天计划数据（mathPlans[] + physicsPlans[]）
 ├── app.js                  # 首页交互（进度、错题、日历渲染）
 ├── build_common.py        # 三脚本共享的 favicon/OG/常量
@@ -60,7 +62,7 @@ python3 build_2026_math_viewer.py    # 2026 数学图片版 → html/papers/2026
 │   ├── physics/           #   物理整理卷（2022-2024，.md）
 │   ├── downloaded/        #   下载的原版文件（PDF/HTML/MD/TXT，按年份/学科分目录）
 │   └── sources/           #   资源链接汇总
-└── html/                   # 构建产物（gitignore，由 build_html.py 生成）
+└── html/                   # 构建产物（由三个脚本生成，已纳入版本控制以便 GitHub Pages 直接服务）
 ```
 
 ### 如何扩展
@@ -82,6 +84,7 @@ python3 build_2026_math_viewer.py    # 2026 数学图片版 → html/papers/2026
 - **2026 非数学科目**：仅有数学整卷图片版，其余科目官方 PDF 未发布。`build_downloads.py` 的 force-include 列表含 `2026`。
 - **`build_downloads.py` force-include 年份**：`('2026', '2025')` 硬编码，若未来有新年份无文件需手动加入。
 - **`build_2026_math_viewer.py` 年份特定**：整个脚本为 2026 数学专用，若 2027 需要图片版查看器需复制改造。
+- **周次导航固定 3 周**：`index.html` 的周次按钮、`app.js` 的 `weeks[]` 数组与 `selectedWeek<3` 钳制三处硬编码为 3。总天数虽由 `mathPlans.length` 自动推导，但超出 21 天（进入第 4 周）后新增天无法通过周次导航到达，需同步改这三处。
 
 ---
 
@@ -145,4 +148,4 @@ python3 build_2026_math_viewer.py    # 2026 数学图片版 → html/papers/2026
 
 ---
 
-*注：2022–2023 数学、2022–2024 物理已据官方 PDF 校对，题面忠实原卷；2024 数学官方 PDF 为扫描件、文字难以提取，暂未校对，做题请到[真题下载页](downloads.html#y2024)下载官方 PDF。2026 诊断使用数学图片版整卷（官方 PDF 未发布）。*
+*注：2022–2023 数学、2022–2024 物理已据官方 PDF 校对，题面忠实原卷；2024 数学官方 PDF 为扫描件、文字难以提取，暂未校对，做题请到[真题下载页](../downloads.html#y2024)下载官方 PDF。2026 诊断使用数学图片版整卷（官方 PDF 未发布）。*

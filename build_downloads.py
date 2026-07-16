@@ -231,8 +231,10 @@ def main():
         render_year(y, data[y], viewer_meta=(viewer_sources, viewer_imgs))
         for y in years)
 
-    # coverage matrix
-    all_subs = ['math','physics','chemistry','biology','chinese','english','history','geography','politics']
+    # coverage matrix: every subject in SUBJ_ORDER except 'overview' (which is
+    # a cross-subject bundle, not its own column). Derived from SUBJ_ORDER so
+    # adding a subject only requires editing SUBJ_ZH + SUBJ_ORDER (two places).
+    all_subs = [s for s in SUBJ_ORDER if s != 'overview']
     rows = []
     for y in years:
         cells = [f'<th>{y}</th>']
