@@ -151,13 +151,10 @@ def rewrite_md_links(html: str, rel_depth: int) -> str:
     return re.sub(r'href="([^"]+)"', repl, html)
 
 def mark_missing_figures(html: str, resources_href: str) -> str:
-    """Explain figure omissions that are present in the source material."""
-    notice = (
-        '<div class="missing-figure">本题依赖配图，但仓库整理稿未收录图像。'
-        f'请使用带图官方试卷完成本题。<a href="{resources_href}">查看试卷资源</a></div>'
-    )
-    pattern = re.compile(r'(<p>(?:(?!</p>).)*如图(?:(?!</p>).)*</p>)', re.DOTALL)
-    return pattern.sub(lambda match: match.group(1) + notice, html)
+    """Figure omissions are already marked inline in source md as 〔需配图〕;
+    this previously injected a duplicate yellow box, which double-flagged
+    figures and split question/option paragraphs. Inline text is sufficient."""
+    return html
 
 def convert_file(md_path: Path, out_path: Path):
     text = md_path.read_text(encoding='utf-8')
@@ -172,6 +169,12 @@ def convert_file(md_path: Path, out_path: Path):
             normalized.append('')
         normalized.append(line)
     text = '\n'.join(normalized)
+    # Fill-in blanks: sequences of 3+ underscores are meant as answer lines,
+    # but Python-Markdown interprets them as <em>/<strong>. Replace with
+    # full-width underscores so they render as stable blank lines.
+    text = re.sub(r'_{3,}', lambda m: '＿' * len(m.group()), text)
+    # Auto-link bare URLs (linkify extension unavailable in this env)
+    text = re.sub(r'(?<![">])(https?://[^\s<）)]+)', r'<\1>', text)
     # Extract first h1 as title, fallback to filename
     title_m = re.search(r'^#\s+(.+)$', text, re.MULTILINE)
     title = title_m.group(1).strip() if title_m else md_path.stem

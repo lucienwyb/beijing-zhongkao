@@ -97,7 +97,7 @@ def main():
     total_imgs = sum(len(items) for _, items in sources_data)
 
     tabs = ''.join(
-        f'<a href="#src-{s["slug"]}" class="tab">{html.escape(s["title"].split(" · ")[0])} <small>{len(imgs)}</small></a>'
+        f'<a href="#src-{s["slug"]}" class="tab" data-slug="{s["slug"]}">{html.escape(s["title"].split(" · ")[0])} <small>{len(imgs)}</small></a>'
         for s, imgs in sources_data
     )
 
@@ -125,7 +125,7 @@ def main():
   .tab{{padding:12px 18px 14px;border-bottom:3px solid transparent;font-size:13px;font-weight:700;color:var(--muted)}}
   .tab small{{display:inline-block;margin-left:4px;color:var(--green);font-family:Georgia,serif}}
   .tab:hover{{color:var(--ink)}}
-  .tab:target,.tab:active{{border-bottom-color:var(--green);color:var(--ink)}}
+  .tab:target,.tab:active,.tab.active{{border-bottom-color:var(--green);color:var(--ink)}}
   main.viewer{{padding:20px 0 60px}}
   .src{{padding:36px clamp(20px,6vw,80px);border-top:1px solid var(--line);background:var(--white)}}
   .src:nth-child(even){{background:var(--paper)}}
@@ -162,7 +162,7 @@ def main():
     .tabs{{padding:0 16px;overflow-x:auto;white-space:nowrap;flex-wrap:nowrap;top:0}}
     .tab{{padding:10px 12px 12px;font-size:12px}}
     .src{{padding:28px 16px}}
-    .grid{{grid-template-columns:1fr 1fr;gap:10px}}
+    .grid{{grid-template-columns:1fr;gap:10px}}
   }}
 </style>
 </head>
@@ -228,6 +228,16 @@ document.addEventListener('keydown', e => {{
   else if (e.key === 'ArrowLeft') {{ e.preventDefault(); show(cur - 1); }}
   else if (e.key === 'ArrowRight') {{ e.preventDefault(); show(cur + 1); }}
 }});
+// Tab switching: highlight active tab + expand its <details> on click
+const tabLinks = document.querySelectorAll('.tab');
+function activateTab(slug){{
+  tabLinks.forEach(t => t.classList.toggle('active', t.dataset.slug === slug));
+  const sec = document.getElementById('src-' + slug);
+  if (sec){{ const det = sec.querySelector('details'); if (det) det.open = true; }}
+}}
+tabLinks.forEach(t => t.addEventListener('click', () => activateTab(t.dataset.slug)));
+// initial: highlight first (primary) tab
+if (tabLinks.length) tabLinks[0].classList.add('active');
 </script>
 </body>
 </html>'''

@@ -5,7 +5,7 @@
   --shadow:0 14px 35px rgba(20,32,29,.08);
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
 body{margin:0;background:var(--paper);color:var(--ink);
   font-family:"Noto Sans SC","Microsoft YaHei",system-ui,sans-serif}
 button,input,select{font:inherit}

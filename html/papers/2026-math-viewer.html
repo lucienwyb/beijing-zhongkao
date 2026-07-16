@@ -20,7 +20,7 @@
   .tab{padding:12px 18px 14px;border-bottom:3px solid transparent;font-size:13px;font-weight:700;color:var(--muted)}
   .tab small{display:inline-block;margin-left:4px;color:var(--green);font-family:Georgia,serif}
   .tab:hover{color:var(--ink)}
-  .tab:target,.tab:active{border-bottom-color:var(--green);color:var(--ink)}
+  .tab:target,.tab:active,.tab.active{border-bottom-color:var(--green);color:var(--ink)}
   main.viewer{padding:20px 0 60px}
   .src{padding:36px clamp(20px,6vw,80px);border-top:1px solid var(--line);background:var(--white)}
   .src:nth-child(even){background:var(--paper)}
@@ -57,7 +57,7 @@
     .tabs{padding:0 16px;overflow-x:auto;white-space:nowrap;flex-wrap:nowrap;top:0}
     .tab{padding:10px 12px 12px;font-size:12px}
     .src{padding:28px 16px}
-    .grid{grid-template-columns:1fr 1fr;gap:10px}
+    .grid{grid-template-columns:1fr;gap:10px}
   }
 </style>
 </head>
@@ -87,7 +87,7 @@
   </p>
 </section>
 
-<nav class="tabs" aria-label="来源切换"><a href="#src-albert" class="tab">Albert <small>17</small></a><a href="#src-jiao" class="tab">焦老师 <small>15</small></a><a href="#src-xdf" class="tab">新东方北京中考研究所 <small>15</small></a><a href="#src-zhentt" class="tab">西城观察 <small>33</small></a></nav>
+<nav class="tabs" aria-label="来源切换"><a href="#src-albert" class="tab" data-slug="albert">Albert <small>17</small></a><a href="#src-jiao" class="tab" data-slug="jiao">焦老师 <small>15</small></a><a href="#src-xdf" class="tab" data-slug="xdf">新东方北京中考研究所 <small>15</small></a><a href="#src-zhentt" class="tab" data-slug="zhentt">西城观察 <small>33</small></a></nav>
 
 <main class="viewer">
 <section class="src" id="src-albert">
@@ -150,6 +150,16 @@ document.addEventListener('keydown', e => {
   else if (e.key === 'ArrowLeft') { e.preventDefault(); show(cur - 1); }
   else if (e.key === 'ArrowRight') { e.preventDefault(); show(cur + 1); }
 });
+// Tab switching: highlight active tab + expand its <details> on click
+const tabLinks = document.querySelectorAll('.tab');
+function activateTab(slug){
+  tabLinks.forEach(t => t.classList.toggle('active', t.dataset.slug === slug));
+  const sec = document.getElementById('src-' + slug);
+  if (sec){ const det = sec.querySelector('details'); if (det) det.open = true; }
+}
+tabLinks.forEach(t => t.addEventListener('click', () => activateTab(t.dataset.slug)));
+// initial: highlight first (primary) tab
+if (tabLinks.length) tabLinks[0].classList.add('active');
 </script>
 </body>
 </html>
