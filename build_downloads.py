@@ -231,6 +231,10 @@ def main():
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="北京中考 2017-2026 真题下载合集：{desc_line}">
+<meta property="og:title" content="真题下载合集 · 京考进阶">
+<meta property="og:description" content="北京中考 2017-2026 真题下载合集：{desc_line}。9 学科 10 年份，原版 PDF 与整卷图片版查看器。">
+<meta property="og:type" content="website">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <title>真题下载合集 · 京考进阶</title>
 <link rel="stylesheet" href="styles.css">
 <style>

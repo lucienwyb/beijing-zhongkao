@@ -178,6 +178,10 @@ def convert_file(md_path: Path, out_path: Path):
     title_m = re.search(r'^#\s+(.+)$', text, re.MULTILINE)
     title = title_m.group(1).strip() if title_m else md_path.stem
 
+    # SEO + social share: brand the title and derive a description from the H1.
+    page_title = f"{title} · 京考进阶"
+    description = f"{title}详解 · 京考进阶复习资料，核心考点、公式速查与历年真题精析。"
+
     md = markdown.Markdown(extensions=['tables', 'fenced_code', 'toc', 'sane_lists'])
     body = md.convert(text)
 
@@ -196,6 +200,7 @@ def convert_file(md_path: Path, out_path: Path):
     body = mark_missing_figures(body, f'{root}papers/sources/README.html')
 
     plan_root = '../' * (depth + 1)
+    favicon_href = f"{plan_root}favicon.svg"
     nav = f'<div class="nav">📚 <a href="{plan_root}index.html">学习计划</a> · <a href="{root}math/exam-points.html">数学考点</a> · <a href="{root}physics/exam-points.html">物理考点</a> · <a href="{plan_root}index.html#mistakes">错题</a> · <a href="{plan_root}downloads.html">真题下载</a></div>'
 
     html = f"""<!DOCTYPE html>
@@ -203,7 +208,12 @@ def convert_file(md_path: Path, out_path: Path):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{title}</title>
+<meta name="description" content="{description}">
+<meta property="og:title" content="{page_title}">
+<meta property="og:description" content="{description}">
+<meta property="og:type" content="article">
+<link rel="icon" href="{favicon_href}" type="image/svg+xml">
+<title>{page_title}</title>
 <style>{CSS}</style>
 {MATHJAX}
 </head>
