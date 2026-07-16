@@ -168,7 +168,11 @@ def main():
         for s in all_subs:
             fs = data[y].get(s, [])
             if not fs:
-                cells.append('<td class="miss">—</td>')
+                # 2026 math has the viewer (image-only, no docs in downloaded/)
+                if y == '2026' and s == 'math':
+                    cells.append(f'<td class="mid"><a href="#y{y}">图片版</a></td>')
+                else:
+                    cells.append('<td class="miss">—</td>')
             else:
                 exts = {f['ext'] for f in fs}
                 if 'pdf' in exts:
