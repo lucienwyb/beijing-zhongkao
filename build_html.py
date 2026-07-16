@@ -190,13 +190,26 @@ def convert_file(md_path: Path, out_path: Path):
     text = md_path.read_text(encoding='utf-8')
     # Python-Markdown requires a blank line before a list. Several papers put
     # answer options immediately after the question, so normalize that format.
+    # Match bullet (-,+,*) and ordered (N.) list items, including those nested
+    # inside blockquotes (lines like "> - foo" or "> 1. foo"). Without this,
+    # ordered lists glued to a paragraph render as plain text, and bullets
+    # inside a blockquote leak their "- " markers into the prose.
+    _list_re = re.compile(r'^(>\s*)*\s*(?:[-+*]|\d+\.)\s+')
     lines = text.splitlines()
     normalized = []
     for line in lines:
-        is_list_item = re.match(r'^\s*[-+*]\s+', line) is not None
-        previous_is_list_item = bool(normalized and re.match(r'^\s*[-+*]\s+', normalized[-1]))
-        if is_list_item and normalized and normalized[-1].strip() and not previous_is_list_item:
-            normalized.append('')
+        is_list_item = _list_re.match(line) is not None
+        prev = normalized[-1] if normalized else ''
+        previous_is_list_item = bool(prev and _list_re.match(prev))
+        if is_list_item and prev.strip() and not previous_is_list_item:
+            # Keep the separator inside the blockquote (a bare blank line would
+            # terminate it); use an empty ">" line so the blockquote survives.
+            normalized.append('>' if prev.lstrip().startswith('>') else '')
+        elif not is_list_item and prev.strip() and _list_re.match(prev) and \
+                prev.lstrip().startswith('>') and line.lstrip().startswith('>'):
+            # Leaving a blockquote-internal list back to blockquote prose:
+            # also need the ">" separator so the list closes cleanly.
+            normalized.append('>')
         normalized.append(line)
     text = '\n'.join(normalized)
     # Fill-in blanks: sequences of 3+ underscores are meant as answer lines,
