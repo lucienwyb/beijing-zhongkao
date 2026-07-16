@@ -93,11 +93,13 @@ mjx-container { font-size: 1.05em; }
 /* ── 打印样式：学生可能打印真题卷做题 ── */
 @media print {
   * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important }
-  body { background: #fff !important; color: #000; font-size: 11pt; max-width: 100%; padding: 0 0 8pt; }
+  body { background: #fff !important; color: #000 !important; font-size: 11pt; max-width: 100%; padding: 0 0 8pt; }
   /* 隐藏站点导航、页脚、MathJax 离线提示等非题面元素 */
   .nav, .footer, .mathjax-offline-note { display: none !important }
   h1, h2 { border-bottom-color: #999 !important }
-  a { color: inherit }
+  /* 暗色模式下打印：强制标题/正文为黑色，避免深色主题覆盖导致白底浅字不可见 */
+  h1, h2, h3, h4 { color: #000 !important }
+  a { color: inherit !important }
   /* 避免题块跨页断开 */
   blockquote, table, pre, figure { break-inside: avoid; page-break-inside: avoid }
   /* MathJax 公式按原样打印，不做反色 */

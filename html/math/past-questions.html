@@ -93,11 +93,13 @@ mjx-container { font-size: 1.05em; }
 /* ── 打印样式：学生可能打印真题卷做题 ── */
 @media print {
   * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important }
-  body { background: #fff !important; color: #000; font-size: 11pt; max-width: 100%; padding: 0 0 8pt; }
+  body { background: #fff !important; color: #000 !important; font-size: 11pt; max-width: 100%; padding: 0 0 8pt; }
   /* 隐藏站点导航、页脚、MathJax 离线提示等非题面元素 */
   .nav, .footer, .mathjax-offline-note { display: none !important }
   h1, h2 { border-bottom-color: #999 !important }
-  a { color: inherit }
+  /* 暗色模式下打印：强制标题/正文为黑色，避免深色主题覆盖导致白底浅字不可见 */
+  h1, h2, h3, h4 { color: #000 !important }
+  a { color: inherit !important }
   /* 避免题块跨页断开 */
   blockquote, table, pre, figure { break-inside: avoid; page-break-inside: avoid }
   /* MathJax 公式按原样打印，不做反色 */
@@ -302,7 +304,7 @@ window.MathJax = {
 <li><strong>中档题（23–26 题，22–23 分）</strong>：第 23 题统计须练熟"补全直方图 + 去掉最高最低分求平均"；第 24 题圆综合掌握切线两套路 + 垂径定理勾股；第 25 题题型在变（二次函数应用/函数建模/反比例综合），核心是待定系数法 + 自变量取值范围；第 26 题二次函数综合反复练"距离比较法 + 区间最值三看"，此题方法固定、投入产出比最高。（2022 年 23 分，2023/2024 年 22 分）</li>
 <li><strong>压轴题（27–28 题，14 分）</strong>：第 27 题第(1)问通常为基础全等/垂直证明，依题意补全图形后从已知等量出发找全等对即可拿 2–3 分；第 28 题第(1)问是定义直接代入（画点/求值），严格"翻译定义→代入→计算"三步走即可拿 2–3 分。两题第(1)问合计 4–6 分应作为保底目标。第(2)问多拿分，第(3)问有思路即可，不硬攻。</li>
 <li><strong>第 28 题新定义题</strong>：单独练翻译定义与分类讨论，重点训练"先把新定义写成符号语言"这一步——近年（2022 对应点、2023 关联点、2024 中心对称点）定义各不同但翻译方法一致。</li>
-<li><strong>时间分配建议</strong>：选择填空 25 分钟，基础解答 35 分钟，中档题 20 分钟，压轴题 15–20 分钟，检查 5–10 分钟。卡壳超 5 分钟的题先跳过。</li>
+<li><strong>时间分配建议</strong>：选择填空 35 分钟，基础解答 35 分钟，中档题 20 分钟，压轴题 15–20 分钟，检查 5–10 分钟。卡壳超 5 分钟的题先跳过。</li>
 <li><strong>真题优先</strong>：本站整理了 2022–2024 数学真题，需配图的题目请到<a href="../downloads.html">真题下载页</a>下载原版 PDF 对照。</li>
 </ol>
 <div class="footer">北京中考数学 & 物理 · 核心考点与真题精析 ·
