@@ -44,7 +44,7 @@ python3 -m http.server 8000
 
 ### 真题下载合集（2017-2026）
 
-见 [`papers/downloaded/README.md`](papers/downloaded/README.md) —— 汇总 50 份原版 PDF + 2 份 MD + 6 份 TXT + 2026 数学整卷图片版（80 张）：
+见 [`papers/downloaded/README.md`](papers/downloaded/README.md) —— 汇总 51 份原版 PDF + 2 份 MD + 6 份 TXT + 2026 数学整卷图片版（80 张）：
 
 - **2019-2023**：基本齐全（2020 政治除外，原版 PDF）
 - **2024**：6 个科目（数学/物理/化学/语文/英语/政治），缺生物/历史/地理
