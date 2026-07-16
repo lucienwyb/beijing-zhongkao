@@ -122,6 +122,11 @@ def render_year(year, subjects):
     all_ext_sum = sum(len(v) for v in subjects.values())
     if not subj_html and year != '2026':
         subj_html = ['<p class="dl-empty">该年份暂无可用真题（曾抓取的网页快照经核验为空壳/损坏/非真题，已删除，待可靠来源补充）。</p>']
+    # 2026 has no doc files in downloaded/ (only the image viewer), so show a friendly note
+    year_count_text = f'{len(subjects)} 个学科 · {all_ext_sum} 个文件'
+    if year == '2026' and not subj_html:
+        year_count_text = '数学图片版 · 4 来源 80 张图'
+        subj_html = ['<p class="dl-empty">2026 仅数学有整卷图片版查看器（上方蓝绿色提示框），其余科目官方 PDF 尚未公开抓到，待可靠来源补充。</p>']
     viewer_hint = ''
     if year == '2026':
         viewer_hint = '''
@@ -133,7 +138,7 @@ def render_year(year, subjects):
 <section class="dl-year" id="y{year}">
   <div class="dl-year-head">
     <h2>{year} 年</h2>
-    <span class="dl-year-count">{len(subjects)} 个学科 · {all_ext_sum} 个文件</span>
+    <span class="dl-year-count">{year_count_text}</span>
   </div>{viewer_hint}
   <div class="dl-subjects">
     {''.join(subj_html)}
@@ -156,6 +161,32 @@ def main():
     total_html = sum(1 for y in data.values() for fs in y.values() for f in fs if f['ext'] == 'html')
     total_md = sum(1 for y in data.values() for fs in y.values() for f in fs if f['ext'] == 'md')
     total_txt = sum(1 for y in data.values() for fs in y.values() for f in fs if f['ext'] == 'txt')
+    # 2026 math viewer: 80 images across 4 WeChat sources — count as 1 "图片版" entry
+    total_viewer = 1 if os.path.isfile(REPO / 'html/papers/2026-math-viewer.html') else 0
+
+    # Dynamic stat cards: only show non-zero categories
+    stat_cards = []
+    if total_pdf:
+        stat_cards.append(f'<div class="dl-stat"><b>{total_pdf}</b><span>PDF 原版试卷</span></div>')
+    if total_html:
+        stat_cards.append(f'<div class="dl-stat"><b>{total_html}</b><span>HTML 网页快照</span></div>')
+    if total_md:
+        stat_cards.append(f'<div class="dl-stat"><b>{total_md}</b><span>Markdown 完整题面</span></div>')
+    if total_txt:
+        stat_cards.append(f'<div class="dl-stat"><b>{total_txt}</b><span>TXT 评析文本</span></div>')
+    if total_viewer:
+        stat_cards.append(f'<div class="dl-stat"><b>{total_viewer}</b><span>2026 图片版整卷</span></div>')
+    stats_html = '\n    '.join(stat_cards)
+    # grid-template-columns adapts to number of cards shown
+    stats_cols = f'repeat({len(stat_cards)},1fr)' if stat_cards else '1fr'
+    # description line: omit zero-count categories
+    desc_parts = []
+    if total_pdf: desc_parts.append(f'{total_pdf}份 PDF')
+    if total_html: desc_parts.append(f'{total_html}份 HTML')
+    if total_md: desc_parts.append(f'{total_md}份 MD')
+    if total_txt: desc_parts.append(f'{total_txt}份 TXT')
+    if total_viewer: desc_parts.append('2026 数学整卷图片版（80 张）')
+    desc_line = ' + '.join(desc_parts)
 
     year_nav = ' · '.join(f'<a href="#y{y}">{y}</a>' for y in years)
     year_blocks = '\n'.join(render_year(y, data[y]) for y in years)
@@ -194,14 +225,14 @@ def main():
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="北京中考 2017-2026 真题下载合集：{total_pdf}份 PDF + {total_html}份 HTML + {total_md}份 MD + {total_txt}份 TXT">
+<meta name="description" content="北京中考 2017-2026 真题下载合集：{desc_line}">
 <title>真题下载合集 · 京考进阶</title>
 <link rel="stylesheet" href="styles.css">
 <style>
   .dl-hero{{padding:60px clamp(24px,8vw,120px) 30px;background:var(--paper)}}
   .dl-hero h1{{font-family:"Noto Serif SC","Songti SC",serif;font-size:clamp(34px,4vw,52px);margin:0 0 12px}}
   .dl-hero p{{color:var(--muted);max-width:780px;line-height:1.75;margin:0}}
-  .dl-stats{{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:36px}}
+  .dl-stats{{display:grid;grid-template-columns:{stats_cols};gap:18px;margin-top:36px}}
   .dl-stat{{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px}}
   .dl-stat b{{font-family:Georgia,serif;font-size:36px;color:var(--green);display:block;line-height:1}}
   .dl-stat span{{font-size:12px;color:var(--muted);display:block;margin-top:6px;font-weight:700;letter-spacing:.06em}}
@@ -243,7 +274,7 @@ def main():
   .dl-badge{{grid-row:1/3;grid-column:1;align-self:center;justify-self:center;width:40px;height:40px;display:grid;place-items:center;border-radius:4px;color:#fff;font-size:11px;font-weight:800;letter-spacing:.02em}}
   .dl-name{{grid-column:2;grid-row:1;font-size:13px;font-weight:700;word-break:break-all;color:var(--ink);line-height:1.35}}
   .dl-meta{{grid-column:2;grid-row:2;font-size:11px;color:var(--muted);margin-top:3px}}
-  @media(max-width:700px){{.dl-stats{{grid-template-columns:1fr 1fr}}.dl-year-head h2{{font-size:42px}}.cov-matrix{{font-size:11px}}.cov-matrix th,.cov-matrix td{{padding:6px 4px}}}}
+  @media(max-width:700px){{.dl-stats{{grid-template-columns:1fr 1fr!important}}.dl-year-head h2{{font-size:42px}}.cov-matrix{{font-size:11px}}.cov-matrix th,.cov-matrix td{{padding:6px 4px}}}}
 </style>
 </head>
 <body>
@@ -266,10 +297,7 @@ def main():
   <h1>北京中考真题下载合集</h1>
   <p>历经多轮长任务从 <code>zhongkaobj.cn</code>（阿里云 OSS 直链）、GitHub 教辅仓库、zizzs.com / gaokzx.com 等来源整理的原版试题，覆盖 9 个学科 · 10 个年份。点击卡片在新标签打开 PDF 预览或网页快照（可在浏览器中另存下载）。</p>
   <div class="dl-stats">
-    <div class="dl-stat"><b>{total_pdf}</b><span>PDF 原版试卷</span></div>
-    <div class="dl-stat"><b>{total_html}</b><span>HTML 网页快照</span></div>
-    <div class="dl-stat"><b>{total_md}</b><span>Markdown 完整题面</span></div>
-    <div class="dl-stat"><b>{total_txt}</b><span>TXT 评析文本</span></div>
+    {stats_html}
   </div>
   <div class="year-nav">跳转年份：{year_nav}</div>
 </section>
@@ -296,7 +324,7 @@ def main():
 '''
     out = REPO / 'downloads.html'
     out.write_text(page, encoding='utf-8')
-    print(f'✓ Wrote {out} — {total_files} files, {total_pdf} PDF + {total_html} HTML + {total_md} MD + {total_txt} TXT')
+    print(f'✓ Wrote {out} — {total_files} files, {total_pdf} PDF + {total_html} HTML + {total_md} MD + {total_txt} TXT + {total_viewer} viewer')
 
 
 if __name__ == '__main__':

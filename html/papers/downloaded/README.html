@@ -334,12 +334,11 @@ window.MathJax = {
 <h2 id="_4">缺口原因分析</h2>
 <ul>
 <li><strong>2015-2016 全部</strong>：网页版真题已下架；付费站签名接口未破解</li>
-<li><strong>2017/2018 非数学</strong>：GitHub 只有单个仓库有 2018 数学 MD</li>
+<li><strong>2017/2018 非数学</strong>：仅 GitHub 散落 2017 化学英语评析 txt 与 2018 数学 OCR MD，无完整试卷</li>
 <li><strong>2020 政治</strong>：<code>zhongkaobj.cn</code> 未收录，猜测 2020 年北京中考未考或该源未发布</li>
 <li><strong>2024 生物/历史/地理</strong>：这三科在 <code>zhongkaobj.cn</code> 上只有"评析/评论"页，无完整试卷发布页</li>
 <li><strong>2025 全科</strong>：各站 HTML 快照均为空壳/损坏，无可做题真题；待官方或可靠文字源</li>
 <li><strong>2026 非数学</strong>：微信公众号主要抢发数学，其余科目多为评析/政策；官方 PDF 考后约 3 个月才发布</li>
-<li><strong>2025 政治</strong>：2025-06-25 考完，各站暂未收录完整版</li>
 </ul>
 <h2 id="_5">使用建议</h2>
 <ul>
@@ -347,23 +346,23 @@ window.MathJax = {
 <li><strong>数学/物理专项</strong>：2019-2024 共 12 份 PDF，是本仓库核心</li>
 <li><strong>2026 数学</strong>：用整卷图片版查看器做题（官方 PDF 未发布）</li>
 <li><strong>2025</strong>：暂无可用真题，待可靠来源补充</li>
-<li><strong>2015-2017</strong>：暂缺；2018 数学有 OCR 版 MD（公式排版有损）</li>
+<li><strong>2015-2017</strong>：无完整试卷（2017 仅有化学/英语评析 txt）；2018 数学有 OCR 版 MD（公式排版有损）</li>
 </ul>
 <h2 id="_6">目录结构</h2>
 <pre><code>papers/downloaded/
 ├── README.md                   # 本文件
 ├── 2017/
-│   ├── summary/2017-summary_github_vcrting_summary.txt   # 2017 评析汇总
-│   ├── {chemistry,english,math}/*.txt         # 各科评析文本
+│   ├── 2017-summary_github_vcrting_summary.txt   # 跨科评析汇总
+│   └── {chemistry,english,math}/*.txt            # 各科评析文本
 ├── 2018/
-│   └── math/2018-math_github_asahiluna*.md     # OCR 版 MD 题面+答案（公式有损）
+│   └── math/2018-math_github_asahiluna*.md       # OCR 版 MD 题面+答案（公式有损）
 ├── 2019/ ~ 2024/
-│   └── {学科}/{年份}-{学科}.pdf              # 原版 PDF
-├── 2025/                                      # 空（HTML 快照经核验为空壳/损坏，已删）
+│   └── {学科}/{年份}-{学科}.pdf                  # 原版 PDF
 └── 2026/
-    └── math/*_imgs/             # 仅数学整卷图片版（4 来源 80 张，见 viewer）
+    └── math/*_imgs/               # 仅数学整卷图片版（4 来源 80 张，见 viewer）
 </code></pre>
 <blockquote>
+<p>2025 年目录已删除：抓取的 HTML 快照经核验均为空壳/损坏，无可做题真题，故不留空目录。</p>
 <p>真题 PDF 均来自北京中考信息网 zhongkaobj.cn 暴露的阿里云 OSS 直链，2019–2024 为原版；2025 无可用真题；2026 仅数学有图片版整卷。</p>
 </blockquote>
 <div class="footer">北京中考数学 & 物理 · 核心考点与真题精析 ·
