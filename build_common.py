@@ -5,6 +5,7 @@ Extracted to eliminate copy-pasted favicon chains, OG meta tags, and magic
 thresholds. Import from build scripts instead of duplicating HTML fragments.
 """
 from pathlib import Path
+import html as _html
 
 REPO_ROOT = Path(__file__).resolve().parent
 
@@ -44,8 +45,8 @@ def og_tags(title: str, description: str, og_type: str = 'article') -> str:
         og_type: 'article' for paper pages, 'website' for index/gallery pages.
     """
     return (
-        f'<meta property="og:title" content="{title}">\n'
-        f'<meta property="og:description" content="{description}">\n'
+        f'<meta property="og:title" content="{_html.escape(title, quote=True)}">\n'
+        f'<meta property="og:description" content="{_html.escape(description, quote=True)}">\n'
         f'<meta property="og:type" content="{og_type}">\n'
         f'<meta name="twitter:card" content="summary">\n'
         f'<meta name="theme-color" content="#14201d">'

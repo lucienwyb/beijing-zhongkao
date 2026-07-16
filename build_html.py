@@ -4,6 +4,7 @@ import os
 import re
 from pathlib import Path
 import markdown
+from html import escape as _html_escape
 
 from build_common import REPO_ROOT, favicon_links, og_tags
 
@@ -133,6 +134,7 @@ mjx-container { font-size: 1.05em; }
 """
 
 MATHJAX = """
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <script>
 window.MathJax = {
   tex: {
@@ -143,7 +145,7 @@ window.MathJax = {
   svg: { fontCache: 'global' }
 };
 </script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <noscript><p class="mathjax-offline-note" style="background:#fff9e8;border-left:4px solid #f1b84b;padding:10px 14px;border-radius:4px;font-size:13px">公式未渲染：本页需要 JavaScript 与网络加载 MathJax 才能正常显示公式。题干文字仍可阅读，若需公式请联网后刷新。</p></noscript>
 <script>
 // 离线打开时 MathJax 从 CDN 加载会失败，题面里的 $...$ 公式将保持原文。
@@ -274,10 +276,10 @@ def convert_file(md_path: Path, out_path: Path):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="{description}">
+<meta name="description" content="{_html_escape(description, quote=True)}">
 {og_tags(page_title, description)}
 {favicon_links(plan_root)}
-<title>{page_title}</title>
+<title>{_html_escape(page_title)}</title>
 <style>{CSS}</style>
 {MATHJAX}
 </head>

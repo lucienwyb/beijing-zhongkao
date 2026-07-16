@@ -79,8 +79,10 @@ def render_source(src, imgs, primary=False):
             badge = '<span class="badge badge-hint">封面/尾图</span>'
         elif sz > VIEWER_BADGE_HD:
             badge = '<span class="badge badge-hd">高清</span>'
+        # 首图（每组第 1 张）加 fetchpriority=high 提升 LCP 加载优先级
+        priority = ' fetchpriority="high"' if i == 0 else ''
         cards.append(
-            f'<figure class="pg"><img loading="lazy" src="{html.escape(im["src"])}" '
+            f'<figure class="pg"><img loading="lazy"{priority} src="{html.escape(im["src"])}" '
             f'alt="{html.escape(src["title"])} 第 {i+1} 张" '
             f'tabindex="0" role="button" aria-label="放大查看 第 {i+1} 张">'
             f'<figcaption>#{i+1:02d} · {sz//1024} KB {badge}</figcaption></figure>'
