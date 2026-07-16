@@ -109,6 +109,8 @@ def main():
 <meta property="og:title" content="2026 北京中考数学 · 整卷图片版 · 京考进阶">
 <meta property="og:description" content="2026 北京中考数学卷整卷图片版 · 4 份来源交叉校对，含官方标答，{total_imgs} 张试题图逐张浏览。">
 <meta property="og:type" content="article">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#14201d">
 <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
 <title>2026 北京中考数学 · 整卷图片版 · 京考进阶</title>
 <link rel="stylesheet" href="../../styles.css">

@@ -212,6 +212,8 @@ def convert_file(md_path: Path, out_path: Path):
 <meta property="og:title" content="{page_title}">
 <meta property="og:description" content="{description}">
 <meta property="og:type" content="article">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#14201d">
 <link rel="icon" href="{favicon_href}" type="image/svg+xml">
 <title>{page_title}</title>
 <style>{CSS}</style>
