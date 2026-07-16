@@ -105,7 +105,6 @@ mjx-container { font-size: 1.05em; }
   hr { border-top-color: #30363d; }
   .nav { background: #161b22; border-color: #30363d; }
   .footer { border-top-color: #30363d; color: #8b949e; }
-  .missing-figure { background: #2d2515; color: #eac54f; border-left-color: #d29922; }
 }
 @media (max-width: 600px) {
   body { padding: 20px 18px 72px; font-size: 15px; }

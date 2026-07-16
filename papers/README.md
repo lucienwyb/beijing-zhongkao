@@ -14,7 +14,7 @@
 - [2023 年北京市初中学业水平考试·物理](physics/2023-physics.md)
 - [2022 年北京市初中学业水平考试·物理](physics/2022-physics.md)
 
-> 原版 PDF / HTML 快照合集见 [`downloaded/README.md`](downloaded/README.md)，官方资源入口见 [`sources/README.md`](sources/README.md)。
+> 原版 PDF / 文字版 / 图片版合集见 [`downloaded/README.md`](downloaded/README.md)，官方资源入口见 [`sources/README.md`](sources/README.md)。
 
 ## 版权与免责声明
 

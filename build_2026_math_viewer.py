@@ -238,7 +238,13 @@ document.addEventListener('keydown', e => {{
   if (e.key === 'Escape') {{ e.preventDefault(); closeLb(); }}
   else if (e.key === 'ArrowLeft') {{ e.preventDefault(); show(cur - 1); }}
   else if (e.key === 'ArrowRight') {{ e.preventDefault(); show(cur + 1); }}
-  else if (e.key === 'Tab') {{ e.preventDefault(); lbClose.focus(); }}
+  else if (e.key === 'Tab') {{
+    e.preventDefault();
+    const f = [lbClose, lb.querySelector('.prev'), lb.querySelector('.next')];
+    const idx = f.indexOf(document.activeElement);
+    const n = e.shiftKey ? (idx <= 0 ? f.length - 1 : idx - 1) : (idx + 1) % f.length;
+    f[n].focus();
+  }}
 }});
 // Tab switching: highlight active tab + expand its <details> on click
 const tabLinks = document.querySelectorAll('.tab');
