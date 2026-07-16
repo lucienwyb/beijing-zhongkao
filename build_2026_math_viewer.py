@@ -169,6 +169,19 @@ def main():
     .src{{padding:28px 16px}}
     .grid{{grid-template-columns:1fr;gap:10px}}
   }}
+  /* 打印真题图片版：隐藏灯箱/标签栏/交互，展开对照版本，逐张图片打印 */
+  @media print{{
+    *{{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}}
+    body{{background:#fff !important;color:#000}}
+    .topbar,.tabs,.lb,.viewer-hero .warn,.badge-hint{{display:none !important}}
+    .viewer-hero,.src{{padding:0 0 8pt}}
+    .src-alt{{border:0;margin:0}}
+    .src-alt details>summary{{display:none}}
+    .src-alt details{{display:block}}
+    .grid{{grid-template-columns:repeat(2,1fr) !important;gap:6pt}}
+    .pg,.pg img{{break-inside:avoid;page-break-inside:avoid}}
+    .pg figcaption{{font-size:9pt;background:#fff !important;border-top:1px solid #999}}
+  }}
 </style>
 </head>
 <body>

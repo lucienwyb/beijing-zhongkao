@@ -57,4 +57,9 @@ function doReset(){state={completed:[],mistakes:[],selectedDay:0,selectedWeek:0}
 $('resetButton').onclick=()=>{const d=$('resetDialog');if(d&&typeof d.showModal==='function'){d.showModal()}else if(confirm('重置学习进度？\n21 天完成状态和错题记录都会被清空，此操作无法撤销。')){doReset()}};
 $('cancelReset').onclick=()=>{const d=$('resetDialog');if(d&&typeof d.close==='function')d.close()};
 $('confirmReset').onclick=doReset;
+// 打印 21 天计划：打印时一次性渲染全部 21 天，而非仅当前周，方便学生贴墙查看。
+// 打印结束后恢复当前周视图。
+function dayCardHTML(n){const d=days[n],done=state.completed.includes(n);return `<button class="day-card ${done?'done':''}" data-day="${n}" type="button" aria-label="第 ${n+1} 天 ${d[0]}${done?' 已完成':''}"><span class="day-number">${String(n+1).padStart(2,'0')}</span><h4>${d[0]}</h4><p>${mathPlans[n].title}<br>${physicsPlans[n].title}</p><span class="done-mark">${done?'✓ 已完成':''}</span></button>`}
+window.addEventListener('beforeprint',()=>{const g=$('daysGrid');if(!g)return;g.dataset.printing='1';g.innerHTML=days.map((_,n)=>dayCardHTML(n)).join('')});
+window.addEventListener('afterprint',()=>{const g=$('daysGrid');if(!g||g.dataset.printing!=='1')return;delete g.dataset.printing;renderWeek()});
 renderToday();renderProgress();renderMistakes();

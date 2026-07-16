@@ -87,6 +87,21 @@ hr { border: none; border-top: 1px solid #d0d7de; margin: 2em 0; }
 /* MathJax display styling */
 mjx-container { font-size: 1.05em; }
 
+/* ── 打印样式：学生可能打印真题卷做题 ── */
+@media print {
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important }
+  body { background: #fff !important; color: #000; font-size: 11pt; max-width: 100%; padding: 0 0 8pt; }
+  /* 隐藏站点导航、页脚、MathJax 离线提示等非题面元素 */
+  .nav, .footer, .mathjax-offline-note { display: none !important }
+  h1, h2 { border-bottom-color: #999 !important }
+  a { color: inherit }
+  /* 避免题块跨页断开 */
+  blockquote, table, pre, figure { break-inside: avoid; page-break-inside: avoid }
+  /* MathJax 公式按原样打印，不做反色 */
+  mjx-container { color: #000 !important }
+  mjx-container[jax="CHTML"] { color: #000 !important }
+}
+
 /* Dark mode */
 @media (prefers-color-scheme: dark) {
   body { background: #0d1117; color: #c9d1d9; }
@@ -126,6 +141,30 @@ window.MathJax = {
 };
 </script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<noscript><p class="mathjax-offline-note" style="background:#fff9e8;border-left:4px solid #f1b84b;padding:10px 14px;border-radius:4px;font-size:13px">公式未渲染：本页需要 JavaScript 与网络加载 MathJax 才能正常显示公式。题干文字仍可阅读，若需公式请联网后刷新。</p></noscript>
+<script>
+// 离线打开时 MathJax 从 CDN 加载会失败，题面里的 $...$ 公式将保持原文。
+// 检测加载失败并提示学生，避免困惑（题干文字本身不受影响）。
+(function(){
+  var s = document.getElementById('MathJax-script');
+  if (!s) return;
+  var done = false;
+  s.addEventListener('load', function(){ done = true; });
+  s.addEventListener('error', function(){ showNote(); });
+  // window.MathJax 早已被上面的配置脚本赋值，因此用 MathJax.startup
+  // （CDN 脚本加载后才挂载）判断是否真正加载成功。
+  setTimeout(function(){ if(!window.MathJax || !window.MathJax.startup){ showNote(); } }, 5000);
+  function showNote(){
+    if(document.querySelector('.mathjax-offline-note')) return;
+    var p = document.createElement('p');
+    p.className = 'mathjax-offline-note';
+    p.style.cssText = 'background:#fff9e8;border-left:4px solid #f1b84b;padding:10px 14px;border-radius:4px;font-size:13px;margin:16px 0';
+    p.textContent = '公式未能加载（可能是离线或网络受限）。题干文字仍可阅读，联网刷新本页即可正常显示 $...$ 公式。';
+    var n = document.querySelector('.nav');
+    if(n){ n.parentNode.insertBefore(p, n.nextSibling); } else { document.body.insertBefore(p, document.body.firstChild); }
+  }
+})();
+</script>
 """
 
 def rewrite_md_links(html: str, rel_depth: int) -> str:

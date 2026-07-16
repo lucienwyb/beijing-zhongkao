@@ -242,3 +242,42 @@ dialog button{border:1px solid var(--line);background:white;padding:9px 15px;bor
   .lesson-flow>div{grid-template-columns:70px 1fr}
 }
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+/* ── Print ─────────────────────────────────────────────── */
+/* 学生可能打印 21 天计划贴墙上、打印真题卷做题、打印下载清单。
+   打印时隐藏导航/按钮/交互控件，保留正文与表格，并强制背景色输出。 */
+@media print{
+  /* 强制背景与边框打印，保证卡片色块、覆盖矩阵颜色可见 */
+  *{ -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important }
+  html{scroll-padding-top:0}
+  body{background:#fff;color:#000;font-size:11pt}
+  /* 隐藏顶部导航条、页脚、交互按钮 */
+  .topbar,.topbar nav,.icon-button,#resetButton,footer,
+  .briefing-actions,.day-switcher,.week-tabs,.completion-bar,
+  .mistake-form,.record-count,.empty-state,
+  .dl-viewer-hint .dl-viewer-link,
+  .lb,.tabs{display:none !important}
+  /* 取消粘性定位与大内边距，节约纸张 */
+  .topbar{position:static;height:auto}
+  main{overflow:visible}
+  .briefing,.today-panel,.plan-section,.resources-section,.mistakes-section,
+  .dl-hero,main.dl-main,.viewer-hero,main.viewer,.src{padding:0 0 8pt}
+  .briefing-stats,.resource-grid,.rhythm-list,.today-grid,.dl-stats{break-inside:avoid}
+  /* 21 天计划：所有 day-card 一页铺满 7 列，去掉 hover/选中阴影 */
+  .days-grid{grid-template-columns:repeat(7,1fr) !important;border:1px solid #999}
+  .day-card{min-height:0;padding:6pt;border:1px solid #999;break-inside:avoid;
+    box-shadow:none !important;background:#fff !important}
+  .day-card.done{background:#eef7f1 !important}
+  .day-card .done-mark{font-size:9pt}
+  /* 资料卡片、错题条目避免跨页断开 */
+  .res-card,.mistake-item,.dl-file,.dl-subject,.dl-year{break-inside:avoid}
+  /* 链接去掉下划线颜色，节省墨水 */
+  a{color:inherit}
+  .briefing-source,.dl-viewer-hint{border:1px solid #999;background:#fff !important}
+  /* viewer 图片整页打印：去掉 lazy/光标、展开折叠版本 */
+  .pg img{break-inside:avoid;page-break-inside:avoid}
+  .src-alt details{break-inside:avoid}
+  /* 覆盖矩阵打印保留色块 */
+  .cov-matrix{display:table;width:100%;white-space:normal;overflow:visible}
+  .cov-matrix th,.cov-matrix td{padding:4pt 3pt}
+}
