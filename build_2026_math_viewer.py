@@ -61,7 +61,7 @@ def collect(src):
     return items
 
 
-def render_source(src, imgs):
+def render_source(src, imgs, primary=False):
     if not imgs:
         return ''
     cards = []
@@ -77,15 +77,19 @@ def render_source(src, imgs):
             f'alt="{html.escape(src["title"])} 第 {i+1} 张">'
             f'<figcaption>#{i+1:02d} · {sz//1024} KB {badge}</figcaption></figure>'
         )
-    return f'''
-<section class="src" id="src-{src['slug']}">
+    grid = f'<div class="grid">{" ".join(cards)}</div>'
+    rec = '<span class="badge badge-rec">推荐</span> ' if primary else ''
+    body = f'''
   <header>
-    <h2>{html.escape(src['title'])}</h2>
+    <h2>{rec}{html.escape(src['title'])}</h2>
     <p class="note">{html.escape(src['note'])}</p>
     <p class="stat">{len(imgs)} 张图 · 平均 {sum(x['size'] for x in imgs)//len(imgs)//1024} KB</p>
   </header>
-  <div class="grid">{''.join(cards)}</div>
-</section>'''
+  {grid}'''
+    if primary:
+        return f'<section class="src" id="src-{src["slug"]}">{body}</section>'
+    # non-primary sources collapsed to reduce repetition
+    return f'<section class="src src-alt" id="src-{src["slug"]}"><details><summary>对照版本：{html.escape(src["title"].split(" · ")[0])} · {len(imgs)} 张图（点击展开）</summary>{body}</details></section>'
 
 
 def main():
@@ -97,7 +101,7 @@ def main():
         for s, imgs in sources_data
     )
 
-    sections = '\n'.join(render_source(s, imgs) for s, imgs in sources_data)
+    sections = '\n'.join(render_source(s, imgs, primary=(i == 0)) for i, (s, imgs) in enumerate(sources_data))
 
     page = f'''<!doctype html>
 <html lang="zh-CN">
@@ -139,6 +143,11 @@ def main():
   .badge{{font-size:10px;font-weight:800;padding:2px 6px;border-radius:2px}}
   .badge-hint{{background:#f4f2eb;color:#a09b8f}}
   .badge-hd{{background:var(--green-soft);color:var(--green)}}
+  .badge-rec{{background:#fff9e8;color:#a06a00;border:1px solid #dfc16d;padding:1px 8px;border-radius:4px;font-size:12px;vertical-align:middle}}
+  .src-alt{{background:#faf9f6;border:1px solid #e8e5dd;border-radius:8px;margin-top:16px}}
+  .src-alt details summary{{cursor:pointer;padding:14px 18px;font-weight:600;color:var(--ink)}}
+  .src-alt details summary:hover{{background:#f3f1ea;border-radius:8px}}
+  .lb-counter{{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:#fff;font-size:14px;opacity:.85;background:rgba(0,0,0,.35);padding:4px 12px;border-radius:12px}}
   /* Lightbox */
   .lb{{position:fixed;inset:0;background:rgba(20,32,29,.92);z-index:100;display:none;
     align-items:center;justify-content:center;padding:24px;cursor:zoom-out}}
@@ -177,9 +186,9 @@ def main():
   <p>本仓库从微信公众号抓取到的 4 份图片版试卷，全部指向同一份 2026-06-24 北京中考数学卷（100 分 · 120 分钟）。
     每份来源各有偏重：Albert 版含官方标答和后三题解析，焦老师版分辨率最高，新东方版覆盖官方答案，西城观察版逐题切分。</p>
   <p class="warn">
-    <strong>使用建议：</strong>先看 Albert 版拿到官方标答，再用焦老师版做原卷限时；
+    <strong>使用建议：</strong>默认展开 Albert 版（含官方标答），其余 3 份折叠为对照版本，需要时点开即可；
     <a href="../../downloads.html#y2026">下载页</a> 有全部原始 HTML 和高清图片文件夹。
-    图片点击可放大查看。
+    图片单击放大，放大后可用 <strong>← →</strong> 翻页、<strong>Esc</strong> 关闭。
   </p>
 </section>
 
@@ -191,18 +200,23 @@ def main():
 
 <footer><span>京考进阶 · 4 份来源共 {total_imgs} 张图 · 数据仅本地保存</span><a href="../../downloads.html#y2026">下载原始文件 ↗</a></footer>
 
-<div class="lb" id="lb"><span class="close">×</span><button class="nav-btn prev" type="button">‹</button><img alt="放大预览"><button class="nav-btn next" type="button">›</button></div>
+<div class="lb" id="lb"><span class="close">×</span><button class="nav-btn prev" type="button" aria-label="上一张">‹</button><img alt="放大预览"><button class="nav-btn next" type="button" aria-label="下一张">›</button><span class="lb-counter" id="lbCounter"></span></div>
 <script>
-const lb = document.getElementById('lb'), lbImg = lb.querySelector('img');
-const imgs = Array.from(document.querySelectorAll('.pg img'));
-let cur = -1;
+const lb = document.getElementById('lb'), lbImg = lb.querySelector('img'), lbCounter = document.getElementById('lbCounter');
+let curImgs = [], cur = -1;
 function show(i){{
-  cur = (i + imgs.length) % imgs.length;
-  lbImg.src = imgs[cur].src;
+  if (!curImgs.length) return;
+  cur = (i + curImgs.length) % curImgs.length;
+  lbImg.src = curImgs[cur].src;
+  lbCounter.textContent = (cur + 1) + ' / ' + curImgs.length;
   lb.classList.add('open');
 }}
-imgs.forEach((im, i) => {{
-  im.onclick = () => show(i);
+document.querySelectorAll('.pg img').forEach(im => {{
+  im.onclick = () => {{
+    const sec = im.closest('.src');
+    curImgs = Array.from(sec.querySelectorAll('.pg img'));
+    show(curImgs.indexOf(im));
+  }};
 }});
 lb.querySelector('.close').onclick = (e) => {{ e.stopPropagation(); lb.classList.remove('open'); }};
 lb.querySelector('.prev').onclick = (e) => {{ e.stopPropagation(); show(cur - 1); }};
@@ -210,9 +224,9 @@ lb.querySelector('.next').onclick = (e) => {{ e.stopPropagation(); show(cur + 1)
 lb.onclick = (e) => {{ if (e.target === lb) lb.classList.remove('open'); }};
 document.addEventListener('keydown', e => {{
   if (!lb.classList.contains('open')) return;
-  if (e.key === 'Escape') lb.classList.remove('open');
-  else if (e.key === 'ArrowLeft') show(cur - 1);
-  else if (e.key === 'ArrowRight') show(cur + 1);
+  if (e.key === 'Escape') {{ e.preventDefault(); lb.classList.remove('open'); }}
+  else if (e.key === 'ArrowLeft') {{ e.preventDefault(); show(cur - 1); }}
+  else if (e.key === 'ArrowRight') {{ e.preventDefault(); show(cur + 1); }}
 }});
 </script>
 </body>
