@@ -79,16 +79,6 @@ hr { border: none; border-top: 1px solid #d0d7de; margin: 2em 0; }
   font-size: 0.9em;
   text-align: center;
 }
-.missing-figure {
-  margin: -0.35em 0 1.2em;
-  padding: 10px 12px;
-  border-left: 4px solid #bf8700;
-  background: #fff8c5;
-  color: #633c01;
-  font-size: 0.9em;
-  border-radius: 4px;
-}
-.missing-figure a { font-weight: 600; }
 
 /* MathJax display styling */
 mjx-container { font-size: 1.05em; }
@@ -138,9 +128,8 @@ window.MathJax = {
 <div class="nav">📚 <a href="../../../index.html">学习计划</a> · <a href="../../math/exam-points.html">数学考点</a> · <a href="../../physics/exam-points.html">物理考点</a> · <a href="../../../index.html#mistakes">错题</a> · <a href="../../../downloads.html">真题下载</a></div>
 <h1 id="2017-2026">北京中考真题下载合集（2017-2026）</h1>
 <blockquote>
-<p>通过 <code>/loop</code> 长期任务从多来源全网抓取整理。
-<strong>生成时间</strong>：2026-07-14（2026-07-16 修订：修正计数、补充 2026 年数据）
-<strong>状态</strong>：Loop 已由用户手动叫停（<code>623fb56b</code>），此为最终版汇总。</p>
+<p>汇总从各公开渠道收集整理的北京中考真题，覆盖 9 个学科 · 10 个年份。
+最后更新：2026-07-16</p>
 </blockquote>
 <h2 id="_1">覆盖矩阵</h2>
 <table>
@@ -282,14 +271,11 @@ window.MathJax = {
 </tbody>
 </table>
 <blockquote>
-<p><strong>2025 年</strong>：曾抓取 16 份 HTML 快照，经核验均为分页空壳（题面在外链图片未内嵌、只抓首页）、汇总导航页、或文字损坏，<strong>无可做题真题，已全部删除</strong>。2025 真题待官方 PDF 或可靠文字源发布后补充。
-<strong>2026 年</strong>：曾抓取 19 份微信 HTML，经核验多为营销/评析/政策/资讯文（非真题），已删除；<strong>2026 数学有整卷图片版查看器</strong>（4 份来源交叉校对、含官方标答、80 张试题图，见 <code>html/papers/2026-math-viewer.html</code>），其余科目 2026 真题暂缺。</p>
+<p><strong>2025 年</strong>：网上流传的 2025 真题多为只放了图片外链的空壳页、汇总导航页或损坏文本，<strong>没有可直接做题的完整版本，已不收录</strong>。待官方 PDF 或可靠文字版发布后补充。
+<strong>2026 年</strong>：<strong>2026 数学有整卷图片版查看器</strong>（4 份来源交叉校对、含官方标答、80 张试题图，见<a href="../../html/papers/2026-math-viewer.html">整卷查看器</a>），其余科目 2026 真题暂缺（官方 PDF 通常考后约 3 个月才发布）。</p>
 </blockquote>
-<p><strong>合计</strong>：51 份原版 PDF + 2 份 2018 数学 MD + 6 份 2017 评析 txt + 2026 数学 viewer 80 张试题图。</p>
-<blockquote>
-<p>注：2024 数学答案 PDF 曾损坏，已从 zhongkaobj.cn 重新下载补回（8 页参考答案扫描件）；2020 语文 v2 损坏已删（用 v1 替代）。2019-2024 数学现均含答案。</p>
-</blockquote>
-<h2 id="_2">数据来源与真伪判断</h2>
+<p><strong>合计</strong>：51 份原版 PDF + 2 份 2018 数学文字版 + 6 份 2017 评析文本 + 2026 数学 80 张试题图。</p>
+<h2 id="_2">数据来源与可信度</h2>
 <table>
 <thead>
 <tr>
@@ -301,71 +287,65 @@ window.MathJax = {
 </thead>
 <tbody>
 <tr>
-<td><strong>PDF</strong></td>
-<td><code>paper-airplane.oss-cn-beijing.aliyuncs.com</code>（通过 <code>zhongkaobj.cn</code> 页面暴露的直链）</td>
-<td>2019-2024 各科目试卷+答案 PDF</td>
+<td><strong>PDF</strong>（2019-2024）</td>
+<td>北京中考信息网 zhongkaobj.cn</td>
+<td>各科目试卷+答案原版 PDF</td>
 <td><strong>✅ 原版</strong></td>
 </tr>
 <tr>
 <td><strong>图片版</strong>（2026 数学）</td>
-<td>微信公众号 <code>mmbiz.qpic.cn</code></td>
+<td>微信公众号转载</td>
 <td>4 份来源交叉校对的整卷试题图，含官方标答</td>
-<td>✅ 完整可做题（见 viewer）</td>
+<td>✅ 完整可做题（见查看器）</td>
 </tr>
 <tr>
-<td><strong>MD</strong>（2018 数学）</td>
-<td>GitHub <code>AsahiLuna/china-text-book-md</code></td>
-<td>PDF→Markdown 转换</td>
-<td>⚠️ OCR 有损，公式排版可能错位</td>
+<td><strong>文字版</strong>（2018 数学）</td>
+<td>GitHub 公开题库</td>
+<td>试卷文字整理版</td>
+<td>⚠️ 公式排版可能错位，做题请对照原卷</td>
 </tr>
 <tr>
-<td><strong>txt</strong>（2017 部分科目）</td>
-<td>GitHub <code>VcrTing/Scrapy_BackUp</code></td>
-<td><strong>评析/解读文本</strong>（非原题）</td>
+<td><strong>评析文本</strong>（2017 部分科目）</td>
+<td>GitHub 公开整理</td>
+<td>试题评析/解读文字</td>
 <td>⚠️ 只讲评析，不含完整题目</td>
 </tr>
 </tbody>
 </table>
-<blockquote>
-<p><strong>已删除的来源</strong>：2025 年曾从 <code>zizzs.com</code>/<code>gaokzx.com</code>/<code>xbjy.com</code> 抓取 16 份 HTML、2026 年曾从微信公众号抓取 19 份 HTML，经核验均为分页空壳（题面外链未内嵌、只抓首页）、汇总导航页、营销/评析/政策/讲义文（非真题题面），<strong>已全部删除</strong>，避免误导。</p>
-</blockquote>
-<h3 id="_3">未收录的来源</h3>
-<p>另对北京教育考试院官网、Baidu/Bing/Sogou 引擎、max.book118/doc88 等付费站、新浪教育中考专题页等多个来源尝试抓取均未命中（空壳导航或需付费），不再收录。</p>
-<h2 id="_4">缺口原因分析</h2>
+<h2 id="_3">缺口说明</h2>
 <ul>
-<li><strong>2015-2016 全部</strong>：网页版真题已下架；付费站签名接口未破解</li>
-<li><strong>2017/2018 非数学</strong>：仅 GitHub 散落 2017 化学英语评析 txt 与 2018 数学 OCR MD，无完整试卷</li>
-<li><strong>2020 政治</strong>：<code>zhongkaobj.cn</code> 未收录，猜测 2020 年北京中考未考或该源未发布</li>
-<li><strong>2024 生物/历史/地理</strong>：这三科在 <code>zhongkaobj.cn</code> 上只有"评析/评论"页，无完整试卷发布页</li>
-<li><strong>2025 全科</strong>：各站 HTML 快照均为空壳/损坏，无可做题真题；待官方或可靠文字源</li>
-<li><strong>2026 非数学</strong>：微信公众号主要抢发数学，其余科目多为评析/政策；官方 PDF 考后约 3 个月才发布</li>
+<li><strong>2015-2016 全部</strong>：网页版真题已下架，暂无可靠来源</li>
+<li><strong>2017/2018 非数学</strong>：网上仅有零散的评析文字，无完整试卷</li>
+<li><strong>2020 政治</strong>：所收录的来源未提供该科，原因不明</li>
+<li><strong>2024 生物/历史/地理</strong>：所收录的来源仅有评析页，无完整试卷</li>
+<li><strong>2025 全科</strong>：网上流传版本均不可直接做题，待可靠来源补充</li>
+<li><strong>2026 非数学</strong>：考后初期各平台主要抢发数学，其余科目多为评析/政策类内容；官方 PDF 发布后补充</li>
 </ul>
-<h2 id="_5">使用建议</h2>
+<h2 id="_4">使用建议</h2>
 <ul>
 <li><strong>备考首选</strong>：<code>2019-2024</code> 各科 PDF 已构成 6 年完整题库，主力用它们</li>
-<li><strong>数学/物理专项</strong>：2019-2024 共 12 份 PDF，是本仓库核心</li>
+<li><strong>数学/物理专项</strong>：2019-2024 共 12 份 PDF，是本合集核心</li>
 <li><strong>2026 数学</strong>：用整卷图片版查看器做题（官方 PDF 未发布）</li>
 <li><strong>2025</strong>：暂无可用真题，待可靠来源补充</li>
-<li><strong>2015-2017</strong>：无完整试卷（2017 仅有化学/英语评析 txt）；2018 数学有 OCR 版 MD（公式排版有损）</li>
+<li><strong>2017-2018</strong>：无完整试卷，仅作参考</li>
 </ul>
-<h2 id="_6">目录结构</h2>
+<h2 id="_5">目录结构</h2>
 <pre><code>papers/downloaded/
 ├── README.md                   # 本文件
 ├── 2017/
 │   ├── 2017-summary_github_vcrting_summary.txt   # 跨科评析汇总
 │   └── {chemistry,english,math}/*.txt            # 各科评析文本
 ├── 2018/
-│   └── math/2018-math_github_asahiluna*.md       # OCR 版 MD 题面+答案（公式有损）
+│   └── math/2018-math_github_asahiluna*.md       # 文字版题面+答案（公式排版可能错位）
 ├── 2019/ ~ 2023/
 │   └── {学科}/{年份}-{学科}.pdf                  # 原版 PDF（每年 9 科齐全）
 ├── 2024/
 │   └── {学科}/{年份}-{学科}.pdf                  # 6 科（数学另含 -answers.pdf；缺生物/历史/地理）
 └── 2026/
-    └── math/*_imgs/               # 仅数学整卷图片版（4 来源 80 张，见 viewer）
+    └── math/*_imgs/               # 仅数学整卷图片版（4 来源 80 张，见查看器）
 </code></pre>
 <blockquote>
-<p>2025 年目录已删除：抓取的 HTML 快照经核验均为空壳/损坏，无可做题真题，故不留空目录。</p>
-<p>真题 PDF 均来自北京中考信息网 zhongkaobj.cn 暴露的阿里云 OSS 直链，2019–2024 为原版；2025 无可用真题；2026 仅数学有图片版整卷。</p>
+<p>真题 PDF 均来自公开渠道，2019–2024 为原版；2025 无可用真题；2026 仅数学有图片版整卷。</p>
 </blockquote>
 <div class="footer">北京中考数学 & 物理 · 核心考点与真题精析 ·
 <a href="https://github.com/lucienwyb/beijing-zhongkao">GitHub</a> ·

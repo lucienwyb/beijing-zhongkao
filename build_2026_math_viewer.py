@@ -74,7 +74,8 @@ def render_source(src, imgs, primary=False):
             badge = '<span class="badge badge-hd">高清</span>'
         cards.append(
             f'<figure class="pg"><img loading="lazy" src="{html.escape(im["src"])}" '
-            f'alt="{html.escape(src["title"])} 第 {i+1} 张">'
+            f'alt="{html.escape(src["title"])} 第 {i+1} 张" '
+            f'tabindex="0" role="button" aria-label="放大查看 第 {i+1} 张">'
             f'<figcaption>#{i+1:02d} · {sz//1024} KB {badge}</figcaption></figure>'
         )
     grid = f'<div class="grid">{" ".join(cards)}</div>'
@@ -141,7 +142,7 @@ def main():
     display:flex;justify-content:space-between;align-items:center;gap:8px;
     border-top:1px solid var(--line);background:#fafaf7}}
   .badge{{font-size:10px;font-weight:800;padding:2px 6px;border-radius:2px}}
-  .badge-hint{{background:#f4f2eb;color:#a09b8f}}
+  .badge-hint{{background:#f4f2eb;color:#6e6759}}
   .badge-hd{{background:var(--green-soft);color:var(--green)}}
   .badge-rec{{background:#fff9e8;color:#a06a00;border:1px solid #dfc16d;padding:1px 8px;border-radius:4px;font-size:12px;vertical-align:middle}}
   .src-alt{{background:#faf9f6;border:1px solid #e8e5dd;border-radius:8px;margin-top:16px}}
@@ -153,13 +154,13 @@ def main():
     align-items:center;justify-content:center;padding:24px;cursor:zoom-out}}
   .lb.open{{display:flex}}
   .lb img{{max-width:100%;max-height:100%;object-fit:contain;box-shadow:0 20px 60px rgba(0,0,0,.5)}}
-  .lb .close{{position:absolute;top:20px;right:24px;color:#fff;font-size:28px;font-weight:700;cursor:pointer}}
+  .lb .close{{position:absolute;top:20px;right:24px;color:#fff;font-size:28px;font-weight:700;cursor:pointer;border:0;background:transparent;border-radius:4px}}
   .lb .nav-btn{{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:40px;font-weight:700;cursor:pointer;background:rgba(0,0,0,.3);border:none;width:48px;height:64px;border-radius:8px;display:flex;align-items:center;justify-content:center}}
   .lb .prev{{left:16px}}
   .lb .next{{right:16px}}
   @media(max-width:700px){{
     .viewer-hero h1{{font-size:24px}}
-    .tabs{{padding:0 16px;overflow-x:auto;white-space:nowrap;flex-wrap:nowrap;top:0}}
+    .tabs{{padding:0 16px;overflow-x:auto;white-space:nowrap;flex-wrap:nowrap;top:68px}}
     .tab{{padding:10px 12px 12px;font-size:12px}}
     .src{{padding:28px 16px}}
     .grid{{grid-template-columns:1fr;gap:10px}}
@@ -175,19 +176,20 @@ def main():
     <a href="../../index.html#today">今日</a>
     <a href="../../index.html#plan">计划</a>
     <a href="../../index.html#materials">资料</a>
+    <a href="../../index.html#mistakes">错题</a>
     <a href="../../downloads.html">真题下载</a>
   </nav>
-  <a class="icon-button" href="../../downloads.html#y2026" title="下载页">←</a>
+  <a class="icon-button" href="../../downloads.html#y2026" title="下载页" aria-label="返回下载页">←</a>
 </header>
 
 <section class="viewer-hero">
   <p class="eyebrow">2026-06-24 · 北京市初中学业水平数学考试</p>
   <h1>2026 数学 · 整卷图片版</h1>
-  <p>本仓库从微信公众号抓取到的 4 份图片版试卷，全部指向同一份 2026-06-24 北京中考数学卷（100 分 · 120 分钟）。
+  <p>这里收录了从微信公众号收集到的 4 份图片版试卷，全部指向同一份 2026-06-24 北京中考数学卷（100 分 · 120 分钟）。
     每份来源各有偏重：Albert 版含官方标答和后三题解析，焦老师版分辨率最高，新东方版覆盖官方答案，西城观察版逐题切分。</p>
   <p class="warn">
     <strong>使用建议：</strong>默认展开 Albert 版（含官方标答），其余 3 份折叠为对照版本，需要时点开即可；
-    <a href="../../downloads.html#y2026">下载页</a> 有全部原始 HTML 和高清图片文件夹。
+    <a href="../../downloads.html#y2026">下载页</a> 可获取全部高清原图。
     图片单击放大，放大后可用 <strong>← →</strong> 翻页、<strong>Esc</strong> 关闭。
   </p>
 </section>
@@ -200,33 +202,43 @@ def main():
 
 <footer><span>京考进阶 · 4 份来源共 {total_imgs} 张图 · 数据仅本地保存</span><a href="../../downloads.html#y2026">下载原始文件 ↗</a></footer>
 
-<div class="lb" id="lb"><span class="close">×</span><button class="nav-btn prev" type="button" aria-label="上一张">‹</button><img alt="放大预览"><button class="nav-btn next" type="button" aria-label="下一张">›</button><span class="lb-counter" id="lbCounter"></span></div>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="图片放大预览"><button class="close" type="button" aria-label="关闭">×</button><button class="nav-btn prev" type="button" aria-label="上一张">‹</button><img alt="放大预览"><button class="nav-btn next" type="button" aria-label="下一张">›</button><span class="lb-counter" id="lbCounter"></span></div>
 <script>
 const lb = document.getElementById('lb'), lbImg = lb.querySelector('img'), lbCounter = document.getElementById('lbCounter');
-let curImgs = [], cur = -1;
+const lbClose = lb.querySelector('.close');
+let curImgs = [], cur = -1, lastFocused = null;
 function show(i){{
   if (!curImgs.length) return;
   cur = (i + curImgs.length) % curImgs.length;
   lbImg.src = curImgs[cur].src;
+  lbImg.alt = curImgs[cur].alt || '放大预览';
   lbCounter.textContent = (cur + 1) + ' / ' + curImgs.length;
   lb.classList.add('open');
+  lbClose.focus();
 }}
+function closeLb(){{ lb.classList.remove('open'); if (lastFocused) lastFocused.focus(); }}
 document.querySelectorAll('.pg img').forEach(im => {{
-  im.onclick = () => {{
+  const open = () => {{
+    lastFocused = im;
     const sec = im.closest('.src');
     curImgs = Array.from(sec.querySelectorAll('.pg img'));
     show(curImgs.indexOf(im));
   }};
+  im.onclick = open;
+  im.addEventListener('keydown', e => {{
+    if (e.key === 'Enter' || e.key === ' ') {{ e.preventDefault(); open(); }}
+  }});
 }});
-lb.querySelector('.close').onclick = (e) => {{ e.stopPropagation(); lb.classList.remove('open'); }};
+lbClose.onclick = (e) => {{ e.stopPropagation(); closeLb(); }};
 lb.querySelector('.prev').onclick = (e) => {{ e.stopPropagation(); show(cur - 1); }};
 lb.querySelector('.next').onclick = (e) => {{ e.stopPropagation(); show(cur + 1); }};
-lb.onclick = (e) => {{ if (e.target === lb) lb.classList.remove('open'); }};
+lb.onclick = (e) => {{ if (e.target === lb) closeLb(); }};
 document.addEventListener('keydown', e => {{
   if (!lb.classList.contains('open')) return;
-  if (e.key === 'Escape') {{ e.preventDefault(); lb.classList.remove('open'); }}
+  if (e.key === 'Escape') {{ e.preventDefault(); closeLb(); }}
   else if (e.key === 'ArrowLeft') {{ e.preventDefault(); show(cur - 1); }}
   else if (e.key === 'ArrowRight') {{ e.preventDefault(); show(cur + 1); }}
+  else if (e.key === 'Tab') {{ e.preventDefault(); lbClose.focus(); }}
 }});
 // Tab switching: highlight active tab + expand its <details> on click
 const tabLinks = document.querySelectorAll('.tab');

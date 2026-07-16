@@ -83,16 +83,6 @@ hr { border: none; border-top: 1px solid #d0d7de; margin: 2em 0; }
   font-size: 0.9em;
   text-align: center;
 }
-.missing-figure {
-  margin: -0.35em 0 1.2em;
-  padding: 10px 12px;
-  border-left: 4px solid #bf8700;
-  background: #fff8c5;
-  color: #633c01;
-  font-size: 0.9em;
-  border-radius: 4px;
-}
-.missing-figure a { font-weight: 600; }
 
 /* MathJax display styling */
 mjx-container { font-size: 1.05em; }

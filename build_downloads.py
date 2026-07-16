@@ -121,7 +121,7 @@ def render_year(year, subjects):
     </section>''')
     all_ext_sum = sum(len(v) for v in subjects.values())
     if not subj_html and year != '2026':
-        subj_html = ['<p class="dl-empty">该年份暂无可用真题（曾抓取的网页快照经核验为空壳/损坏/非真题，已删除，待可靠来源补充）。</p>']
+        subj_html = ['<p class="dl-empty">该年份暂无可用真题（网上流传的版本经核验为空壳/损坏/非真题，已不收录，待可靠来源补充）。</p>']
     # 2026 has no doc files in downloaded/ (only the image viewer), so show a friendly note
     # 学科计数不含 overview（合辑），合辑单列，避免把跨科汇总误算成一个学科
     subj_keys = [s for s in subjects if s != 'overview']
@@ -131,7 +131,7 @@ def render_year(year, subjects):
     year_count_text = f'{subj_count_text} · {all_ext_sum} 个文件'
     if year == '2026' and not subj_html:
         year_count_text = '数学图片版 · 4 来源 80 张图'
-        subj_html = ['<p class="dl-empty">2026 仅数学有整卷图片版查看器（上方蓝绿色提示框），其余科目官方 PDF 尚未公开抓到，待可靠来源补充。</p>']
+        subj_html = ['<p class="dl-empty">2026 仅数学有整卷图片版查看器（上方蓝绿色提示框），其余科目官方 PDF 尚未发布，待可靠来源补充。</p>']
     viewer_hint = ''
     if year == '2026':
         viewer_hint = '''
@@ -253,7 +253,7 @@ def main():
   .cov-matrix td.ok{{background:#dcebe2;color:#0e4b34}}
   .cov-matrix td.mid{{background:#fff8c5;color:#5a4600}}
   .cov-matrix td.weak{{background:#fbe4d5;color:#7a2f19}}
-  .cov-matrix td.miss{{background:#f4f2eb;color:#a09b8f}}
+  .cov-matrix td.miss{{background:#f4f2eb;color:#6e6759}}
   .dl-year{{margin:50px 0 0;padding-top:30px;border-top:1px solid var(--line)}}
   .dl-year:first-of-type{{border-top:0}}
   .dl-viewer-hint{{background:linear-gradient(90deg,#f4fbf6,#f0f7fb);border:1px solid var(--green-soft,#cfe6db);border-left:4px solid var(--green,#176b4d);border-radius:var(--radius);padding:14px 20px;margin-bottom:18px;font-size:14.5px;line-height:1.7}}
@@ -294,13 +294,13 @@ def main():
     <a href="index.html#mistakes">错题</a>
     <a href="downloads.html" aria-current="page">真题下载</a>
   </nav>
-  <a class="icon-button" href="index.html" title="返回">←</a>
+  <a class="icon-button" href="index.html" title="返回首页" aria-label="返回首页">←</a>
 </header>
 
 <section class="dl-hero">
   <p class="eyebrow">EXAM PAPERS · 2017 → 2026</p>
   <h1>北京中考真题下载合集</h1>
-  <p>历经多轮长任务整理的北京中考真题资料，覆盖 9 个学科 · 10 个年份（2017-2026）。2019-2024 原版 PDF 来自 <code>zhongkaobj.cn</code> 暴露的阿里云 OSS 直链；2018 数学为 GitHub OCR 题面、2017 为评析文本、2026 数学为微信公众号整卷图片版（4 来源交叉校对）。点击卡片在新标签打开 PDF / 题面页 / 图片版查看器（可在浏览器中另存下载）。</p>
+  <p>本合集整理了北京中考历年真题，覆盖 9 个学科 · 10 个年份（2017-2026）。2019-2024 为原版 PDF 试卷；2018 数学为文字整理版、2017 为试题评析文本、2026 数学为整卷图片版（4 份来源交叉校对）。点击卡片在新标签打开 PDF / 题面页 / 图片版查看器（可在浏览器中另存下载）。</p>
   <div class="dl-stats">
     {stats_html}
   </div>

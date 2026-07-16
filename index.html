@@ -52,7 +52,7 @@
       </div>
       <p class="briefing-source">
         <strong>基线卷说明：</strong>数学诊断用 <a href="html/papers/2026-math-viewer.html">2026 整卷图片版</a>（4 份微信来源交叉校对，含官方标答）；
-        物理 2026 原卷尚未公开抓到，Day 1 物理诊断退回 <a href="downloads.html#y2024">2024 官方 PDF</a>，Day 21 终局检验用未做过的 2021 卷。整卷训练请以带图 PDF 为准。
+        物理 2026 原卷官方尚未发布，Day 1 物理诊断先用 <a href="downloads.html#y2024">2024 官方 PDF</a>，Day 21 终局检验用未做过的 2021 卷。整卷训练请以原版 PDF 为准。
       </p>
     </section>
 
@@ -102,10 +102,10 @@
     <section class="plan-section" id="plan" aria-labelledby="planTitle">
       <div class="section-heading">
         <div><p class="eyebrow">THREE-WEEK PLAN</p><h2 id="planTitle">三周进阶路线</h2></div>
-        <div class="week-tabs" role="tablist" aria-label="选择周次">
-          <button class="active" data-week="0" type="button">第 1 周</button>
-          <button data-week="1" type="button">第 2 周</button>
-          <button data-week="2" type="button">第 3 周</button>
+        <div class="week-tabs" role="group" aria-label="选择周次">
+          <button class="active" data-week="0" type="button" aria-pressed="true">第 1 周</button>
+          <button data-week="1" type="button" aria-pressed="false">第 2 周</button>
+          <button data-week="2" type="button" aria-pressed="false">第 3 周</button>
         </div>
       </div>
 
@@ -179,7 +179,7 @@
   </main>
 
   <footer><span>京考进阶 · 数据仅保存在当前浏览器</span><a href="html/index.html">仓库说明 ↗</a></footer>
-  <dialog id="resetDialog"><h2>重置学习进度？</h2><p>21 天完成状态和错题记录都会被清空，此操作无法撤销。</p><div><button id="cancelReset" type="button">取消</button><button class="danger-button" id="confirmReset" type="button">确认重置</button></div></dialog>
+  <dialog id="resetDialog" aria-labelledby="resetTitle" aria-describedby="resetDesc"><h2 id="resetTitle">重置学习进度？</h2><p id="resetDesc">21 天完成状态和错题记录都会被清空，此操作无法撤销。</p><div><button id="cancelReset" type="button" autofocus>取消</button><button class="danger-button" id="confirmReset" type="button">确认重置</button></div></dialog>
   <script src="curriculum.js"></script>
   <script src="app.js"></script>
 </body>
