@@ -120,6 +120,8 @@ def render_year(year, subjects):
       </div>
     </section>''')
     all_ext_sum = sum(len(v) for v in subjects.values())
+    if not subj_html and year != '2026':
+        subj_html = ['<p class="dl-empty">该年份暂无可用真题（曾抓取的网页快照经核验为空壳/损坏/非真题，已删除，待可靠来源补充）。</p>']
     viewer_hint = ''
     if year == '2026':
         viewer_hint = '''
@@ -141,6 +143,12 @@ def render_year(year, subjects):
 
 def main():
     data = scan()
+    # 2026 has the math viewer even though no HTML files remain (deleted as non-real-exam);
+    # 2025 has no usable files (HTML snapshots were all empty/damaged, deleted).
+    # Force-include both so the matrix and year-nav show them honestly (marked "暂无").
+    for y in ('2026', '2025'):
+        if y not in data:
+            data[y] = {}
     years = sorted(data.keys(), reverse=True)
 
     total_files = sum(len(f) for y in data.values() for f in y.values())

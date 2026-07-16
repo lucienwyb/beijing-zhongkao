@@ -257,31 +257,35 @@ window.MathJax = {
 </tr>
 <tr>
 <td>2025</td>
-<td style="text-align: center;">HTML</td>
-<td style="text-align: center;">HTML</td>
-<td style="text-align: center;">HTML</td>
-<td style="text-align: center;">HTML</td>
-<td style="text-align: center;">HTML</td>
-<td style="text-align: center;">HTML</td>
-<td style="text-align: center;">HTML</td>
-<td style="text-align: center;">HTML</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
 <td style="text-align: center;">✗</td>
 </tr>
 <tr>
 <td>2026</td>
 <td style="text-align: center;">图片版</td>
-<td style="text-align: center;">解析</td>
 <td style="text-align: center;">✗</td>
 <td style="text-align: center;">✗</td>
-<td style="text-align: center;">讲义</td>
-<td style="text-align: center;">解析</td>
-<td style="text-align: center;">政策</td>
 <td style="text-align: center;">✗</td>
-<td style="text-align: center;">政策</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
+<td style="text-align: center;">✗</td>
 </tr>
 </tbody>
 </table>
-<p><strong>合计</strong>：52 份原版 PDF + 35 份 HTML 快照（2025 八科 16 份 + 2026 各科 19 份）+ 2 份 2018 数学 MD + 6 份 2017 评析 txt + 200+ 试题图片</p>
+<blockquote>
+<p><strong>2025 年</strong>：曾抓取 16 份 HTML 快照，经核验均为分页空壳（题面在外链图片未内嵌、只抓首页）、汇总导航页、或文字损坏，<strong>无可做题真题，已全部删除</strong>。2025 真题待官方 PDF 或可靠文字源发布后补充。
+<strong>2026 年</strong>：曾抓取 19 份微信 HTML，经核验多为营销/评析/政策/资讯文（非真题），已删除；<strong>2026 数学有整卷图片版查看器</strong>（4 份来源交叉校对、含官方标答、80 张试题图，见 <code>html/papers/2026-math-viewer.html</code>），其余科目 2026 真题暂缺。</p>
+</blockquote>
+<p><strong>合计</strong>：52 份原版 PDF + 2 份 2018 数学 MD + 6 份 2017 评析 txt + 2026 数学 viewer 80 张试题图。</p>
 <h2 id="_2">数据来源与真伪判断</h2>
 <table>
 <thead>
@@ -300,16 +304,16 @@ window.MathJax = {
 <td><strong>✅ 原版</strong></td>
 </tr>
 <tr>
-<td><strong>HTML</strong>（2025）</td>
-<td><code>zizzs.com</code>、<code>gaokzx.com</code>、<code>xbjy.com</code></td>
-<td>网页版试题，含图片和答案</td>
-<td>⚠️ 需辨认，含答案摘要</td>
+<td><strong>图片版</strong>（2026 数学）</td>
+<td>微信公众号 <code>mmbiz.qpic.cn</code></td>
+<td>4 份来源交叉校对的整卷试题图，含官方标答</td>
+<td>✅ 完整可做题（见 viewer）</td>
 </tr>
 <tr>
 <td><strong>MD</strong>（2018 数学）</td>
 <td>GitHub <code>AsahiLuna/china-text-book-md</code></td>
 <td>PDF→Markdown 转换</td>
-<td>✅ 完整题面+答案</td>
+<td>⚠️ OCR 有损，公式排版可能错位</td>
 </tr>
 <tr>
 <td><strong>txt</strong>（2017 部分科目）</td>
@@ -319,6 +323,9 @@ window.MathJax = {
 </tr>
 </tbody>
 </table>
+<blockquote>
+<p><strong>已删除的来源</strong>：2025 年曾从 <code>zizzs.com</code>/<code>gaokzx.com</code>/<code>xbjy.com</code> 抓取 16 份 HTML、2026 年曾从微信公众号抓取 19 份 HTML，经核验均为分页空壳（题面外链未内嵌、只抓首页）、汇总导航页、营销/评析/政策/讲义文（非真题题面），<strong>已全部删除</strong>，避免误导。</p>
+</blockquote>
 <h3 id="_3">未收录的来源</h3>
 <p>另对北京教育考试院官网、Baidu/Bing/Sogou 引擎、max.book118/doc88 等付费站、新浪教育中考专题页等多个来源尝试抓取均未命中（空壳导航或需付费），不再收录。</p>
 <h2 id="_4">缺口原因分析</h2>
@@ -327,13 +334,16 @@ window.MathJax = {
 <li><strong>2017/2018 非数学</strong>：GitHub 只有单个仓库有 2018 数学 MD</li>
 <li><strong>2020 政治</strong>：<code>zhongkaobj.cn</code> 未收录，猜测 2020 年北京中考未考或该源未发布</li>
 <li><strong>2024 生物/历史/地理</strong>：这三科在 <code>zhongkaobj.cn</code> 上只有"评析/评论"页，无完整试卷发布页</li>
+<li><strong>2025 全科</strong>：各站 HTML 快照均为空壳/损坏，无可做题真题；待官方或可靠文字源</li>
+<li><strong>2026 非数学</strong>：微信公众号主要抢发数学，其余科目多为评析/政策；官方 PDF 考后约 3 个月才发布</li>
 <li><strong>2025 政治</strong>：2025-06-25 考完，各站暂未收录完整版</li>
 </ul>
 <h2 id="_5">使用建议</h2>
 <ul>
 <li><strong>备考首选</strong>：<code>2019-2024</code> 各科 PDF 已构成 6 年完整题库，主力用它们</li>
 <li><strong>数学/物理专项</strong>：2019-2024 共 12 份 PDF，是本仓库核心</li>
-<li><strong>2025 参考</strong>：HTML 页里通常有答案摘要，试题主体建议对照当年题册使用</li>
+<li><strong>2026 数学</strong>：用整卷图片版查看器做题（官方 PDF 未发布）</li>
+<li><strong>2025</strong>：暂无可用真题，待可靠来源补充</li>
 <li><strong>2015-2017</strong>：暂缺；2018 数学有 OCR 版 MD（公式排版有损）</li>
 </ul>
 <h2 id="_6">目录结构</h2>
