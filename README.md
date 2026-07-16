@@ -42,14 +42,14 @@ python3 -m http.server 8000
 | 2023 | [2023 数学真题](papers/math/2023-math.md) | [2023 物理真题](papers/physics/2023-physics.md) |
 | 2022 | [2022 数学真题](papers/math/2022-math.md) | [2022 物理真题](papers/physics/2022-physics.md) |
 
-### 原版 PDF 下载合集（2015-2026）
+### 真题下载合集（2017-2026）
 
-见 [`papers/downloaded/README.md`](papers/downloaded/README.md) —— 汇总从多来源抓取的 52 份 PDF、35 份 HTML 快照 + 200+ 图片切片和 Markdown 题面：
+见 [`papers/downloaded/README.md`](papers/downloaded/README.md) —— 汇总从多来源抓取的 52 份 PDF + 35 份 HTML 快照 + 2 份 MD + 6 份 TXT + 200+ 图片：
 
-- **2019-2023**：9 科目基本齐全（原版 PDF）
+- **2019-2023**：基本齐全（2020 政治除外，原版 PDF）
 - **2024**：6 个科目（数学/物理/化学/语文/英语/政治），缺生物/历史/地理
 - **2025**：8 科 HTML 快照（zizzs.com / gaokzx.com，部分只含摘要）
-- **2026**：微信公众号抓取的图片版真题（数学最完整，见 [2026 说明](papers/downloaded/2026/README.md)）；物理仅难度分析，无完整原卷
+- **2026**：微信公众号抓取的图片版真题（数学最完整，见 [2026 说明](papers/downloaded/2026/README.md)）；物理仅解析（难度分析 + 部分试题），无完整原卷
 - **明显缺口**：2015-2018 老年份非数学科目、2020 政治、2024 生物/历史/地理、2025 政治、2026 官方 PDF 未发布
 
 📎 [官方 PDF 及资源链接汇总](papers/sources/README.md) — 北京教育考试院、学科网、菁优网等官方/主流资源入口
@@ -76,4 +76,4 @@ python3 -m http.server 8000
 
 ---
 
-*注：2022–2024 真题整理版已基于官方 PDF 重新校对，题面忠实原卷；需配图题目请对照 `papers/downloaded/` 下带图官方 PDF。2026 诊断使用数学图片版整卷（官方 PDF 未发布）。*
+*注：2022–2023 数学、2022–2024 物理已据官方 PDF 校对，题面忠实原卷；2024 数学官方 PDF 为扫描件，未校对，做题请用 `papers/downloaded/2024/math/` 下带图官方 PDF。2026 诊断使用数学图片版整卷（官方 PDF 未发布）。*
