@@ -27,10 +27,13 @@ const days=[
  ['终局检验']
 ];
 const key='beijingZhongkaoPlan';
-let state=JSON.parse(localStorage.getItem(key)||'{"completed":[],"mistakes":[],"selectedDay":0,"selectedWeek":0}');
+let state;
+try{state=JSON.parse(localStorage.getItem(key)||'{"completed":[],"mistakes":[],"selectedDay":0,"selectedWeek":0}')}catch(e){state=null}
 // Defensive normalize: old/corrupted localStorage (out-of-range day, missing
-// fields, non-array values) would make mathPlans[state.selectedDay] throw
-// and break the whole page. Clamp indices and ensure expected types.
+// fields, non-array values, or a non-object payload like "null"/"5"/"[1,2,3]")
+// would make mathPlans[state.selectedDay] throw and break the whole page.
+// Reject any non-plain-object payload, then clamp indices and ensure types.
+if(!state||typeof state!=='object'||Array.isArray(state)){state={completed:[],mistakes:[],selectedDay:0,selectedWeek:0}}
 state.completed=Array.isArray(state.completed)?state.completed.filter(n=>Number.isInteger(n)&&n>=0&&n<21):[];
 state.mistakes=Array.isArray(state.mistakes)?state.mistakes:[];
 state.selectedDay=Number.isInteger(state.selectedDay)&&state.selectedDay>=0&&state.selectedDay<21?state.selectedDay:0;
@@ -42,8 +45,8 @@ function fillLesson(subject,lesson){$(''+subject+'Title').textContent=lesson.tit
 function renderToday(){const math=mathPlans[state.selectedDay],physics=physicsPlans[state.selectedDay];$('dayLabel').textContent=`第 ${state.selectedDay+1} 天`;fillLesson('math',math);fillLesson('physics',physics);$('completeToday').checked=state.completed.includes(state.selectedDay);renderWeek();}
 function renderWeek(){document.querySelectorAll('.week-tabs button').forEach((b,i)=>{const on=i===state.selectedWeek;b.classList.toggle('active',on);b.setAttribute('aria-pressed',on?'true':'false')});const w=weeks[state.selectedWeek];$('weekNumber').textContent=String(state.selectedWeek+1).padStart(2,'0');$('weekTitle').textContent=w.title;$('weekDescription').textContent=w.description;$('daysGrid').innerHTML=days.slice(state.selectedWeek*7,state.selectedWeek*7+7).map((d,i)=>{const n=state.selectedWeek*7+i,done=state.completed.includes(n);return `<button class="day-card ${done?'done':''} ${n===state.selectedDay?'selected':''}" data-day="${n}" type="button" aria-label="第 ${n+1} 天 ${d[0]}${done?' 已完成':''}"><span class="day-number">${String(n+1).padStart(2,'0')}</span><h4>${d[0]}</h4><p>${mathPlans[n].title}<br>${physicsPlans[n].title}</p><span class="done-mark">${done?'✓ 已完成':'查看任务 →'}</span></button>`}).join('');document.querySelectorAll('.day-card').forEach(b=>b.onclick=()=>{state.selectedDay=Number(b.dataset.day);save();renderToday();document.querySelector('.today-panel').scrollIntoView({behavior:'smooth'})})}
 function renderProgress(){const count=state.completed.length,pct=Math.round(count/21*100);$('completedDays').textContent=count;$('progressPercent').textContent=`${pct}%`;$('progressMessage').textContent=count===21?'三周训练完成，保持整卷节奏。':count>=14?'进入整卷阶段，重点控制非知识性失分。':count>=7?'基础框架已建立，开始突破中档模型。':'先完成诊断，找到最值得补的分数。'}
-function renderMistakes(){$('recordCount').textContent=`${state.mistakes.length} 条记录`;$('mistakeList').innerHTML=state.mistakes.length?state.mistakes.map((m,i)=>`<div class="mistake-item"><b>${m.subject}</b><span>${m.reason}</span><span>${escapeHtml(m.text)}</span><button type="button" data-remove="${i}" aria-label="删除记录">×</button></div>`).join(''):'<p class="empty-state">还没有错题记录。做完今日训练后，把最值得重做的题留在这里。</p>';document.querySelectorAll('[data-remove]').forEach(b=>b.onclick=()=>{state.mistakes.splice(Number(b.dataset.remove),1);save();renderMistakes()})}
-function escapeHtml(s){return s.replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
+function renderMistakes(){$('recordCount').textContent=`${state.mistakes.length} 条记录`;$('mistakeList').innerHTML=state.mistakes.length?state.mistakes.map((m,i)=>`<div class="mistake-item"><b>${escapeHtml(m.subject)}</b><span>${escapeHtml(m.reason)}</span><span>${escapeHtml(m.text)}</span><button type="button" data-remove="${i}" aria-label="删除记录">×</button></div>`).join(''):'<p class="empty-state">还没有错题记录。做完今日训练后，把最值得重做的题留在这里。</p>';document.querySelectorAll('[data-remove]').forEach(b=>b.onclick=()=>{state.mistakes.splice(Number(b.dataset.remove),1);save();renderMistakes()})}
+function escapeHtml(s){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
 $('completeToday').onchange=e=>{state.completed=e.target.checked?[...new Set([...state.completed,state.selectedDay])]:state.completed.filter(n=>n!==state.selectedDay);save();renderProgress();renderWeek()};
 $('prevDay').onclick=()=>{state.selectedDay=(state.selectedDay+20)%21;state.selectedWeek=Math.floor(state.selectedDay/7);save();renderToday()};
 $('nextDay').onclick=()=>{state.selectedDay=(state.selectedDay+1)%21;state.selectedWeek=Math.floor(state.selectedDay/7);save();renderToday()};
