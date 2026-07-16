@@ -73,4 +73,4 @@ papers/downloaded/
     └── {学科}/*.html            # HTML 快照 + 答案摘要
 ```
 
-抓取详细日志见 [`../loop-memory.md`](../loop-memory.md)（R1-R5 完整过程）。
+> 真题 PDF 均来自北京中考信息网 zhongkaobj.cn 暴露的阿里云 OSS 直链，2019–2024 为原版；2025 为站点 HTML 快照；2026 为微信公众号图片版。

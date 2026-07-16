@@ -53,16 +53,7 @@
 - **北京中考**：http://bj.zhongkao.com/
 - 说明：政策解读、复习指南、部分真题
 
-## 三、GitHub 上的相关公开仓库
-
-| 仓库 | 说明 |
-|------|------|
-| [Dujltqzv/Some-Many-Books](https://github.com/Dujltqzv/Some-Many-Books) | 综合书籍收藏 |
-| [computer-drive/Beijing-Zhongkao-Fuxishouce](https://github.com/computer-drive/Beijing-Zhongkao-Fuxishouce) | 北京中考复习手册 |
-| [yangxiongmao/zhongkao-math](https://github.com/yangxiongmao/zhongkao-math) | 2026 北京中考数学押题平台 |
-| [bgq2023-maker/beijing-zhongkao-tools](https://github.com/bgq2023-maker/beijing-zhongkao-tools) | 北京中考工具 |
-
-## 四、微信公众号 / 家长圈
+## 三、微信公众号 / 家长圈
 
 - 【北京中考在线】
 - 【北京升学圈】
@@ -82,12 +73,6 @@
 2. **北京日报客户端等官方媒体**
 3. **主流教辅或题库平台**（必须核对完整图片与答案）
 4. **教育类公众号**（只能作为线索，不能仅凭标题确认真题）
-
-## 六、免费开源资源
-
-- **国家中小学智慧教育平台**：https://basic.smartedu.cn/
-  - 免费提供教材配套资源、习题库、名师课堂
-- **人教版数字教材**：https://www.pep.com.cn/
 
 ---
 

@@ -169,7 +169,7 @@ def main():
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="北京中考 2015-2025 真题下载合集：{total_pdf}份 PDF + {total_html}份 HTML + {total_md}份 MD + {total_txt}份 TXT">
+<meta name="description" content="北京中考 2017-2026 真题下载合集：{total_pdf}份 PDF + {total_html}份 HTML + {total_md}份 MD + {total_txt}份 TXT">
 <title>真题下载合集 · 京考进阶</title>
 <link rel="stylesheet" href="styles.css">
 <style>
@@ -233,9 +233,9 @@ def main():
 </header>
 
 <section class="dl-hero">
-  <p class="eyebrow">EXAM PAPERS · 2015 → 2025</p>
+  <p class="eyebrow">EXAM PAPERS · 2017 → 2026</p>
   <h1>北京中考真题下载合集</h1>
-  <p>历经多轮长任务从 <code>zhongkaobj.cn</code>（阿里云 OSS 直链）、GitHub 教辅仓库、zizzs.com / gaokzx.com 等来源整理的原版试题，覆盖 9 个学科 · 11 个年份。所有文件本地可下载，PDF 打开即读；点击卡片直接下载或在新标签查看。</p>
+  <p>历经多轮长任务从 <code>zhongkaobj.cn</code>（阿里云 OSS 直链）、GitHub 教辅仓库、zizzs.com / gaokzx.com 等来源整理的原版试题，覆盖 9 个学科 · 10 个年份（2015/2016 暂缺）。所有文件本地可下载，PDF 打开即读；点击卡片直接下载或在新标签查看。</p>
   <div class="dl-stats">
     <div class="dl-stat"><b>{total_pdf}</b><span>PDF 原版试卷</span></div>
     <div class="dl-stat"><b>{total_html}</b><span>HTML 网页快照</span></div>
@@ -259,7 +259,7 @@ def main():
 </main>
 
 <footer>
-  <span>京考进阶 · 真题合集，来源见 <a href="loop-memory.md">loop-memory</a> 与 <a href="papers/downloaded/README.md">下载 README</a></span>
+  <span>京考进阶 · 真题合集，来源详见 <a href="html/papers/downloaded/README.html">下载 README</a></span>
   <a href="index.html">← 返回首页</a>
 </footer>
 </body>

@@ -1,0 +1,11 @@
+# OS / 编辑器
+.DS_Store
+*.swp
+*~
+
+# pdftotext 中间产物
+papers/downloaded/**/*-raw.txt
+
+# Python
+__pycache__/
+*.pyc
