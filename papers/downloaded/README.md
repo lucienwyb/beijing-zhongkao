@@ -47,7 +47,7 @@
 - **备考首选**：`2019-2024` 各科 PDF 已构成 6 年完整题库，主力用它们
 - **数学/物理专项**：2019-2024 共 12 份 PDF，是本仓库核心
 - **2025 参考**：HTML 页里通常有答案摘要，试题主体建议对照当年题册使用
-- **2015-2018**：暂时空缺，如有原始 PDF 请自行补充到相应目录
+- **2015-2017**：暂缺；2018 数学有 OCR 版 MD（公式排版有损）
 
 ## 目录结构
 
@@ -55,15 +55,16 @@
 papers/downloaded/
 ├── README.md                   # 本文件
 ├── 2017/
-│   ├── chemistry/*.txt         # 评析文本
-│   ├── english/*.txt
-│   └── math/*.txt
+│   ├── summary/2017-summary_github_vcrting_summary.txt   # 2017 评析汇总
+│   ├── {chemistry,english,math}/*.txt         # 各科评析文本
 ├── 2018/
-│   └── math/2018-math_github_asahiluna.md   # 完整 MD 题面
+│   └── math/2018-math_github_asahiluna*.md     # OCR 版 MD 题面+答案（公式有损）
 ├── 2019/ ~ 2024/
 │   └── {学科}/{年份}-{学科}.pdf              # 原版 PDF
-└── 2025/
-    └── {学科}/*.html            # HTML 快照 + 答案摘要
+├── 2025/
+│   └── {学科}/*.html            # HTML 快照 + 答案摘要
+└── 2026/
+    └── {学科}/*.html + *_imgs/  # 微信公众号图片版真题（数学最完整）
 ```
 
 > 真题 PDF 均来自北京中考信息网 zhongkaobj.cn 暴露的阿里云 OSS 直链，2019–2024 为原版；2025 为站点 HTML 快照；2026 为微信公众号图片版。

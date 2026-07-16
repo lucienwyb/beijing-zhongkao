@@ -80,6 +80,7 @@ main{overflow:hidden}
   border-radius:var(--radius);display:flex;flex-direction:column;
   border-top:5px solid var(--yellow)}
 .physics-card{border-top-color:var(--blue)}
+.math-card{border-top-color:var(--yellow)}
 .task-top{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}
 .subject-tag{font-weight:800;color:var(--ink)}
 .task-card h3{font-size:21px;margin:22px 0 16px}

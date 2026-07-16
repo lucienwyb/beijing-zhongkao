@@ -175,12 +175,28 @@ def convert_file(md_path: Path, out_path: Path):
     text = re.sub(r'_{3,}', lambda m: '＿' * len(m.group()), text)
     # Auto-link bare URLs (linkify extension unavailable in this env)
     text = re.sub(r'(?<![">])(https?://[^\s<）)]+)', r'<\1>', text)
+    # Protect math fragments from Python-Markdown backslash escaping.
+    # Markdown eats \\ (cases row break) and \! (negative thin space) inside $...$,
+    # corrupting the math. Stash math, convert, then restore.
+    math_stash = []
+    def _stash(m):
+        math_stash.append(m.group(0))
+        return f'\x00MATH{len(math_stash)-1}\x00'
+    text = re.sub(r'\$\$.*?\$\$', _stash, text, flags=re.DOTALL)
+    text = re.sub(r'\$[^$\n]+?\$', _stash, text)
+    # Escape backslashes in stashed math is unnecessary; we just skip markdown processing.
     # Extract first h1 as title, fallback to filename
     title_m = re.search(r'^#\s+(.+)$', text, re.MULTILINE)
     title = title_m.group(1).strip() if title_m else md_path.stem
 
     md = markdown.Markdown(extensions=['tables', 'fenced_code', 'toc', 'sane_lists'])
     body = md.convert(text)
+
+    # Restore math fragments
+    def _restore(m):
+        idx = int(m.group(1))
+        return math_stash[idx]
+    body = re.sub(r'\x00MATH(\d+)\x00', _restore, body)
 
     # Rewrite .md -> .html
     body = rewrite_md_links(body, 0)
