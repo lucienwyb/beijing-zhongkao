@@ -208,9 +208,13 @@ dialog button{border:1px solid var(--line);background:white;padding:9px 15px;bor
   .days-grid{grid-template-columns:repeat(4,1fr)}
 }
 @media(max-width:700px){
-  .topbar{padding:0 18px}
-  .topbar nav{display:none}
-  .topbar .icon-button{margin-left:auto}
+  .topbar{padding:0 14px}
+  .topbar nav{display:flex;margin:0;gap:14px;overflow-x:auto;white-space:nowrap;flex:1;
+    -webkit-overflow-scrolling:touch;font-size:12px;scrollbar-width:none}
+  .topbar nav::-webkit-scrollbar{display:none}
+  .topbar nav a{flex-shrink:0}
+  .topbar .icon-button{margin-left:4px;flex-shrink:0;width:34px;height:34px}
+  .brand span:last-child{display:none}
   .briefing{padding:44px 20px 32px}
   .briefing-head h1{font-size:34px}
   .briefing-stats{grid-template-columns:1fr 1fr;gap:10px}
