@@ -123,7 +123,12 @@ def render_year(year, subjects):
     if not subj_html and year != '2026':
         subj_html = ['<p class="dl-empty">该年份暂无可用真题（曾抓取的网页快照经核验为空壳/损坏/非真题，已删除，待可靠来源补充）。</p>']
     # 2026 has no doc files in downloaded/ (only the image viewer), so show a friendly note
-    year_count_text = f'{len(subjects)} 个学科 · {all_ext_sum} 个文件'
+    # 学科计数不含 overview（合辑），合辑单列，避免把跨科汇总误算成一个学科
+    subj_keys = [s for s in subjects if s != 'overview']
+    subj_count_text = f'{len(subj_keys)} 个学科'
+    if 'overview' in subjects:
+        subj_count_text += ' + 合辑'
+    year_count_text = f'{subj_count_text} · {all_ext_sum} 个文件'
     if year == '2026' and not subj_html:
         year_count_text = '数学图片版 · 4 来源 80 张图'
         subj_html = ['<p class="dl-empty">2026 仅数学有整卷图片版查看器（上方蓝绿色提示框），其余科目官方 PDF 尚未公开抓到，待可靠来源补充。</p>']
@@ -295,7 +300,7 @@ def main():
 <section class="dl-hero">
   <p class="eyebrow">EXAM PAPERS · 2017 → 2026</p>
   <h1>北京中考真题下载合集</h1>
-  <p>历经多轮长任务从 <code>zhongkaobj.cn</code>（阿里云 OSS 直链）、GitHub 教辅仓库、zizzs.com / gaokzx.com 等来源整理的原版试题，覆盖 9 个学科 · 10 个年份。点击卡片在新标签打开 PDF 预览或网页快照（可在浏览器中另存下载）。</p>
+  <p>历经多轮长任务整理的北京中考真题资料，覆盖 9 个学科 · 10 个年份（2017-2026）。2019-2024 原版 PDF 来自 <code>zhongkaobj.cn</code> 暴露的阿里云 OSS 直链；2018 数学为 GitHub OCR 题面、2017 为评析文本、2026 数学为微信公众号整卷图片版（4 来源交叉校对）。点击卡片在新标签打开 PDF / 题面页 / 图片版查看器（可在浏览器中另存下载）。</p>
   <div class="dl-stats">
     {stats_html}
   </div>

@@ -68,8 +68,10 @@ papers/downloaded/
 │   └── {chemistry,english,math}/*.txt            # 各科评析文本
 ├── 2018/
 │   └── math/2018-math_github_asahiluna*.md       # OCR 版 MD 题面+答案（公式有损）
-├── 2019/ ~ 2024/
-│   └── {学科}/{年份}-{学科}.pdf                  # 原版 PDF
+├── 2019/ ~ 2023/
+│   └── {学科}/{年份}-{学科}.pdf                  # 原版 PDF（每年 9 科齐全）
+├── 2024/
+│   └── {学科}/{年份}-{学科}.pdf                  # 6 科（数学另含 -answers.pdf；缺生物/历史/地理）
 └── 2026/
     └── math/*_imgs/               # 仅数学整卷图片版（4 来源 80 张，见 viewer）
 ```
