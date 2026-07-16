@@ -188,7 +188,7 @@ def convert_file(md_path: Path, out_path: Path):
     body = mark_missing_figures(body, f'{root}papers/sources/README.html')
 
     plan_root = '../' * (depth + 1)
-    nav = f'<div class="nav">📚 <a href="{plan_root}index.html">学习计划</a> · <a href="{root}index.html">资料首页</a> · <a href="{root}math/exam-points.html">数学考点</a> · <a href="{root}physics/exam-points.html">物理考点</a> · <a href="{root}papers/README.html">真题合集</a></div>'
+    nav = f'<div class="nav">📚 <a href="{plan_root}index.html">学习计划</a> · <a href="{root}math/exam-points.html">数学考点</a> · <a href="{root}physics/exam-points.html">物理考点</a> · <a href="{plan_root}index.html#mistakes">错题</a> · <a href="{plan_root}downloads.html">真题下载</a></div>'
 
     html = f"""<!DOCTYPE html>
 <html lang="zh-CN">

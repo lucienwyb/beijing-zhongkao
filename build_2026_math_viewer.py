@@ -145,6 +145,9 @@ def main():
   .lb.open{{display:flex}}
   .lb img{{max-width:100%;max-height:100%;object-fit:contain;box-shadow:0 20px 60px rgba(0,0,0,.5)}}
   .lb .close{{position:absolute;top:20px;right:24px;color:#fff;font-size:28px;font-weight:700;cursor:pointer}}
+  .lb .nav-btn{{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:40px;font-weight:700;cursor:pointer;background:rgba(0,0,0,.3);border:none;width:48px;height:64px;border-radius:8px;display:flex;align-items:center;justify-content:center}}
+  .lb .prev{{left:16px}}
+  .lb .next{{right:16px}}
   @media(max-width:700px){{
     .viewer-hero h1{{font-size:24px}}
     .tabs{{padding:0 16px;overflow-x:auto;white-space:nowrap;flex-wrap:nowrap;top:0}}
@@ -188,14 +191,29 @@ def main():
 
 <footer><span>京考进阶 · 4 份来源共 {total_imgs} 张图 · 数据仅本地保存</span><a href="../../downloads.html#y2026">下载原始文件 ↗</a></footer>
 
-<div class="lb" id="lb"><span class="close">×</span><img alt="放大预览"></div>
+<div class="lb" id="lb"><span class="close">×</span><button class="nav-btn prev" type="button">‹</button><img alt="放大预览"><button class="nav-btn next" type="button">›</button></div>
 <script>
 const lb = document.getElementById('lb'), lbImg = lb.querySelector('img');
-document.querySelectorAll('.pg img').forEach(im => {{
-  im.onclick = () => {{ lbImg.src = im.src; lb.classList.add('open'); }};
+const imgs = Array.from(document.querySelectorAll('.pg img'));
+let cur = -1;
+function show(i){{
+  cur = (i + imgs.length) % imgs.length;
+  lbImg.src = imgs[cur].src;
+  lb.classList.add('open');
+}}
+imgs.forEach((im, i) => {{
+  im.onclick = () => show(i);
 }});
-lb.onclick = () => lb.classList.remove('open');
-document.addEventListener('keydown', e => {{ if (e.key === 'Escape') lb.classList.remove('open'); }});
+lb.querySelector('.close').onclick = (e) => {{ e.stopPropagation(); lb.classList.remove('open'); }};
+lb.querySelector('.prev').onclick = (e) => {{ e.stopPropagation(); show(cur - 1); }};
+lb.querySelector('.next').onclick = (e) => {{ e.stopPropagation(); show(cur + 1); }};
+lb.onclick = (e) => {{ if (e.target === lb) lb.classList.remove('open'); }};
+document.addEventListener('keydown', e => {{
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') lb.classList.remove('open');
+  else if (e.key === 'ArrowLeft') show(cur - 1);
+  else if (e.key === 'ArrowRight') show(cur + 1);
+}});
 </script>
 </body>
 </html>'''

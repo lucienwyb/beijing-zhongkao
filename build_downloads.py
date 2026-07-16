@@ -78,8 +78,14 @@ def render_card(f):
     extra = ''
     if f.get('imgs'):
         extra = f' · 附 {f["imgs"]} 图 · {fmt_size(f["imgs_bytes"])}'
+    # MD files have a rendered HTML version (build_html.py) with site nav — prefer it
+    href = f['href']
+    if ext == 'md':
+        rendered = 'html/' + href[:-3] + '.html'
+        if (REPO / rendered).is_file():
+            href = rendered
     return f'''
-      <a class="dl-file" href="{html.escape(f['href'])}" target="_blank" rel="noopener">
+      <a class="dl-file" href="{html.escape(href)}" target="_blank" rel="noopener">
         <span class="dl-badge" style="background:{color}">{label}</span>
         <span class="dl-name">{html.escape(f['name'])}</span>
         <span class="dl-meta">{kind} · {fmt_size(f['size'])}{extra}</span>
@@ -114,12 +120,19 @@ def render_year(year, subjects):
       </div>
     </section>''')
     all_ext_sum = sum(len(v) for v in subjects.values())
+    viewer_hint = ''
+    if year == '2026':
+        viewer_hint = '''
+  <div class="dl-viewer-hint">
+    <strong>📐 做题首选：</strong>2026 数学整卷图片版查看器（4 份来源交叉校对 · 含官方标答 · 80 张试题图逐张浏览）
+    <a class="dl-viewer-link" href="html/papers/2026-math-viewer.html" target="_blank" rel="noopener">打开 2026 数学整卷查看器 →</a>
+  </div>'''
     return f'''
 <section class="dl-year" id="y{year}">
   <div class="dl-year-head">
     <h2>{year} 年</h2>
     <span class="dl-year-count">{len(subjects)} 个学科 · {all_ext_sum} 个文件</span>
-  </div>
+  </div>{viewer_hint}
   <div class="dl-subjects">
     {''.join(subj_html)}
   </div>
@@ -235,7 +248,7 @@ def main():
 <section class="dl-hero">
   <p class="eyebrow">EXAM PAPERS · 2017 → 2026</p>
   <h1>北京中考真题下载合集</h1>
-  <p>历经多轮长任务从 <code>zhongkaobj.cn</code>（阿里云 OSS 直链）、GitHub 教辅仓库、zizzs.com / gaokzx.com 等来源整理的原版试题，覆盖 9 个学科 · 10 个年份（2015/2016 暂缺）。所有文件本地可下载，PDF 打开即读；点击卡片直接下载或在新标签查看。</p>
+  <p>历经多轮长任务从 <code>zhongkaobj.cn</code>（阿里云 OSS 直链）、GitHub 教辅仓库、zizzs.com / gaokzx.com 等来源整理的原版试题，覆盖 9 个学科 · 10 个年份。所有文件本地可下载，PDF 打开即读；点击卡片直接下载或在新标签查看。</p>
   <div class="dl-stats">
     <div class="dl-stat"><b>{total_pdf}</b><span>PDF 原版试卷</span></div>
     <div class="dl-stat"><b>{total_html}</b><span>HTML 网页快照</span></div>
