@@ -28,6 +28,13 @@ const days=[
 ];
 const key='beijingZhongkaoPlan';
 let state=JSON.parse(localStorage.getItem(key)||'{"completed":[],"mistakes":[],"selectedDay":0,"selectedWeek":0}');
+// Defensive normalize: old/corrupted localStorage (out-of-range day, missing
+// fields, non-array values) would make mathPlans[state.selectedDay] throw
+// and break the whole page. Clamp indices and ensure expected types.
+state.completed=Array.isArray(state.completed)?state.completed.filter(n=>Number.isInteger(n)&&n>=0&&n<21):[];
+state.mistakes=Array.isArray(state.mistakes)?state.mistakes:[];
+state.selectedDay=Number.isInteger(state.selectedDay)&&state.selectedDay>=0&&state.selectedDay<21?state.selectedDay:0;
+state.selectedWeek=Number.isInteger(state.selectedWeek)&&state.selectedWeek>=0&&state.selectedWeek<3?state.selectedWeek:0;
 const $=id=>document.getElementById(id);
 function save(){localStorage.setItem(key,JSON.stringify(state))}
 function resourceUrl(path){return path.endsWith('.md')?`html/${path.slice(0,-3)}.html`:path}

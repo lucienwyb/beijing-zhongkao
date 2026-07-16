@@ -181,7 +181,8 @@ main{overflow:hidden}
 .mistake-list{margin-top:24px;border-top:1px solid var(--line)}
 .mistake-item{display:grid;grid-template-columns:70px 120px 1fr auto;
   align-items:center;gap:15px;padding:15px 0;border-bottom:1px solid var(--line)}
-.mistake-item span{font-size:12px;color:var(--muted)}
+.mistake-item span{font-size:12px;color:var(--muted);min-width:0}
+.mistake-item span:nth-child(3){overflow-wrap:anywhere;word-break:break-word}
 .mistake-item b{font-size:14px}
 .mistake-item button{border:0;background:transparent;font-size:20px;color:var(--muted)}
 .empty-state{color:var(--muted);font-size:14px;padding:25px 0}

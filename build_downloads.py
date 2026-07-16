@@ -71,6 +71,29 @@ def fmt_size(n):
     return f"{n:.1f} GB"
 
 
+def count_2026_images():
+    """Count 2026 math image sources and total images.
+
+    Mirrors build_2026_math_viewer.py's >4KB content filter so the figure
+    cited here always matches what the viewer actually displays. Returns
+    (sources, images); (0, 0) when the directory is absent.
+    """
+    base = DL / '2026' / 'math'
+    if not base.is_dir():
+        return 0, 0
+    sources = 0
+    total = 0
+    for d in sorted(base.iterdir()):
+        if not (d.is_dir() and d.name.endswith('_imgs')):
+            continue
+        sources += 1
+        for f in d.iterdir():
+            if (f.is_file() and f.suffix.lower() in ('.jpg', '.jpeg', '.png', '.gif', '.webp')
+                    and f.stat().st_size >= 4096):
+                total += 1
+    return sources, total
+
+
 def render_card(f):
     ext = f['ext']
     label, color, kind = EXT_META.get(ext, ('文件', '#61706b', ''))
@@ -92,7 +115,8 @@ def render_card(f):
       </a>'''
 
 
-def render_year(year, subjects):
+def render_year(year, subjects, viewer_meta=(0, 0)):
+    sources, imgs = viewer_meta
     subj_html = []
     for s in SUBJ_ORDER:
         if s not in subjects:
@@ -130,13 +154,13 @@ def render_year(year, subjects):
         subj_count_text += ' + 合辑'
     year_count_text = f'{subj_count_text} · {all_ext_sum} 个文件'
     if year == '2026' and not subj_html:
-        year_count_text = '数学图片版 · 4 来源 80 张图'
+        year_count_text = f'数学图片版 · {sources} 来源 {imgs} 张图'
         subj_html = ['<p class="dl-empty">2026 仅数学有整卷图片版查看器（上方蓝绿色提示框），其余科目官方 PDF 尚未发布，待可靠来源补充。</p>']
     viewer_hint = ''
-    if year == '2026':
-        viewer_hint = '''
+    if year == '2026' and sources:
+        viewer_hint = f'''
   <div class="dl-viewer-hint">
-    <strong>📐 做题首选：</strong>2026 数学整卷图片版查看器（4 份来源交叉校对 · 含官方标答 · 80 张试题图逐张浏览）
+    <strong>📐 做题首选：</strong>2026 数学整卷图片版查看器（{sources} 份来源交叉校对 · 含官方标答 · {imgs} 张试题图逐张浏览）
     <a class="dl-viewer-link" href="html/papers/2026-math-viewer.html" target="_blank" rel="noopener">打开 2026 数学整卷查看器 →</a>
   </div>'''
     return f'''
@@ -159,6 +183,9 @@ def main():
     for y in ('2026', '2025'):
         if y not in data:
             data[y] = {}
+    # 2026 math image sources/figures — computed from papers/downloaded/2026/math/*_imgs/
+    # so the counts stay correct if a source is added or removed.
+    viewer_sources, viewer_imgs = count_2026_images()
     years = sorted(data.keys(), reverse=True)
 
     total_files = sum(len(f) for y in data.values() for f in y.values())
@@ -190,11 +217,13 @@ def main():
     if total_html: desc_parts.append(f'{total_html}份 HTML')
     if total_md: desc_parts.append(f'{total_md}份 MD')
     if total_txt: desc_parts.append(f'{total_txt}份 TXT')
-    if total_viewer: desc_parts.append('2026 数学整卷图片版（80 张）')
+    if total_viewer: desc_parts.append(f'2026 数学整卷图片版（{viewer_imgs} 张）')
     desc_line = ' + '.join(desc_parts)
 
     year_nav = ' · '.join(f'<a href="#y{y}">{y}</a>' for y in years)
-    year_blocks = '\n'.join(render_year(y, data[y]) for y in years)
+    year_blocks = '\n'.join(
+        render_year(y, data[y], viewer_meta=(viewer_sources, viewer_imgs))
+        for y in years)
 
     # coverage matrix
     all_subs = ['math','physics','chemistry','biology','chinese','english','history','geography','politics']
@@ -214,7 +243,7 @@ def main():
                 if 'pdf' in exts:
                     cells.append(f'<td class="ok"><a href="#y{y}">PDF</a></td>')
                 elif 'md' in exts:
-                    cells.append(f'<td class="mid"><a href="#y{y}">MD</a></td>')
+                    cells.append(f'<td class="md"><a href="#y{y}">MD</a></td>')
                 elif 'html' in exts:
                     cells.append(f'<td class="mid"><a href="#y{y}">HTML</a></td>')
                 else:
@@ -255,6 +284,7 @@ def main():
   .cov-matrix tbody th{{background:var(--paper);font-family:Georgia,serif;font-size:15px}}
   .cov-matrix td a{{color:inherit;font-weight:700}}
   .cov-matrix td.ok{{background:#dcebe2;color:#0e4b34}}
+  .cov-matrix td.md{{background:#e8dfff;color:#4c2f7a}}
   .cov-matrix td.mid{{background:#fff8c5;color:#5a4600}}
   .cov-matrix td.weak{{background:#fbe4d5;color:#7a2f19}}
   .cov-matrix td.miss{{background:#f4f2eb;color:#6e6759}}
@@ -304,7 +334,7 @@ def main():
 <section class="dl-hero">
   <p class="eyebrow">EXAM PAPERS · 2017 → 2026</p>
   <h1>北京中考真题下载合集</h1>
-  <p>本合集整理了北京中考历年真题，覆盖 9 个学科 · 10 个年份（2017-2026）。2019-2024 为原版 PDF 试卷；2018 数学为文字整理版、2017 为试题评析文本、2026 数学为整卷图片版（4 份来源交叉校对）。点击卡片在新标签打开 PDF / 题面页 / 图片版查看器（可在浏览器中另存下载）。</p>
+  <p>本合集整理了北京中考历年真题，覆盖 9 个学科 · 10 个年份（2017-2026）。2019-2024 为原版 PDF 试卷；2018 数学为文字整理版、2017 为试题评析文本、2026 数学为整卷图片版（{viewer_sources} 份来源交叉校对）。点击卡片在新标签打开 PDF / 题面页 / 图片版查看器（可在浏览器中另存下载）。</p>
   <div class="dl-stats">
     {stats_html}
   </div>
