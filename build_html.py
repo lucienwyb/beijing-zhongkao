@@ -195,29 +195,48 @@ def convert_file(md_path: Path, out_path: Path):
     # ordered lists glued to a paragraph render as plain text, and bullets
     # inside a blockquote leak their "- " markers into the prose.
     _list_re = re.compile(r'^(>\s*)*\s*(?:[-+*]|\d+\.)\s+')
+    # Inline answer keys like "1. C　2. B　3. B　4. A　5. B　6. C　7. D　8. C"
+    # pack multiple numbered markers onto one line (separated by full-width
+    # spaces). These are shorthand answer text, not real list items — if the
+    # list regex matched them, Python-Markdown would parse only the leading
+    # "1." as a marker and jam every other answer into a single <li>, producing
+    # a broken one-item <ol>. Exclude such lines so they render as a <p>.
+    _inline_key_re = re.compile(r'^\s*\d+\.\s+\S.*\d+\.\s+\S')
+
+    def _is_list(line):
+        return bool(_list_re.match(line)) and not _inline_key_re.match(line)
+
     lines = text.splitlines()
     normalized = []
     for line in lines:
-        is_list_item = _list_re.match(line) is not None
+        is_list_item = _is_list(line)
         prev = normalized[-1] if normalized else ''
-        previous_is_list_item = bool(prev and _list_re.match(prev))
+        previous_is_list_item = bool(prev) and _is_list(prev)
         if is_list_item and prev.strip() and not previous_is_list_item:
             # Keep the separator inside the blockquote (a bare blank line would
             # terminate it); use an empty ">" line so the blockquote survives.
             normalized.append('>' if prev.lstrip().startswith('>') else '')
-        elif not is_list_item and prev.strip() and _list_re.match(prev) and \
+        elif not is_list_item and prev.strip() and _is_list(prev) and \
                 prev.lstrip().startswith('>') and line.lstrip().startswith('>'):
             # Leaving a blockquote-internal list back to blockquote prose:
             # also need the ">" separator so the list closes cleanly.
             normalized.append('>')
+        if _inline_key_re.match(line):
+            # Escape the leading "N." so Python-Markdown's block list processor
+            # does not treat it as an ordered-list marker (which would collapse
+            # the whole answer key into one <li>). The inline pass renders
+            # "\." back to ".", so the visible text is unchanged.
+            line = re.sub(r'^(\s*\d+)\.', r'\1\\.', line)
         normalized.append(line)
     text = '\n'.join(normalized)
     # Fill-in blanks: sequences of 3+ underscores are meant as answer lines,
     # but Python-Markdown interprets them as <em>/<strong>. Replace with
     # full-width underscores so they render as stable blank lines.
     text = re.sub(r'_{3,}', lambda m: '＿' * len(m.group()), text)
-    # Auto-link bare URLs (linkify extension unavailable in this env)
-    text = re.sub(r'(?<![">])(https?://[^\s<）)]+)', r'<\1>', text)
+    # Auto-link bare URLs (linkify extension unavailable in this env).
+    # Skip URLs already inside backtick code spans (char before is `) —
+    # wrapping those in <...> makes Python-Markdown mangle the code span.
+    text = re.sub(r'(?<![">`])(https?://[^\s<）)]+)', r'<\1>', text)
     # Protect math fragments from Python-Markdown backslash escaping.
     # Markdown eats \\ (cases row break) and \! (negative thin space) inside $...$,
     # corrupting the math. Stash math, convert, then restore.
