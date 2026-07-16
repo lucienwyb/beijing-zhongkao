@@ -39,7 +39,7 @@ state.mistakes=Array.isArray(state.mistakes)?state.mistakes:[];
 state.selectedDay=Number.isInteger(state.selectedDay)&&state.selectedDay>=0&&state.selectedDay<21?state.selectedDay:0;
 state.selectedWeek=Number.isInteger(state.selectedWeek)&&state.selectedWeek>=0&&state.selectedWeek<3?state.selectedWeek:0;
 const $=id=>document.getElementById(id);
-function save(){localStorage.setItem(key,JSON.stringify(state))}
+function save(){try{localStorage.setItem(key,JSON.stringify(state))}catch(e){/* iOS Safari private mode / quota: silently ignore */}}
 function resourceUrl(path){return path.endsWith('.md')?`html/${path.slice(0,-3)}.html`:path}
 function fillLesson(subject,lesson){$(''+subject+'Title').textContent=lesson.title;$(''+subject+'Concept').textContent=lesson.concept;$(''+subject+'Points').textContent=lesson.points;$(''+subject+'Model').textContent=lesson.model;$(''+subject+'Practice').textContent=lesson.practice;$(''+subject+'Check').textContent=lesson.check;$(''+subject+'Resource').href=resourceUrl(lesson.resource);$(''+subject+'Time').textContent=lesson.time}
 function renderToday(){const math=mathPlans[state.selectedDay],physics=physicsPlans[state.selectedDay];$('dayLabel').textContent=`第 ${state.selectedDay+1} 天`;fillLesson('math',math);fillLesson('physics',physics);$('completeToday').checked=state.completed.includes(state.selectedDay);renderWeek();}
@@ -53,5 +53,8 @@ $('nextDay').onclick=()=>{state.selectedDay=(state.selectedDay+1)%21;state.selec
 $('startButton').onclick=()=>document.querySelector('.today-panel').scrollIntoView({behavior:'smooth'});
 document.querySelectorAll('.week-tabs button').forEach(b=>b.onclick=()=>{state.selectedWeek=Number(b.dataset.week);save();renderWeek()});
 $('mistakeForm').onsubmit=e=>{e.preventDefault();state.mistakes.unshift({subject:$('mistakeSubject').value,reason:$('mistakeReason').value,text:$('mistakeText').value.trim()});$('mistakeText').value='';save();renderMistakes()};
-$('resetButton').onclick=()=>$('resetDialog').showModal();$('cancelReset').onclick=()=>$('resetDialog').close();$('confirmReset').onclick=()=>{state={completed:[],mistakes:[],selectedDay:0,selectedWeek:0};save();$('resetDialog').close();renderToday();renderProgress();renderMistakes()};
+function doReset(){state={completed:[],mistakes:[],selectedDay:0,selectedWeek:0};save();const d=$('resetDialog');if(d&&typeof d.close==='function')d.close();renderToday();renderProgress();renderMistakes()}
+$('resetButton').onclick=()=>{const d=$('resetDialog');if(d&&typeof d.showModal==='function'){d.showModal()}else if(confirm('重置学习进度？\n21 天完成状态和错题记录都会被清空，此操作无法撤销。')){doReset()}};
+$('cancelReset').onclick=()=>{const d=$('resetDialog');if(d&&typeof d.close==='function')d.close()};
+$('confirmReset').onclick=doReset;
 renderToday();renderProgress();renderMistakes();

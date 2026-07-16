@@ -201,6 +201,11 @@ def convert_file(md_path: Path, out_path: Path):
 
     plan_root = '../' * (depth + 1)
     favicon_href = f"{plan_root}favicon.svg"
+    favicon_links = (
+        f'<link rel="icon" href="{plan_root}favicon.ico" sizes="any">'
+        f'<link rel="icon" href="{plan_root}favicon-32.png" type="image/png" sizes="32x32">'
+        f'<link rel="icon" href="{favicon_href}" type="image/svg+xml">'
+    )
     nav = f'<div class="nav">📚 <a href="{plan_root}index.html">学习计划</a> · <a href="{root}math/exam-points.html">数学考点</a> · <a href="{root}physics/exam-points.html">物理考点</a> · <a href="{plan_root}index.html#mistakes">错题</a> · <a href="{plan_root}downloads.html">真题下载</a></div>'
 
     html = f"""<!DOCTYPE html>
@@ -214,7 +219,7 @@ def convert_file(md_path: Path, out_path: Path):
 <meta property="og:type" content="article">
 <meta name="twitter:card" content="summary">
 <meta name="theme-color" content="#14201d">
-<link rel="icon" href="{favicon_href}" type="image/svg+xml">
+{favicon_links}
 <title>{page_title}</title>
 <style>{CSS}</style>
 {MATHJAX}
