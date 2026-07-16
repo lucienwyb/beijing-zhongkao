@@ -28,6 +28,63 @@ python3 -m http.server 8000
 
 ---
 
+## 🔧 维护者指南
+
+### 构建
+
+所有 HTML 产物由三个 Python 脚本生成，无外部依赖（仅需 `python-markdown`）：
+
+```bash
+python3 build_html.py               # *.md → html/*.html（考点、公式、真题整理卷）
+python3 build_downloads.py           # 扫描 papers/downloaded/ → downloads.html
+python3 build_2026_math_viewer.py    # 2026 数学图片版 → html/papers/2026-math-viewer.html
+```
+
+三者共享 `build_common.py`（favicon 链、OG meta 标签、图片大小阈值常量）。修改公共模板时改一处即可。
+
+### 文件结构
+
+```
+├── index.html              # 首页（21 天计划入口，手写，非脚本生成）
+├── styles.css              # 全站样式（首页 + 下载页 + viewer 共用）
+├── curriculum.js           # 21 天计划数据（mathPlans[] + physicsPlans[]）
+├── app.js                  # 首页交互（进度、错题、日历渲染）
+├── build_common.py        # 三脚本共享的 favicon/OG/常量
+├── build_html.py           # .md → .html 转换（考点、公式、整理卷）
+├── build_downloads.py     # 真题下载页生成
+├── build_2026_math_viewer.py  # 2026 数学图片版查看器
+├── math/                   # 数学源文档（.md）
+├── physics/                # 物理源文档（.md）
+├── papers/                 # 真题
+│   ├── math/              #   数学整理卷（2022-2024，.md）
+│   ├── physics/           #   物理整理卷（2022-2024，.md）
+│   ├── downloaded/        #   下载的原版文件（PDF/HTML/MD/TXT，按年份/学科分目录）
+│   └── sources/           #   资源链接汇总
+└── html/                   # 构建产物（gitignore，由 build_html.py 生成）
+```
+
+### 如何扩展
+
+**新增一份真题整理卷**（.md 题面 + 讲解）：把 `.md` 放到 `papers/math/` 或 `papers/physics/` 下，运行 `build_html.py`，自动生成对应 HTML。
+
+**新增一个年份的下载**：把文件放到 `papers/downloaded/<年份>/<学科>/` 下，运行 `build_downloads.py`，自动扫描。年份目录名必须是纯数字（如 `2027`）。
+
+**新增一个学科**：编辑 `build_downloads.py` 的 `SUBJ_ZH` 和 `SUBJ_ORDER` 两处（加中文名 + 排序位置）。
+
+**新增一个 2026 数学图片来源**：在 `build_2026_math_viewer.py` 的 `SOURCES` 列表末尾加一个 dict（`slug`/`title`/`note`/`dir` 四个字段），重新构建。
+
+**新增一天到 21 天计划**：在 `curriculum.js` 的 `mathPlans[]` 和 `physicsPlans[]` 各加一个 `plan(...)` 条目，同时在 `app.js` 的 `days[]` 数组加一个短标题。总天数由 `mathPlans.length` 自动推导，无需改其他地方。注意周次导航目前固定 3 周。
+
+### 已知技术债
+
+- **2024 数学 Q17/Q19**：OCR 修正版，非据官方 PDF 核实（官方为扫描件，文字不可提取）。题面注释已标注来源为"多份网络文字版交叉核对"。若未来获取到可提取的官方 PDF，应据实校对。
+- **2025 全科空缺**：网上流传版本均为空壳/损坏，未收录。`build_downloads.py` 的 force-include 列表含 `2025`，待可靠来源补充后可移除。
+- **2026 非数学科目**：仅有数学整卷图片版，其余科目官方 PDF 未发布。`build_downloads.py` 的 force-include 列表含 `2026`。
+- **`build_downloads.py` force-include 年份**：`('2026', '2025')` 硬编码，若未来有新年份无文件需手动加入。
+- **`build_2026_math_viewer.py` 年份特定**：整个脚本为 2026 数学专用，若 2027 需要图片版查看器需复制改造。
+
+---
+
 ## 📐 数学
 
 | 文件 | 内容 |

@@ -193,7 +193,48 @@ window.MathJax = {
 </code></pre>
 <p>然后访问 <code>http://localhost:8000</code>。</p>
 <hr />
-<h2 id="_3">📐 数学</h2>
+<h2 id="_3">🔧 维护者指南</h2>
+<h3 id="_4">构建</h3>
+<p>所有 HTML 产物由三个 Python 脚本生成，无外部依赖（仅需 <code>python-markdown</code>）：</p>
+<pre><code class="language-bash">python3 build_html.py               # *.md → html/*.html（考点、公式、真题整理卷）
+python3 build_downloads.py           # 扫描 papers/downloaded/ → downloads.html
+python3 build_2026_math_viewer.py    # 2026 数学图片版 → html/papers/2026-math-viewer.html
+</code></pre>
+<p>三者共享 <code>build_common.py</code>（favicon 链、OG meta 标签、图片大小阈值常量）。修改公共模板时改一处即可。</p>
+<h3 id="_5">文件结构</h3>
+<pre><code>├── index.html              # 首页（21 天计划入口，手写，非脚本生成）
+├── styles.css              # 全站样式（首页 + 下载页 + viewer 共用）
+├── curriculum.js           # 21 天计划数据（mathPlans[] + physicsPlans[]）
+├── app.js                  # 首页交互（进度、错题、日历渲染）
+├── build_common.py        # 三脚本共享的 favicon/OG/常量
+├── build_html.py           # .md → .html 转换（考点、公式、整理卷）
+├── build_downloads.py     # 真题下载页生成
+├── build_2026_math_viewer.py  # 2026 数学图片版查看器
+├── math/                   # 数学源文档（.md）
+├── physics/                # 物理源文档（.md）
+├── papers/                 # 真题
+│   ├── math/              #   数学整理卷（2022-2024，.md）
+│   ├── physics/           #   物理整理卷（2022-2024，.md）
+│   ├── downloaded/        #   下载的原版文件（PDF/HTML/MD/TXT，按年份/学科分目录）
+│   └── sources/           #   资源链接汇总
+└── html/                   # 构建产物（gitignore，由 build_html.py 生成）
+</code></pre>
+<h3 id="_6">如何扩展</h3>
+<p><strong>新增一份真题整理卷</strong>（.md 题面 + 讲解）：把 <code>.md</code> 放到 <code>papers/math/</code> 或 <code>papers/physics/</code> 下，运行 <code>build_html.py</code>，自动生成对应 HTML。</p>
+<p><strong>新增一个年份的下载</strong>：把文件放到 <code>papers/downloaded/&lt;年份&gt;/&lt;学科&gt;/</code> 下，运行 <code>build_downloads.py</code>，自动扫描。年份目录名必须是纯数字（如 <code>2027</code>）。</p>
+<p><strong>新增一个学科</strong>：编辑 <code>build_downloads.py</code> 的 <code>SUBJ_ZH</code> 和 <code>SUBJ_ORDER</code> 两处（加中文名 + 排序位置）。</p>
+<p><strong>新增一个 2026 数学图片来源</strong>：在 <code>build_2026_math_viewer.py</code> 的 <code>SOURCES</code> 列表末尾加一个 dict（<code>slug</code>/<code>title</code>/<code>note</code>/<code>dir</code> 四个字段），重新构建。</p>
+<p><strong>新增一天到 21 天计划</strong>：在 <code>curriculum.js</code> 的 <code>mathPlans[]</code> 和 <code>physicsPlans[]</code> 各加一个 <code>plan(...)</code> 条目，同时在 <code>app.js</code> 的 <code>days[]</code> 数组加一个短标题。总天数由 <code>mathPlans.length</code> 自动推导，无需改其他地方。注意周次导航目前固定 3 周。</p>
+<h3 id="_7">已知技术债</h3>
+<ul>
+<li><strong>2024 数学 Q17/Q19</strong>：OCR 修正版，非据官方 PDF 核实（官方为扫描件，文字不可提取）。题面注释已标注来源为"多份网络文字版交叉核对"。若未来获取到可提取的官方 PDF，应据实校对。</li>
+<li><strong>2025 全科空缺</strong>：网上流传版本均为空壳/损坏，未收录。<code>build_downloads.py</code> 的 force-include 列表含 <code>2025</code>，待可靠来源补充后可移除。</li>
+<li><strong>2026 非数学科目</strong>：仅有数学整卷图片版，其余科目官方 PDF 未发布。<code>build_downloads.py</code> 的 force-include 列表含 <code>2026</code>。</li>
+<li><strong><code>build_downloads.py</code> force-include 年份</strong>：<code>('2026', '2025')</code> 硬编码，若未来有新年份无文件需手动加入。</li>
+<li><strong><code>build_2026_math_viewer.py</code> 年份特定</strong>：整个脚本为 2026 数学专用，若 2027 需要图片版查看器需复制改造。</li>
+</ul>
+<hr />
+<h2 id="_8">📐 数学</h2>
 <table>
 <thead>
 <tr>
@@ -216,7 +257,7 @@ window.MathJax = {
 </tr>
 </tbody>
 </table>
-<h2 id="_4">⚛️ 物理</h2>
+<h2 id="_9">⚛️ 物理</h2>
 <table>
 <thead>
 <tr>
@@ -239,7 +280,7 @@ window.MathJax = {
 </tr>
 </tbody>
 </table>
-<h2 id="_5">📄 真题合集</h2>
+<h2 id="_10">📄 真题合集</h2>
 <h3 id="markdown">Markdown 整理版（题面 + 讲解）</h3>
 <table>
 <thead>
@@ -278,12 +319,12 @@ window.MathJax = {
 </ul>
 <p>📎 <a href="papers/sources/README.html">官方 PDF 及资源链接汇总</a> — 北京教育考试院、学科网、菁优网等官方/主流资源入口</p>
 <hr />
-<h2 id="_6">📊 北京中考概况</h2>
+<h2 id="_11">📊 北京中考概况</h2>
 <p>根据北京教育考试院《2026 年高级中等学校考试招生工作的通知》，数学满分 100 分，考试时间 120 分钟；物理满分 80 分，其中笔试 70 分、实验操作 10 分（单独组织），笔试时间 70 分钟。</p>
 <blockquote>
 <p>注：2022–2024 北京中考物理笔试卷本身满分即为 70 分（与 2026 一致），并非"旧卷 80 分、新卷 70 分"。实验操作 10 分为单独组织的实验考试，不在笔试卷内。</p>
 </blockquote>
-<h3 id="_7">试卷结构概览</h3>
+<h3 id="_12">试卷结构概览</h3>
 <p><strong>数学（100分，120分钟）</strong></p>
 <ul>
 <li>选择题：8 题 × 2 分 = 16 分</li>

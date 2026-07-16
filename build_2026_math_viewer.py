@@ -3,11 +3,20 @@
 import os, re, html, json
 from pathlib import Path
 
-ROOT = Path('/pulp/beijing-zhongkao')
+from build_common import REPO_ROOT as ROOT, favicon_links, og_tags, IMAGE_MIN_BYTES, VIEWER_BADGE_SMALL, VIEWER_BADGE_HD
+
 MATH_DIR = ROOT / 'papers/downloaded/2026/math'
 OUT = ROOT / 'html/papers/2026-math-viewer.html'
 
-# The 4 sources, ordered by content quality (largest image bundles + cleanest content)
+# The 4 WeChat sources, ordered by content quality (largest image bundles +
+# cleanest content first). The first entry is the "primary" source — shown
+# expanded by default; the rest are collapsed as "对照版本".
+#
+# MAINTENANCE: to add a 5th source, append a dict with:
+#   slug  — short identifier used in the URL fragment (#src-<slug>)
+#   title — display name (shown in tab + section header)
+#   note  — 1-line description of the source's strengths
+#   dir   — directory name under papers/downloaded/2026/math/ (must end with _imgs)
 SOURCES = [
     {
         'slug': 'albert',
@@ -36,7 +45,9 @@ SOURCES = [
 ]
 
 # Marketing filler: skip img_000, img_001, img_last-2 etc. based on size threshold
-# We include all images >4KB (real content) sorted by index. But we mark <15KB as "封面/尾图" so viewer can skim past.
+# (IMAGE_MIN_BYTES from build_common — shared with build_downloads so counts match).
+# Among included images, <VIEWER_BADGE_SMALL are labeled "封面/尾图" so viewer can skim past;
+# >VIEWER_BADGE_HD are labeled "高清".
 
 
 def collect(src):
@@ -48,7 +59,7 @@ def collect(src):
         if f.suffix.lower() not in ('.jpg', '.png', '.webp', '.gif'):
             continue
         size = f.stat().st_size
-        if size < 4096:
+        if size < IMAGE_MIN_BYTES:
             continue
         # relative from OUT (html/papers/2026-math-viewer.html)
         rel = os.path.relpath(f, OUT.parent)
@@ -64,9 +75,9 @@ def render_source(src, imgs, primary=False):
     for i, im in enumerate(imgs):
         sz = im['size']
         badge = ''
-        if sz < 20000:
+        if sz < VIEWER_BADGE_SMALL:
             badge = '<span class="badge badge-hint">封面/尾图</span>'
-        elif sz > 300000:
+        elif sz > VIEWER_BADGE_HD:
             badge = '<span class="badge badge-hd">高清</span>'
         cards.append(
             f'<figure class="pg"><img loading="lazy" src="{html.escape(im["src"])}" '
@@ -106,14 +117,8 @@ def main():
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="2026 北京中考数学卷整卷图片版 · 4 份来源交叉校对">
-<meta property="og:title" content="2026 北京中考数学 · 整卷图片版 · 京考进阶">
-<meta property="og:description" content="2026 北京中考数学卷整卷图片版 · 4 份来源交叉校对，含官方标答，{total_imgs} 张试题图逐张浏览。">
-<meta property="og:type" content="article">
-<meta name="twitter:card" content="summary">
-<meta name="theme-color" content="#14201d">
-<link rel="icon" href="../../favicon.ico" sizes="any">
-<link rel="icon" href="../../favicon-32.png" type="image/png" sizes="32x32">
-<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+{og_tags('2026 北京中考数学 · 整卷图片版 · 京考进阶', f'2026 北京中考数学卷整卷图片版 · 4 份来源交叉校对，含官方标答，{total_imgs} 张试题图逐张浏览。')}
+{favicon_links('../../')}
 <title>2026 北京中考数学 · 整卷图片版 · 京考进阶</title>
 <link rel="stylesheet" href="../../styles.css">
 <style>

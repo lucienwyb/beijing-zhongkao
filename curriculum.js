@@ -1,3 +1,17 @@
+// Factory for a single day's lesson plan.
+// Parameter order: (title, concept, points, model, practice, check, resource, time)
+//   title    — short name shown on day cards + task headers
+//   concept  — core principle / mental model for the day
+//   points   — bullet list of knowledge points covered
+//   model    — classic problem types / models to practice
+//   practice — concrete exercise plan (question counts, timing)
+//   check    — acceptance criteria for "done"
+//   resource — relative path to the study material (.md → auto-linked to .html)
+//   time     — estimated minutes (string, shown in task header)
+//
+// mathPlans[] and physicsPlans[] MUST have the same length (one entry per day).
+// To add a day: add an entry to BOTH arrays AND to days[] in app.js, then
+// bump the week-tab count if needed (currently 3 weeks × 7 days = 21).
 const plan=(title,concept,points,model,practice,check,resource,time)=>({title,concept,points,model,practice,check,resource,time});
 
 const mathPlans=[

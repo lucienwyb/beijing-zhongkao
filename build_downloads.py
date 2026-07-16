@@ -3,9 +3,13 @@
 import os, html
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent
+from build_common import REPO_ROOT as REPO, favicon_links, og_tags, IMAGE_MIN_BYTES
+
 DL = REPO / "papers" / "downloaded"
 
+# Subject metadata. To add a new subject (e.g. 'informatics'), add it to
+# both SUBJ_ZH and SUBJ_ORDER. The coverage matrix uses SUBJ_ORDER minus
+# 'overview' (see all_subs in main()).
 SUBJ_ZH = {
     'math': '数学', 'physics': '物理', 'chemistry': '化学', 'biology': '生物',
     'chinese': '语文', 'english': '英语', 'history': '历史',
@@ -89,7 +93,7 @@ def count_2026_images():
         sources += 1
         for f in d.iterdir():
             if (f.is_file() and f.suffix.lower() in ('.jpg', '.jpeg', '.png', '.gif', '.webp')
-                    and f.stat().st_size >= 4096):
+                    and f.stat().st_size >= IMAGE_MIN_BYTES):
                 total += 1
     return sources, total
 
@@ -177,9 +181,11 @@ def render_year(year, subjects, viewer_meta=(0, 0)):
 
 def main():
     data = scan()
-    # 2026 has the math viewer even though no HTML files remain (deleted as non-real-exam);
-    # 2025 has no usable files (HTML snapshots were all empty/damaged, deleted).
-    # Force-include both so the matrix and year-nav show them honestly (marked "暂无").
+    # Force-include years that have no downloadable files but should still
+    # appear in the matrix (marked "暂无"). Currently 2026 (only the image
+    # viewer, no docs in downloaded/) and 2025 (all sources were empty/damaged).
+    # MAINTENANCE: if a future year (e.g. 2027) similarly has no files yet,
+    # add it here so the matrix and year-nav show it honestly.
     for y in ('2026', '2025'):
         if y not in data:
             data[y] = {}
@@ -260,14 +266,8 @@ def main():
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="北京中考 2017-2026 真题下载合集：{desc_line}">
-<meta property="og:title" content="真题下载合集 · 京考进阶">
-<meta property="og:description" content="北京中考 2017-2026 真题下载合集：{desc_line}。9 学科 10 年份，原版 PDF 与整卷图片版查看器。">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary">
-<meta name="theme-color" content="#14201d">
-<link rel="icon" href="favicon.ico" sizes="any">
-<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
+{og_tags('真题下载合集 · 京考进阶', f'北京中考 2017-2026 真题下载合集：{desc_line}。9 学科 10 年份，原版 PDF 与整卷图片版查看器。', 'website')}
+{favicon_links('')}
 <title>真题下载合集 · 京考进阶</title>
 <link rel="stylesheet" href="styles.css">
 <style>
