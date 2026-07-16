@@ -602,6 +602,29 @@ window.MathJax = {
 </ul>
 <p><strong>清理后真实覆盖</strong>：57 份原版 PDF（2019-2024，2020政治/2024生物历史地理缺）+ 16 份 2025 HTML 快照 + 2 份 2018 数学 MD + 6 份 2017 评析 txt。</p>
 <p><strong>这就是"感觉你瞎找了"的验证</strong> — R5 的所有"新发现"实际上都是导航/评析空壳，不是真题，已全部剔除。</p>
+<h3 id="r6-2026-07-15-2026">R6 (2026-07-15) — 微信公众号图片版 2026 真题抓取</h3>
+<ul>
+<li><strong>来源</strong>：Sogou 微信搜索 <code>weixin.sogou.com/weixin?type=2&amp;query=...</code></li>
+<li><strong>技术要点</strong>：</li>
+<li><code>/link?url=...</code> 是一次性签名 URL，必须搜索后<strong>立即</strong>跟随（同一 cookie 会话）</li>
+<li>页面用 JS <code>url += 'https://mp.weixin...'</code> 拼接真实 URL，需正则提取拼接</li>
+<li>mmbiz.qpic.cn 图片有防盗链，需带 <code>Referer: https://mp.weixin.qq.com/</code> 头</li>
+<li><strong>抓取脚本</strong>：<code>/tmp/wx_batch.py</code>（按学科分批调用，规避 2 min bash 超时）</li>
+<li><strong>搜索关键词</strong>：<code>2026北京中考{学科}真题</code>、<code>2026北京中考{学科}试卷答案</code> 等</li>
+<li><strong>过滤规则</strong>：必须含 <code>2026</code>+<code>北京</code>+<code>中考</code>，剔除广东/广州/区名/一模/期末/暑假/模拟/听说考等</li>
+<li><strong>去重策略</strong>：跨学科命中的通用文（如"全科目答案速览"）统一移到 <code>overview/</code></li>
+<li><strong>精减策略</strong>：无试题图（&gt;50KB）的营销/评论文一律删除；数学冗余保留题量最丰富的 4 篇</li>
+<li><strong>最终产物</strong>：<code>papers/downloaded/2026/{学科}/*.html + *_imgs/*.png/jpg</code></li>
+<li>math 4 篇（每篇 12-17 张试题扫描图，含官方标答）</li>
+<li>overview 6 篇（含全科目答案速览）</li>
+<li>physics 2 篇（深度解析+试题图）</li>
+<li>chemistry/chinese/english/history/politics 各 1-2 篇（内容较少）</li>
+<li>biology / geography：0 篇（自媒体几乎不发这两科真题）</li>
+<li><strong>重要发现</strong>：<strong>bjeea.cn 官方 2026 真题至今未公布</strong>（历史规律：2024 年真题在考后 3 个月才发布，2025 年真题目前仍未发布）</li>
+<li><strong><code>zizzs.com</code> / <code>gaokzx.com</code>（2025 主源）现均 404</strong></li>
+<li><strong>总数变化</strong>：PDF 52 → 52，HTML 16 → 35（+19 2026），图片 0 → 203 张</li>
+<li><strong>前端更新</strong>：<code>build_downloads.py</code> 增加 <code>_imgs</code> 目录过滤 + 图片包附加信息展示</li>
+</ul>
 <div class="footer">北京中考数学 & 物理 · 核心考点与真题精析 ·
 <a href="https://github.com/lucienwyb/beijing-zhongkao">GitHub</a> ·
 <a href="https://gitee.com/lucienwyb/beijing-zhongkao">Gitee</a></div>

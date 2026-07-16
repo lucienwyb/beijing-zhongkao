@@ -185,8 +185,8 @@ window.MathJax = {
 </tr>
 <tr>
 <td>浮沉条件</td>
-<td>上浮：$F_浮&gt;G$；悬浮/漂浮：$F_浮=G$；下沉：$F_浮&lt;G$</td>
-<td></td>
+<td>上浮：$F_浮&gt;G$；悬浮：$F_浮=G$ 且 $V_排=V_物$；漂浮：$F_浮=G$ 且 $V_排&lt;V_物$；下沉：$F_浮&lt;G$</td>
+<td>区分悬浮/漂浮看排开体积</td>
 </tr>
 <tr>
 <td>功</td>
@@ -196,7 +196,7 @@ window.MathJax = {
 <tr>
 <td>功率</td>
 <td>$P=\frac{W}{t}=Fv$</td>
-<td>—</td>
+<td>$P=Fv$ 仅当 $F$ 与 $v$ 同向匀速时</td>
 </tr>
 <tr>
 <td>机械效率</td>
@@ -210,8 +210,8 @@ window.MathJax = {
 </tr>
 <tr>
 <td>滑轮组（绳子段数 $n$）</td>
-<td>$F=\frac{G}{n}\text{（不计摩擦）}$、$s=nh$</td>
-<td>$G$：物重（含动滑轮），$h$：物升高</td>
+<td>$F=\frac{G+G_动}{n}$、$s=nh$</td>
+<td>不计绳重摩擦；$G_动$：动滑轮重；若忽略 $G_动$ 则 $F=G/n$</td>
 </tr>
 <tr>
 <td>动能</td>
@@ -273,8 +273,8 @@ window.MathJax = {
 </tr>
 <tr>
 <td>电能表转数</td>
-<td>$n=N·W$</td>
-<td>$N$：imp/kWh，$n$：实际转数</td>
+<td>$W=\frac{n}{N}$（kWh）</td>
+<td>$N$：表盘常数 imp/kWh（或 r/kWh），$n$：实际转数/脉冲数；$W$ 为消耗电能</td>
 </tr>
 </tbody>
 </table>
@@ -305,8 +305,8 @@ window.MathJax = {
 </tr>
 <tr>
 <td>分压/分流</td>
-<td>$\frac{U_1}{U_2}=\frac{R_1}{R_2}$</td>
-<td>$\frac{I_1}{I_2}=\frac{R_2}{R_1}$</td>
+<td>$\frac{U_1}{U_2}=\frac{R_1}{R_2}$（串联正比分压）</td>
+<td>$\frac{I_1}{I_2}=\frac{R_2}{R_1}$（并联反比分流）</td>
 </tr>
 </tbody>
 </table>
@@ -353,7 +353,7 @@ window.MathJax = {
 </table>
 <h3 id="_7">常见比热容</h3>
 <ul>
-<li>水：$4.2×10^3$ J/(kg·°C) —— 比热容最大、最常用的计算对象</li>
+<li>水：$4.2×10^3$ J/(kg·°C) —— 常见物质中比热容较大、最常用的计算对象</li>
 <li>冰：$2.1×10^3$ J/(kg·°C)</li>
 <li>酒精：$2.4×10^3$ J/(kg·°C)</li>
 </ul>
@@ -396,9 +396,9 @@ window.MathJax = {
 </tr>
 <tr>
 <td>$u&lt;f$</td>
-<td>$</td>
-<td>v</td>
-<td>&gt;u$</td>
+<td>像距大于物距（不要求计算）</td>
+<td>正立放大虚像</td>
+<td>放大镜</td>
 </tr>
 </tbody>
 </table>
