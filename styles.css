@@ -1,6 +1,6 @@
 :root{
   --ink:#14201d; --muted:#61706b; --paper:#f4f2eb; --white:#fff;
-  --green:#176b4d; --green-soft:#dcebe2; --red:#d4523f; --yellow:#f1b84b;
+  --green:#176b4d; --green-soft:#dcebe2; --red:#c6412f; --yellow:#f1b84b;
   --line:#d8ddd8; --blue:#39759b; --radius:6px;
   --shadow:0 14px 35px rgba(20,32,29,.08);
 }
@@ -50,7 +50,7 @@ main{overflow:hidden}
   color:var(--ink);line-height:1;margin:8px 0 4px}
 .stat small{display:block;font-size:11.5px;color:var(--muted)}
 .stat-math{border-top-color:var(--yellow)}
-.stat-math strong{color:#a06e08}
+.stat-math strong{color:#8a5e08}
 .stat-physics{border-top-color:var(--blue)}
 .stat-physics strong{color:var(--blue)}
 .stat-progress{border-top-color:var(--green);background:linear-gradient(180deg,#fff 0,#f6faf7 100%)}
@@ -156,7 +156,7 @@ main{overflow:hidden}
 .res-physics{border-top-color:var(--blue)}
 .res-download{border-top-color:var(--green);background:linear-gradient(180deg,#fff 0,#f6faf7 100%)}
 .res-card .eyebrow{margin:0 0 6px;color:var(--muted)}
-.res-math .eyebrow{color:#a06e08}
+.res-math .eyebrow{color:#8a5e08}
 .res-physics .eyebrow{color:var(--blue)}
 .res-download .eyebrow{color:var(--green)}
 .res-card h3{margin:0 0 16px;font-size:18px}

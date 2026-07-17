@@ -19,7 +19,7 @@ SUBJ_ORDER = ['math', 'physics', 'chemistry', 'biology', 'chinese',
               'english', 'history', 'geography', 'politics', 'overview']
 
 EXT_META = {
-    'pdf':  ('PDF',   '#d4523f', '原版试卷'),
+    'pdf':  ('PDF',   '#c6412f', '原版试卷'),
     'html': ('HTML',  '#39759b', '网页快照'),
     'md':   ('MD',    '#176b4d', 'Markdown 题面'),
     'txt':  ('TXT',   '#61706b', '评析文本'),
