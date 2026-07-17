@@ -38,6 +38,8 @@
     overflow:hidden;display:flex;flex-direction:column}
   .pg img{width:100%;height:auto;display:block;background:#f7f5ee;cursor:zoom-in}
   .pg img:hover{opacity:.92}
+  .pg img.img-failed{min-height:100px;padding:30px 20px;font-size:13px;color:#61706b;text-align:center;cursor:default}
+  .pg img.img-failed:hover{opacity:1}
   .pg figcaption{padding:8px 10px;font-size:11px;color:var(--muted);
     display:flex;justify-content:space-between;align-items:center;gap:8px;
     border-top:1px solid var(--line);background:#fafaf7}
@@ -142,7 +144,7 @@
 
 <footer><span>京考进阶 · 4 份来源共 80 张图 · 数据仅本地保存</span><a href="../../downloads.html#y2026">下载原始文件 ↗</a></footer>
 
-<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="图片放大预览"><button class="close" type="button" aria-label="关闭">×</button><button class="nav-btn prev" type="button" aria-label="上一张">‹</button><img alt="放大预览"><button class="nav-btn next" type="button" aria-label="下一张">›</button><span class="lb-counter" id="lbCounter"></span></div>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="图片放大预览"><button class="close" type="button" aria-label="关闭">×</button><button class="nav-btn prev" type="button" aria-label="上一张">‹</button><img alt="放大预览"><button class="nav-btn next" type="button" aria-label="下一张">›</button><span class="lb-counter" id="lbCounter" aria-live="polite"></span></div>
 <script>
 const lb = document.getElementById('lb'), lbImg = lb.querySelector('img'), lbCounter = document.getElementById('lbCounter');
 const lbClose = lb.querySelector('.close');
@@ -158,6 +160,10 @@ function show(i){
 }
 function closeLb(){ lb.classList.remove('open'); if (lastFocused) lastFocused.focus(); }
 document.querySelectorAll('.pg img').forEach(im => {
+  // Image error fallback: if lazy-loaded image fails (network/CDN/corruption),
+  // show alt text as placeholder instead of a bare broken-image icon.
+  if (im.complete && im.naturalWidth === 0) { im.alt = '图片加载失败'; im.classList.add('img-failed'); }
+  im.addEventListener('error', () => { im.alt = '图片加载失败'; im.classList.add('img-failed'); });
   const open = () => {
     lastFocused = im;
     const sec = im.closest('.src');
@@ -169,6 +175,8 @@ document.querySelectorAll('.pg img').forEach(im => {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
   });
 });
+// Lightbox image error: show message in counter instead of blank
+lbImg.addEventListener('error', () => { lbCounter.textContent = '图片加载失败'; });
 lbClose.onclick = (e) => { e.stopPropagation(); closeLb(); };
 lb.querySelector('.prev').onclick = (e) => { e.stopPropagation(); show(cur - 1); };
 lb.querySelector('.next').onclick = (e) => { e.stopPropagation(); show(cur + 1); };
