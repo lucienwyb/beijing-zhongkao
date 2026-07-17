@@ -229,6 +229,7 @@ def main():
 <footer><span>京考进阶 · 4 份来源共 {total_imgs} 张图 · 数据仅本地保存</span><a href="../../downloads.html#y2026">下载原始文件 ↗</a></footer>
 
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="图片放大预览"><button class="close" type="button" aria-label="关闭">×</button><button class="nav-btn prev" type="button" aria-label="上一张">‹</button><img alt="放大预览"><button class="nav-btn next" type="button" aria-label="下一张">›</button><span class="lb-counter" id="lbCounter" aria-live="polite"></span></div>
+<noscript><p style="padding:18px 24px;background:#fff9e8;border:1px solid #dfc16d;border-left:4px solid #f1b84b;margin:0;font-size:14px;line-height:1.7">图片版查看器依赖 JavaScript 实现放大浏览与来源切换。未启用 JavaScript 时，下方试题图片仍可逐张查看，但无法点击放大。</p></noscript>
 <script>
 const lb = document.getElementById('lb'), lbImg = lb.querySelector('img'), lbCounter = document.getElementById('lbCounter');
 const lbClose = lb.querySelector('.close');
