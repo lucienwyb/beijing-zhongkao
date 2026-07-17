@@ -233,14 +233,16 @@ def convert_file(md_path: Path, out_path: Path):
     # inside blockquotes (lines like "> - foo" or "> 1. foo"). Without this,
     # ordered lists glued to a paragraph render as plain text, and bullets
     # inside a blockquote leak their "- " markers into the prose.
-    _list_re = re.compile(r'^(>\s*)*\s*(?:[-+*]|\d+\.)\s+')
+    _list_re = re.compile(r'^\s*(>\s*)*\s*(?:[-+*]|\d+\.)\s+')
     # Inline answer keys like "1. C　2. B　3. B　4. A　5. B　6. C　7. D　8. C"
     # pack multiple numbered markers onto one line (separated by full-width
     # spaces). These are shorthand answer text, not real list items — if the
     # list regex matched them, Python-Markdown would parse only the leading
     # "1." as a marker and jam every other answer into a single <li>, producing
     # a broken one-item <ol>. Exclude such lines so they render as a <p>.
-    _inline_key_re = re.compile(r'^\s*\d+\.\s+\S.*\d+\.\s+\S')
+    # The leading \s*(>\s*)* mirrors _list_re so blockquote-prefixed answer
+    # keys (e.g. "  > 1. C　2. B") are still excluded, not parsed as lists.
+    _inline_key_re = re.compile(r'^\s*(>\s*)*\s*\d+\.\s+\S.*\d+\.\s+\S')
 
     def _is_list(line):
         return bool(_list_re.match(line)) and not _inline_key_re.match(line)
