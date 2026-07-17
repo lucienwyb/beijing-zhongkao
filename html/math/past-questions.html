@@ -68,7 +68,6 @@ tr:nth-child(even) td { background: #fafbfc; }
 a { color: #0969da; text-decoration: none; }
 a:hover { text-decoration: underline; }
 hr { border: none; border-top: 1px solid #d0d7de; margin: 2em 0; }
-.emoji { font-size: 1.2em; }
 .nav {
   background: #f6f8fa;
   border: 1px solid #d0d7de;
@@ -102,6 +101,11 @@ mjx-container { font-size: 1.05em; }
   a { color: inherit !important }
   /* 避免题块跨页断开 */
   blockquote, table, pre, figure { break-inside: avoid; page-break-inside: avoid }
+  /* 暗色模式下打印：重置代码块/引用/表头深色背景为白底，避免深色色块浪费墨水 */
+  blockquote, code, pre, th, tr:nth-child(even) td { background: #fff !important }
+  blockquote { color: #57606a !important; border-left-color: #999 !important }
+  code { color: #d73a49 !important }
+  pre code { color: #000 !important }
   /* MathJax 公式按原样打印，不做反色 */
   mjx-container { color: #000 !important }
   mjx-container[jax="CHTML"] { color: #000 !important }
@@ -191,11 +195,15 @@ window.MathJax = {
 <li><strong>2022 第 5 题</strong>：摸球概率（放回，两次摸球）</li>
 <li><strong>2022 第 6 题</strong>：一元二次方程 $x^2+x+m=0$ 有两个相等实数根，求 $m$<blockquote>
 <p>判别式 $\Delta=1-4m=0$ → $m=\frac14$，答案 C。
+干扰项分析：A（$-4$）和 B（$-\frac14$）为负值干扰——学生若误用 $\Delta=b^2-4ac$ 代入时符号搞反（如写成 $1+4m=0$）会得 $m=-\frac14$（B）；D（$4$）为代入 $\Delta=0$ 时方程列错（如 $1-4m=0$ 误算为 $m=4$）。C 为唯一正确值。
 </p>
 </blockquote>
 </li>
 <li><strong>2022 第 7 题</strong>：轴对称图形对称轴条数</li>
-<li><strong>2022 第 8 题</strong>：函数图像分析（两个变量关系的判断）</li>
+<li><strong>2022 第 8 题</strong>：函数图像分析（两个变量关系的判断）<blockquote>
+<p>命题分析：①汽车剩余路程 $y$ 随时间 $x$ 线性递减（一次函数）；②水箱放水剩余水量线性递减（一次函数）；③矩形面积 $y=x(\frac{L}{2}-x)$ 是二次函数（先增后减）。题目给出的图象为"递减"图象，故仅 ①② 符合，答案 A。干扰项 D（①②③）考查学生能否区分"递减函数"与"非单调函数"，③为抛物线开口向下（非全程递减），是最强干扰项。</p>
+</blockquote>
+</li>
 </ul>
 <h3 id="2023">真实考法（基于 2023 原卷）</h3>
 <ul>
@@ -203,10 +211,25 @@ window.MathJax = {
 <li><strong>2023 第 2 题</strong>：既轴对称又中心对称图形识别</li>
 <li><strong>2023 第 3 题</strong>：角的计算（$\angle AOC=\angle BOD=90^\circ$，求 $\angle BOC$）</li>
 <li><strong>2023 第 4 题</strong>：由 $a-1>0$ 判断实数大小关系</li>
-<li><strong>2023 第 5 题</strong>：一元二次方程 $x^2-3x+m=0$ 有等根，求 $m$（$\Delta=9-4m=0\to m=\frac94$，答案 C）</li>
-<li><strong>2023 第 6 题</strong>：十二边形外角和（$360^\circ$，答案 C）</li>
-<li><strong>2023 第 7 题</strong>：两次抛硬币概率（$\frac14$，答案 A）</li>
-<li><strong>2023 第 8 题</strong>：直角三角形拼接，判断 $a+b$ 与 $c$ 等结论（答案 D）</li>
+<li><strong>2023 第 5 题</strong>：一元二次方程 $x^2-3x+m=0$ 有等根，求 $m$（$\Delta=9-4m=0\to m=\frac94$，答案 C）<blockquote>
+<p>干扰项分析：A（$-9$）为 $\Delta=9-4m$ 误算 $m=-9$；B（$-\frac94$）为符号搞反；D（$9$）为 $\Delta=0$ 解方程出错。考查 $\Delta=b^2-4ac$ 的准确代入与求解。
+</p>
+</blockquote>
+</li>
+<li><strong>2023 第 6 题</strong>：十二边形外角和（$360^\circ$，答案 C）<blockquote>
+<p>干扰项分析：A（$30^\circ$）=外角和÷边数（混淆"外角和"与"每个外角"）；B（$150^\circ$）=内角（混淆内角与外角和）；D（$1800^\circ$）=内角和 $(12-2)\times180^\circ$（混淆内角和与外角和）。三个干扰项分别对应三种常见概念混淆，命题设计精准。核心知识点：任意多边形外角和恒为 $360^\circ$，与边数无关。
+</p>
+</blockquote>
+</li>
+<li><strong>2023 第 7 题</strong>：两次抛硬币概率（$\frac14$，答案 A）<blockquote>
+<p>干扰项分析：B（$\frac13$）为遗漏一种情况（误认为只有"正反、反正、正正"三种等可能）；C（$\frac12$）为只考虑一次的概率；D（$\frac34$）为"不是两次都正面"的补集概率。考查列举法求两次独立事件概率，需列出全部 4 种等可能结果。
+</p>
+</blockquote>
+</li>
+<li><strong>2023 第 8 题</strong>：直角三角形拼接，判断 $a+b$ 与 $c$ 等结论（答案 D）<blockquote>
+<p>命题分析：本题考查三角形三边关系与不等式放缩。① $a+b<c$ 错（三角形两边之和大于第三边，$a+b>c$ 恒成立）；② $a+b>\sqrt{a^2+b^2}$ 对（$(a+b)^2=a^2+b^2+2ab>a^2+b^2$，因 $a,b>0$）；③ $\sqrt2(a+b)>c$ 对（由 $c=\sqrt{(a+b)^2+(b-a)^2}\le\sqrt2(a+b)$，即勾股定理放缩）。答案 D（②③）。考查学生综合运用三角形不等式、勾股定理、基本不等式放缩进行判断的能力。</p>
+</blockquote>
+</li>
 </ul>
 <h3 id="2024">真实考法（基于 2024 原卷，早期整理版）</h3>
 <ul>
@@ -214,10 +237,25 @@ window.MathJax = {
 <li><strong>2024 第 2 题</strong>：科学记数法（$34.5$ 亿 $\to3.45\times10^9$，答案 B）</li>
 <li><strong>2024 第 3 题</strong>：相交线求角度（$OE\perp AB$，$\angle 1=50^\circ$，答案 B）</li>
 <li><strong>2024 第 4 题</strong>：数轴上 $a,b$ 判断结论</li>
-<li><strong>2024 第 5 题</strong>：多边形内角和 $540^\circ$ 求边数（$n=5$，答案 B）</li>
-<li><strong>2024 第 6 题</strong>：摸球概率（绿球 $\frac16$，答案 C）</li>
-<li><strong>2024 第 7 题</strong>：$x^2-2x+m=0$ 有等根，求 $m$（$\Delta=4-4m=0\to m=1$，答案 D）</li>
-<li><strong>2024 第 8 题</strong>：抽样调查合理性判断（答案 C）</li>
+<li><strong>2024 第 5 题</strong>：多边形内角和 $540^\circ$ 求边数（$n=5$，答案 B）<blockquote>
+<p>干扰项分析：$(n-2)\times180=540$ → $n=5$。A（4）代入得 $360^\circ\ne540^\circ$；C（6）代入得 $720^\circ$；D（7）代入得 $900^\circ$。考查多边形内角和公式 $(n-2)\times180^\circ$ 的逆向运用。
+</p>
+</blockquote>
+</li>
+<li><strong>2024 第 6 题</strong>：摸球概率（绿球 $\frac16$，答案 C）<blockquote>
+<p>干扰项分析：6 个球中绿球 1 个，概率 $\frac{1}{6}$。A（$\frac12$）=红球概率（3/6，混淆不同颜色）；B（$\frac13$）=黄球概率（2/6=1/3，取错目标事件）；D（$\frac23$）=非红球概率（4/6，取了补集）。三个干扰项分别对应取错目标事件，命题设计精准考查"目标事件"的准确识别。
+</p>
+</blockquote>
+</li>
+<li><strong>2024 第 7 题</strong>：$x^2-2x+m=0$ 有等根，求 $m$（$\Delta=4-4m=0\to m=1$，答案 D）<blockquote>
+<p>干扰项分析：A（$-1$）、B（$-\frac12$）为符号错误；C（$\frac12$）为 $\Delta=b^2-4ac=4-4m=0$ 中误将 $a$ 代入 $\frac12$。与 2022/2023 同型题考查点一致：$\Delta=0$ 对应等根。
+</p>
+</blockquote>
+</li>
+<li><strong>2024 第 8 题</strong>：抽样调查合理性判断（答案 C）<blockquote>
+<p>命题分析：本题考查统计抽样方法的合理性判断，是近年新增题型。A 干扰项"样本容量小一定不准"——绝对化表述（"一定"），小样本不一定不准，关键是抽样方法是否合理；B 干扰项"样本容量大一定准确"——同样绝对化，大样本不代表结论一定准确；D 干扰项"人流密集处更接近实际"——乙的抽样地点（地铁站口）不代表整体用户分布，结论不一定更接近实际。正确项 C 指出"抽样时间和地点不同导致差异"，考查学生对抽样代表性（时间、地点、人群覆盖）的综合判断。两个"一定"的绝对化干扰项是本题最大陷阱。</p>
+</blockquote>
+</li>
 </ul>
 <h3 id="_2">易错</h3>
 <ul>
@@ -290,10 +328,28 @@ window.MathJax = {
 <blockquote>
 <p>模型与口诀（手拉手/半角/倍长中线/截长补短/最值转化）见 <a href="exam-points.html"><code>exam-points.md</code></a> 第五节"第 27 题"。</p>
 </blockquote>
+<p><strong>命题意图分析</strong>：第 27 题的命题核心是<strong>几何变换与推理能力</strong>，考查学生在非标准图形中发现并构造全等/相似的迁移能力。</p>
+<ul>
+<li><strong>2022 第 27 题</strong>：核心变换为"倍长中线"（$CE=DC$ 即构造 $E$ 为 $D$ 关于 $C$ 的对称点），第(1)问通过 $AF\perp EF$ 的条件引导学生发现旋转变换（$\triangle BCD$ 绕 $C$ 旋转 $180^\circ$），第(2)问 $AB^2=AE^2+BD^2$ 考查勾股定理与线段关系的综合推理。考查能力：<strong>几何变换意识 + 线段关系的代数化表达</strong>。</li>
+<li><strong>2023 第 27 题</strong>：核心变换为"旋转"（$DM$ 绕 $D$ 旋转 $2\alpha$ 得 $DE$），第(1)问证 $D$ 为 $MC$ 中点考查旋转性质 + 等腰三角形判定，第(2)问 $DF=DC$ 结合 $\angle B=\angle C=\alpha$ 考查<strong>分类讨论与角度计算</strong>（$\angle AEF=90^\circ$）。考查能力：<strong>旋转变换理解 + 角度关系的多步推理</strong>。</li>
+<li><strong>2024 第 27 题</strong>：核心变换为"中点 + 等距"（$D$ 为 $AC$ 中点，$EA=EB$），第(1)问 $\angle BAC=45^\circ$ 时补全图形并求 $DE$ 与 $BC$ 关系，第(2)问 $\angle AEB=2\angle ACD$ 时求 $DE$、$AC$、$BC$ 的数量关系。考查能力：<strong>中位线/斜边中线定理的灵活运用 + 多条件下的几何推理</strong>。</li>
+</ul>
+<blockquote>
+<p>三年命题趋势：均以"几何变换（旋转/对称/中点构造）"为载体，第(1)问设特殊条件（角度/位置）降低难度，第(2)问推向一般情形考查分类讨论与综合推理。能力层级从"识别变换"逐步上升到"构造变换并建立代数关系"。</p>
+</blockquote>
 <h3 id="28-7">第 28 题：新定义题（7 分）——北京卷最高区分度</h3>
 <p><strong>2022 第 28 题</strong>：给出"对应点"定义——点 $P$ 平移得到 $P'$，$P'$ 关于点 $N$ 的对称点为 $Q$，称 $Q$ 为 $P$ 的"对应点"。第（2）问 $PQ$ 长的最大值与最小值之差为 $4t-2$。</p>
 <blockquote>
 <p>解题三步法与近年主题见 <a href="exam-points.html"><code>exam-points.md</code></a> 第六节。</p>
+</blockquote>
+<p><strong>命题意图分析</strong>：第 28 题的命题核心是<strong>新定义理解与代数几何综合</strong>，考查学生"阅读定义→翻译为符号语言→几何建模→求最值"的完整思维链。</p>
+<ul>
+<li><strong>2022 第 28 题</strong>（对应点）：定义涉及"平移 + 中心对称"两步复合变换。第(1)问画图 + 证明 $NT=\frac12 OM$（考查定义的几何本质——$N$ 是 $PP'$ 中点）；第(2)问 $M$ 在 $\bigodot O$ 上运动时求 $PQ$ 最值之差，考查<strong>动点轨迹分析 + 最值建模</strong>（$PQ=2PN=2|ON-OM|=2|t-1|=2(1-t)$，最大 $2(1-t)$、最小 $2(t-1)$，差 $4t-2$）。考查能力：<strong>新定义的几何本质提炼 + 动点最值</strong>。</li>
+<li><strong>2023 第 28 题</strong>（关联点）：定义涉及"过圆心的直线 + 切线"两条件。第(1)问判断哪些点是"关联点"并求 $OC$ 长（考查切线性质 + 勾股定理）；第(2)问 $S$ 在线段 $MN$ 上运动时求弦长 $t$ 的范围，考查<strong>分类讨论（切线在哪一侧）+ 弦长公式 $t=2\sqrt{1-d^2}$ 的范围分析</strong>。考查能力：<strong>定义的多情况分类 + 弦长与距离的转化</strong>。</li>
+<li><strong>2024 第 28 题</strong>（中心对称点）：定义"点 $P$ 关于图形 $W$ 上任一点的对称点都在 $W$ 内"。第(1)问判断哪些点是线段 $AB$ 的中心对称点（考查定义的直接代入与边界判断）；第(2)问线段 $CD$ 上存在满足条件的点 $P$（考查<strong>存在性问题 + 边界值求解</strong>）；第(3)问线段 $AB$ 上任一点都是 $\bigodot O$ 的中心对称点，求 $r$ 范围（考查<strong>最值转化——$r$ 须覆盖所有对称点</strong>）。考查能力：<strong>定义的集合语言理解 + 存在性与恒成立问题的转化</strong>。</li>
+</ul>
+<blockquote>
+<p>三年命题趋势：定义各不同（平移+对称/切线+圆心/对称点集合），但解题方法高度一致——"翻译定义→确定几何模型→分类讨论→求最值/范围"。区分度极高：第(1)问可得 2–3 分（定义直接代入），第(2)(3)问需较强的几何建模与代数转化能力。备考核心是训练"翻译定义"这一步的准确性和速度。</p>
 </blockquote>
 <hr />
 <h2 id="_7">📌 备考建议</h2>

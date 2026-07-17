@@ -124,7 +124,6 @@ def main():
 <title>2026 北京中考数学 · 整卷图片版 · 京考进阶</title>
 <link rel="stylesheet" href="../../styles.css">
 <style>
-  body{{background:var(--paper);color:var(--ink)}}
   .viewer-hero{{padding:52px clamp(20px,6vw,80px) 24px;background:var(--paper)}}
   .viewer-hero h1{{font-family:"Noto Serif SC","Songti SC",serif;font-size:clamp(28px,3.6vw,44px);margin:0 0 12px;font-weight:800}}
   .viewer-hero p{{color:var(--muted);line-height:1.75;margin:0 0 8px;max-width:760px}}
@@ -178,11 +177,11 @@ def main():
     .src{{padding:28px 16px}}
     .grid{{grid-template-columns:1fr;gap:10px}}
   }}
-  /* 打印真题图片版：隐藏灯箱/标签栏/交互，展开对照版本，逐张图片打印 */
+  /* 打印真题图片版：隐藏灯箱/标签栏/交互，展开对照版本，逐张图片打印。
+     styles.css 的 @media print 已处理 print-color-adjust、body 白底黑字、
+     隐藏 .topbar/.tabs/.lb，这里只补 viewer 专属规则。 */
   @media print{{
-    *{{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}}
-    body{{background:#fff !important;color:#000}}
-    .topbar,.tabs,.lb,.viewer-hero .warn,.badge-hint{{display:none !important}}
+    .viewer-hero .warn,.badge-hint{{display:none !important}}
     .viewer-hero,.src{{padding:0 0 8pt}}
     .src-alt{{border:0;margin:0}}
     .src-alt details>summary{{display:none}}

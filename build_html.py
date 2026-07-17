@@ -67,7 +67,6 @@ tr:nth-child(even) td { background: #fafbfc; }
 a { color: #0969da; text-decoration: none; }
 a:hover { text-decoration: underline; }
 hr { border: none; border-top: 1px solid #d0d7de; margin: 2em 0; }
-.emoji { font-size: 1.2em; }
 .nav {
   background: #f6f8fa;
   border: 1px solid #d0d7de;
@@ -101,6 +100,11 @@ mjx-container { font-size: 1.05em; }
   a { color: inherit !important }
   /* 避免题块跨页断开 */
   blockquote, table, pre, figure { break-inside: avoid; page-break-inside: avoid }
+  /* 暗色模式下打印：重置代码块/引用/表头深色背景为白底，避免深色色块浪费墨水 */
+  blockquote, code, pre, th, tr:nth-child(even) td { background: #fff !important }
+  blockquote { color: #57606a !important; border-left-color: #999 !important }
+  code { color: #d73a49 !important }
+  pre code { color: #000 !important }
   /* MathJax 公式按原样打印，不做反色 */
   mjx-container { color: #000 !important }
   mjx-container[jax="CHTML"] { color: #000 !important }
