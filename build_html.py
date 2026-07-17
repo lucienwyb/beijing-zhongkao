@@ -115,8 +115,9 @@ mjx-container { font-size: 1.05em; }
 @media print {
   * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important }
   body { background: #fff !important; color: #000 !important; font-size: 11pt; max-width: 100%; padding: 0 0 8pt; }
-  /* 隐藏站点导航、页脚、MathJax 离线提示等非题面元素 */
-  .nav, .footer, .mathjax-offline-note { display: none !important }
+  /* 隐藏站点导航、本页目录、页脚、MathJax 离线提示等非题面元素：
+     .toc 是页内锚点跳转清单，纸面无法点击，与 .nav 一并隐藏 */
+  .nav, .toc, .footer, .mathjax-offline-note { display: none !important }
   h1, h2 { border-bottom-color: #999 !important }
   /* 暗色模式下打印：强制标题/正文为黑色，避免深色主题覆盖导致白底浅字不可见 */
   h1, h2, h3, h4 { color: #000 !important }
