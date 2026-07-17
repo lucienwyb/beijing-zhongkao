@@ -172,15 +172,53 @@ window.MathJax = {
 </script>
 """
 
-def rewrite_md_links(html: str, rel_depth: int) -> str:
-    """Rewrite .md links to .html so navigation between pages works."""
+def rewrite_md_links(html: str, md_rel: Path) -> str:
+    """Rewrite in-body links so they resolve from the HTML output location.
+
+    The markdown source lives at <md_rel> under the repo root, but the
+    generated HTML lives at html/<md_rel with .html>. Two link kinds need
+    different handling:
+
+    - .md links: the target md is ALSO converted, so its HTML lives at
+      html/<target.html>. Both source and target are mirrored under html/,
+      so the original relative path is depth-correct as-is — only the
+      suffix (.md→.html) and the root README.md→index.html rename need
+      fixing. (We still recompute via relpath against html/<md_dir> so the
+      root-README special case and any cross-tree .md link resolve
+      correctly.)
+    - non-.md links (e.g. downloads.html at the repo root, or the 2026
+      viewer already inside html/): these point at real repo-relative
+      files, NOT mirrored md. The md author wrote them for the md's own
+      directory, but the HTML is one level deeper (under html/), so the
+      depth is off — recompute via relpath from html/<md_dir>.
+
+    Both cases reduce to: resolve the href to a repo-relative target,
+    map it to its actual on-disk file path, then relpath from the HTML
+    output directory html/<md_dir>.
+    """
+    md_dir = md_rel.parent                       # repo-relative, e.g. "math" or "."
+    html_src_dir = Path("html") / md_dir         # repo-relative dir of output html
+
     def repl(m):
         href = m.group(1)
         if href.startswith(('http://', 'https://', '#', 'mailto:')):
             return m.group(0)
-        if href.endswith('.md'):
-            href = href[:-3] + '.html'
-        return f'href="{href}"'
+        # Split off the fragment (and any query) — only the path is rewritten.
+        path_part, sep, frag = href.partition('#')
+        frag = sep + frag if sep else ''
+        if not path_part:
+            return m.group(0)                     # pure in-page anchor
+        # Resolve the link's target relative to the md's directory.
+        target = os.path.normpath(os.path.join(str(md_dir), path_part))
+        # Determine the actual on-disk target file:
+        if target == 'README.md':
+            file_target = Path('html') / 'index.html'      # root README → index.html
+        elif target.endswith('.md'):
+            file_target = Path('html') / (target[:-3] + '.html')  # mirrored under html/
+        else:
+            file_target = Path(target)             # real repo-relative file (downloads.html, viewer, …)
+        new_path = os.path.relpath(str(file_target), str(html_src_dir))
+        return f'href="{new_path}{frag}"'
     return re.sub(r'href="([^"]+)"', repl, html)
 
 def convert_file(md_path: Path, out_path: Path):
@@ -261,8 +299,8 @@ def convert_file(md_path: Path, out_path: Path):
         return math_stash[idx]
     body = re.sub(r'\x00MATH(\d+)\x00', _restore, body)
 
-    # Rewrite .md -> .html
-    body = rewrite_md_links(body, 0)
+    # Rewrite .md -> .html and fix link depth for the html/ output location
+    body = rewrite_md_links(body, md_path.relative_to(REPO_ROOT))
 
     # Relative path back to root for nav
     depth = len(md_path.relative_to(REPO_ROOT).parts) - 1
