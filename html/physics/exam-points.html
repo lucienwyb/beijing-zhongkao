@@ -77,6 +77,29 @@ hr { border: none; border-top: 1px solid #d0d7de; margin: 2em 0; }
   font-size: 0.95em;
 }
 .nav a { margin-right: 16px; }
+/* 本页目录：长内容页顶部 [TOC] 渲染出的跳转清单 */
+.toc {
+  background: #f6f8fa;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  padding: 14px 20px 14px 36px;
+  margin: 0 0 28px;
+  font-size: 0.92em;
+  line-height: 1.9;
+}
+.toc::before {
+  content: "本页导航";
+  display: block;
+  font-size: 0.78em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #57606a;
+  margin: 0 0 6px -16px;
+}
+.toc ul { margin: 0; padding-left: 18px; }
+.toc > ul { padding-left: 0; }
+.toc li { margin: 0; }
+.toc a { color: #0969da; }
 .footer {
   margin-top: 60px;
   padding-top: 20px;
@@ -128,6 +151,8 @@ mjx-container { font-size: 1.05em; }
   a { color: #58a6ff; }
   hr { border-top-color: #30363d; }
   .nav { background: #161b22; border-color: #30363d; }
+  .toc { background: #161b22; border-color: #30363d; }
+  .toc::before { color: #8b949e; }
   .footer { border-top-color: #30363d; color: #8b949e; }
 }
 @media (max-width: 600px) {
@@ -180,8 +205,55 @@ window.MathJax = {
 <div class="nav">📚 <a href="../../index.html">学习计划</a> · <a href="../math/exam-points.html">数学考点</a> · <a href="../physics/exam-points.html">物理考点</a> · <a href="../../index.html#mistakes">错题</a> · <a href="../../downloads.html">真题下载</a></div>
 <h1 id="_1">北京中考物理 · 核心考点</h1>
 <blockquote>
-<p>按北京中考考纲要求，物理卷覆盖 <strong>力学</strong>、<strong>电学</strong>、<strong>热学</strong>、<strong>光学</strong>、<strong>声学</strong> 五大板块。其中力学和电学占比最大（约 70%）。</p>
+<p>按北京中考考纲要求，物理卷覆盖 <strong>力学</strong>、<strong>电学</strong>、<strong>热学</strong>、<strong>光学</strong>、<strong>声学</strong> 五大板块。其中力学和电学占比最大（约 70%）。
+想看真题怎么考？对应题型与解析见<a href="past-questions.html">常见考题与真题分析</a>。</p>
 </blockquote>
+<div class="toc">
+<ul>
+<li><a href="#_2">一、力学（高频重点）</a><ul>
+<li><a href="#1">1. 测量与机械运动</a></li>
+<li><a href="#2">2. 质量与密度</a></li>
+<li><a href="#3">3. 力与运动</a></li>
+<li><a href="#4">4. 压强</a></li>
+<li><a href="#5">5. 浮力</a></li>
+<li><a href="#6">6. 简单机械</a></li>
+<li><a href="#7">7. 功与机械能</a></li>
+</ul>
+</li>
+<li><a href="#_3">二、电学（高频重点）</a><ul>
+<li><a href="#1_1">1. 电路基础</a></li>
+<li><a href="#2_1">2. 欧姆定律</a></li>
+<li><a href="#3_1">3. 电功率</a></li>
+<li><a href="#4_1">4. 电磁学基础</a></li>
+</ul>
+</li>
+<li><a href="#_4">三、热学</a><ul>
+<li><a href="#1_2">1. 物态变化</a></li>
+<li><a href="#2_2">2. 热量与比热容</a></li>
+<li><a href="#3_2">3. 热机</a></li>
+</ul>
+</li>
+<li><a href="#_5">四、光学</a><ul>
+<li><a href="#1_3">1. 光的直线传播</a></li>
+<li><a href="#2_3">2. 光的反射</a></li>
+<li><a href="#3_3">3. 光的折射</a></li>
+<li><a href="#4_2">4. 凸透镜成像</a></li>
+</ul>
+</li>
+<li><a href="#_6">五、声学</a><ul>
+<li><a href="#1_4">1. 声音的产生与传播</a></li>
+<li><a href="#2_4">2. 声音的特性</a></li>
+<li><a href="#3_4">3. 噪声</a></li>
+</ul>
+</li>
+<li><a href="#_7">六、能量与能源</a></li>
+<li><a href="#_8">📊 计分结构与笔试题型分布</a><ul>
+<li><a href="#4_3">北京卷特色题型：科普阅读题（4 分）</a></li>
+<li><a href="#10">实验操作考试（10 分）</a></li>
+</ul>
+</li>
+</ul>
+</div>
 <hr />
 <h2 id="_2">一、力学（高频重点）</h2>
 <h3 id="1">1. 测量与机械运动</h3>

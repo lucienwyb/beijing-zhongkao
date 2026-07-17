@@ -77,6 +77,29 @@ hr { border: none; border-top: 1px solid #d0d7de; margin: 2em 0; }
   font-size: 0.95em;
 }
 .nav a { margin-right: 16px; }
+/* 本页目录：长内容页顶部 [TOC] 渲染出的跳转清单 */
+.toc {
+  background: #f6f8fa;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  padding: 14px 20px 14px 36px;
+  margin: 0 0 28px;
+  font-size: 0.92em;
+  line-height: 1.9;
+}
+.toc::before {
+  content: "本页导航";
+  display: block;
+  font-size: 0.78em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #57606a;
+  margin: 0 0 6px -16px;
+}
+.toc ul { margin: 0; padding-left: 18px; }
+.toc > ul { padding-left: 0; }
+.toc li { margin: 0; }
+.toc a { color: #0969da; }
 .footer {
   margin-top: 60px;
   padding-top: 20px;
@@ -128,6 +151,8 @@ mjx-container { font-size: 1.05em; }
   a { color: #58a6ff; }
   hr { border-top-color: #30363d; }
   .nav { background: #161b22; border-color: #30363d; }
+  .toc { background: #161b22; border-color: #30363d; }
+  .toc::before { color: #8b949e; }
   .footer { border-top-color: #30363d; color: #8b949e; }
 }
 @media (max-width: 600px) {
@@ -183,6 +208,47 @@ window.MathJax = {
 <p>基于 2022–2024 官方原卷按题型归纳，均据官方 PDF 校对。所有题目均可对应到真实原卷题号，不是模拟题。完整真题见<a href="../../downloads.html">真题下载页</a>。
 笔试满分 70 分：单选 24 + 多选 6 + 实验探究 28 + 科普阅读 4 + 计算 8。</p>
 </blockquote>
+<div class="toc">
+<ul>
+<li><a href="#112-2-24">一、单项选择题（第 1–12 题，每题 2 分，共 24 分）</a><ul>
+<li><a href="#1-1">第 1 类：导体/绝缘体判断（几乎每年第 1 题）</a></li>
+<li><a href="#2">第 2 类：摩擦力方向（增大/减小）</a></li>
+<li><a href="#3">第 3 类：光现象判断（反射/折射/直线传播）</a></li>
+<li><a href="#4">第 4 类：物态变化</a></li>
+<li><a href="#5">第 5 类：运动与参照物</a></li>
+<li><a href="#6">第 6 类：力与运动状态、惯性</a></li>
+<li><a href="#7">第 7 类：压强与相互作用力（高频难点）</a></li>
+<li><a href="#8">第 8 类：声现象（情境化）</a></li>
+<li><a href="#9">第 9 类：分子动理论与热学综合</a></li>
+<li><a href="#10">第 10 类：电学综合判断（分压分流、功率、动态电路）</a></li>
+<li><a href="#11">第 11 类：力学综合（杠杆、浮力、压强）</a></li>
+</ul>
+</li>
+<li><a href="#1315-2-6">二、多项选择题（第 13–15 题，每题 2 分，共 6 分，部分计分）</a><ul>
+<li><a href="#_2">真实考法（近年）</a></li>
+</ul>
+</li>
+<li><a href="#1623-8-28">三、实验探究题（第 16–23 题，约 8 题，共 28 分）</a><ul>
+<li><a href="#_3">真实考查过的实验</a></li>
+<li><a href="#_4">常见设问类型</a></li>
+<li><a href="#_5">控制变量法·近年真题逐题对照</a></li>
+<li><a href="#_6">易错</a></li>
+</ul>
+</li>
+<li><a href="#24-4">四、科普阅读题（第 24 题，4 分）——北京卷特色题型</a><ul>
+<li><a href="#_7">近年真题主题</a></li>
+<li><a href="#vs">科普阅读·信息提取分析（材料给什么 vs 学生需提取什么）</a></li>
+</ul>
+</li>
+<li><a href="#2526-8-4">五、计算题（第 25–26 题，共 8 分，每题 4 分）</a><ul>
+<li><a href="#_8">真实考法</a></li>
+<li><a href="#_9">规范（四步书写，缺一扣分）</a></li>
+<li><a href="#_10">易错</a></li>
+</ul>
+</li>
+<li><a href="#_11">📌 备考建议</a></li>
+</ul>
+</div>
 <hr />
 <h2 id="112-2-24">一、单项选择题（第 1–12 题，每题 2 分，共 24 分）</h2>
 <p>北京卷单选每年覆盖声、光、热、力、电、电磁各板块，重视情境化。以下是近年真实考点分布与典型考法。</p>

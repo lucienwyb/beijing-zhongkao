@@ -77,6 +77,29 @@ hr { border: none; border-top: 1px solid #d0d7de; margin: 2em 0; }
   font-size: 0.95em;
 }
 .nav a { margin-right: 16px; }
+/* 本页目录：长内容页顶部 [TOC] 渲染出的跳转清单 */
+.toc {
+  background: #f6f8fa;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  padding: 14px 20px 14px 36px;
+  margin: 0 0 28px;
+  font-size: 0.92em;
+  line-height: 1.9;
+}
+.toc::before {
+  content: "本页导航";
+  display: block;
+  font-size: 0.78em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #57606a;
+  margin: 0 0 6px -16px;
+}
+.toc ul { margin: 0; padding-left: 18px; }
+.toc > ul { padding-left: 0; }
+.toc li { margin: 0; }
+.toc a { color: #0969da; }
 .footer {
   margin-top: 60px;
   padding-top: 20px;
@@ -128,6 +151,8 @@ mjx-container { font-size: 1.05em; }
   a { color: #58a6ff; }
   hr { border-top-color: #30363d; }
   .nav { background: #161b22; border-color: #30363d; }
+  .toc { background: #161b22; border-color: #30363d; }
+  .toc::before { color: #8b949e; }
   .footer { border-top-color: #30363d; color: #8b949e; }
 }
 @media (max-width: 600px) {
@@ -180,8 +205,63 @@ window.MathJax = {
 <div class="nav">📚 <a href="../../index.html">学习计划</a> · <a href="../math/exam-points.html">数学考点</a> · <a href="../physics/exam-points.html">物理考点</a> · <a href="../../index.html#mistakes">错题</a> · <a href="../../downloads.html">真题下载</a></div>
 <h1 id="_1">北京中考数学 · 核心考点</h1>
 <blockquote>
-<p>按北京中考考纲要求，数学卷覆盖 <strong>数与代数</strong>、<strong>图形与几何</strong>、<strong>统计与概率</strong> 三大领域。</p>
+<p>按北京中考考纲要求，数学卷覆盖 <strong>数与代数</strong>、<strong>图形与几何</strong>、<strong>统计与概率</strong> 三大领域。
+想看真题怎么考？对应题型与解析见<a href="past-questions.html">常见考题与真题分析</a>。</p>
 </blockquote>
+<div class="toc">
+<ul>
+<li><a href="#4045">一、数与代数（约 40–45 分）</a><ul>
+<li><a href="#1">1. 实数与运算</a></li>
+<li><a href="#2">2. 整式与分式</a></li>
+<li><a href="#3">3. 方程与方程组</a></li>
+<li><a href="#4">4. 不等式与不等式组</a></li>
+<li><a href="#5">5. 函数</a><ul>
+<li><a href="#51">5.1 平面直角坐标系与函数概念</a></li>
+<li><a href="#52">5.2 一次函数（正比例函数）</a></li>
+<li><a href="#53">5.3 反比例函数</a></li>
+<li><a href="#54">5.4 二次函数</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#4045_1">二、图形与几何（约 40–45 分）</a><ul>
+<li><a href="#1_1">1. 几何基础</a></li>
+<li><a href="#2_1">2. 三角形</a><ul>
+<li><a href="#21">2.1 三角形基础</a></li>
+<li><a href="#22">2.2 全等三角形</a></li>
+<li><a href="#23">2.3 相似三角形</a></li>
+<li><a href="#24">2.4 等腰三角形与等边三角形</a></li>
+<li><a href="#25">2.5 直角三角形</a></li>
+</ul>
+</li>
+<li><a href="#3_1">3. 四边形</a></li>
+<li><a href="#4_1">4. 圆</a></li>
+<li><a href="#5_1">5. 图形的变换</a></li>
+<li><a href="#6">6. 尺规作图</a></li>
+</ul>
+</li>
+<li><a href="#812">三、统计与概率（约 8–12 分）</a><ul>
+<li><a href="#1_2">1. 统计</a></li>
+<li><a href="#2_2">2. 概率</a></li>
+</ul>
+</li>
+<li><a href="#_2">四、数学思想与方法（贯穿全卷）</a></li>
+<li><a href="#_3">五、压轴题方法专节</a><ul>
+<li><a href="#26-6">第 26 题：二次函数综合（6 分，中档压轴衔接）</a></li>
+<li><a href="#27-7">第 27 题：几何综合（7 分）</a></li>
+</ul>
+</li>
+<li><a href="#100">📊 题型分值分布（100分）</a></li>
+<li><a href="#28-7">六、北京卷特色压轴：第 28 题新定义题（7 分）</a><ul>
+<li><a href="#_4">解题三步法</a></li>
+<li><a href="#_5">常见模型</a></li>
+<li><a href="#_6">近年真题</a></li>
+<li><a href="#_7">易错点</a></li>
+<li><a href="#1_3">第(1)问拿分策略</a></li>
+</ul>
+</li>
+</ul>
+</div>
 <hr />
 <h2 id="4045">一、数与代数（约 40–45 分）</h2>
 <h3 id="1">1. 实数与运算</h3>

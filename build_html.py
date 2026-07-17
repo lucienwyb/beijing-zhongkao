@@ -76,6 +76,29 @@ hr { border: none; border-top: 1px solid #d0d7de; margin: 2em 0; }
   font-size: 0.95em;
 }
 .nav a { margin-right: 16px; }
+/* 本页目录：长内容页顶部 [TOC] 渲染出的跳转清单 */
+.toc {
+  background: #f6f8fa;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  padding: 14px 20px 14px 36px;
+  margin: 0 0 28px;
+  font-size: 0.92em;
+  line-height: 1.9;
+}
+.toc::before {
+  content: "本页导航";
+  display: block;
+  font-size: 0.78em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #57606a;
+  margin: 0 0 6px -16px;
+}
+.toc ul { margin: 0; padding-left: 18px; }
+.toc > ul { padding-left: 0; }
+.toc li { margin: 0; }
+.toc a { color: #0969da; }
 .footer {
   margin-top: 60px;
   padding-top: 20px;
@@ -127,6 +150,8 @@ mjx-container { font-size: 1.05em; }
   a { color: #58a6ff; }
   hr { border-top-color: #30363d; }
   .nav { background: #161b22; border-color: #30363d; }
+  .toc { background: #161b22; border-color: #30363d; }
+  .toc::before { color: #8b949e; }
   .footer { border-top-color: #30363d; color: #8b949e; }
 }
 @media (max-width: 600px) {
@@ -296,7 +321,12 @@ def convert_file(md_path: Path, out_path: Path):
     page_title = f"{title} · 京考进阶"
     description = f"{title}详解 · 京考进阶复习资料，核心考点、公式速查与历年真题精析。"
 
-    md = markdown.Markdown(extensions=['tables', 'fenced_code', 'toc', 'sane_lists'])
+    md = markdown.Markdown(
+        extensions=['tables', 'fenced_code', 'toc', 'sane_lists'],
+        # toc_depth 2-4: skip the H1 page title (redundant) but keep the
+        # section (H2) and subsection (H3/H4) headings students jump to.
+        extension_configs={'toc': {'toc_depth': '2-4'}},
+    )
     body = md.convert(text)
 
     # Restore math fragments. Escape HTML special chars (<, >, &) inside the
