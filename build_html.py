@@ -338,7 +338,7 @@ def convert_file(md_path: Path, out_path: Path):
 <body>
 {nav}
 {body}
-<div class="footer">北京中考数学 & 物理 · 核心考点与真题精析 ·
+<div class="footer">北京中考数学 &amp; 物理 · 核心考点与真题精析 ·
 <a href="https://github.com/lucienwyb/beijing-zhongkao">GitHub</a> ·
 <a href="https://gitee.com/lucienwyb/beijing-zhongkao">Gitee</a></div>
 </body>
