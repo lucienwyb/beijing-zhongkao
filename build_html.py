@@ -299,10 +299,18 @@ def convert_file(md_path: Path, out_path: Path):
     md = markdown.Markdown(extensions=['tables', 'fenced_code', 'toc', 'sane_lists'])
     body = md.convert(text)
 
-    # Restore math fragments
+    # Restore math fragments. Escape HTML special chars (<, >, &) inside the
+    # math so the output is valid HTML: a literal "<" inside "$F_浮<G$" would
+    # otherwise be misparsed as a tag start (invalidating the DOM and cascading
+    # into bogus "unclosed tag"/"<p> contains <hr>" nesting errors). The browser
+    # decodes the entities back to "<"/">"/"&" in the text node before MathJax
+    # runs its tex preprocessor, so rendering is unchanged.
     def _restore(m):
         idx = int(m.group(1))
-        return math_stash[idx]
+        frag = math_stash[idx]
+        # Escape &, <, > — in that order. $ delimiters are HTML-safe.
+        frag = frag.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+        return frag
     body = re.sub(r'\x00MATH(\d+)\x00', _restore, body)
 
     # Rewrite .md -> .html and fix link depth for the html/ output location
